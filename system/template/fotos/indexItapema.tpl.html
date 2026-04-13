@@ -1,0 +1,68 @@
+*=>indexFotosItapema
+<script type="text/javascript" src="[[JS_PATH]]jquery-1.3.2.js"></script>
+<link rel="stylesheet" href="[[CSS_PATH]]slimbox2.css" type="text/css" media="screen" />
+<script type="text/javascript" src="[[JS_PATH]]slimbox2.js"></script>
+<script type="text/javascript" src="[[JS_PATH]]jquery.EmbedPicasaGallery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/publicalbum@latest/embed-ui.min.js" async></script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+  jQuery("#tobi_pics").EmbedPicasaGallery('viveiromudar', {
+    loading_animation: '[[IMAGE_PATH]]loading.gif',
+    msg_loading_list: 'Carregando álbuns, aguarde...',
+    msg_back: 'Voltar'
+  });
+});
+</script>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container">
+    <span class="section-tag light" style="margin-bottom:16px;display:inline-block;">Galeria</span>
+    <h1>Viveiro Itapema</h1>
+    <p>Fotos das instalações e mudas do nosso viveiro em Itapema, SC.</p>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <div class="content-grid">
+
+      <div class="content-body">
+        <h2>Viveiro de Itapema</h2>
+        <p>Instalado para atender ao mercado de mudas para praças, parques, ruas e jardins. Mudas maiores com cerca de 1,8 m de altura em baldes de 8 litros.</p>
+
+        <div id="tobi_pics" style="margin: 32px 0;"></div>
+
+        <div class="pa-gallery-player-widget" style="width:100%; height:480px; display:none;"
+          data-link="https://photos.app.goo.gl/bvrjKqW5VYyDGU4j7"
+          data-title="ViveiroItapema"
+          data-description="Galeria de fotos do Viveiro Itapema">
+          <object data="https://lh3.googleusercontent.com/iQ_NBlB4jTvaXuj8I97Z-MktJ9lWshIx9VBMoU-K-Rk0cjaDk0J7MvAPpoG6wg5FjElFOFpbOrSAbxKz-SyKh5P8Pzk6ye5PzcXunGLHUkomBG1hKFXEIbVhBDs7m4KHVTJR6v9j=w1920-h1080"></object>
+          <object data="https://lh3.googleusercontent.com/e_iYVZjUBbnLnJUJRZgGKfEVJWmU00ZoTfFSWYXkP9Ys8ItJB_BoFdhWVti4e2qTd5V4n7DlL5haVfaY1R0XxNywAxRaDufGMmhO_Enp42Gy9-EdorM-XhSCv175hqI9OlpOXoZl=w1920-h1080"></object>
+          <object data="https://lh3.googleusercontent.com/Ei8QXiCnq8iw73LxX9CGvLWqbassfGgBevEB36QXanzH8ebdCRApnFPAxppHKeGnc4qONQ7UqE0byfj8tZr5Ce06P_SgmRgyoNoV0qdHoBXch3iTfc6cjw2OYhcnIVKm1WXT0mRi=w1920-h1080"></object>
+        </div>
+      </div>
+
+      <aside class="content-sidebar">
+        <div class="sidebar-card">
+          <h3>Sobre o Viveiro</h3>
+          <p>O <strong>Viveiro Florestal Mudar</strong> está localizado em Agrolândia (SC) no Alto Vale do Itajaí, e em Itapema (SC).</p>
+          <a href="[[URL_PATH]]empresa" class="sidebar-link">Conheça a empresa →</a>
+        </div>
+
+        <div class="sidebar-image">
+          <img src="[[IMAGE_PATH]]pictures/xanxere.jpg" alt="Espécies nativas produzidas no viveiro" />
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Catálogo de Mudas</h3>
+          <p>Consulte nossa relação completa de espécies disponíveis para fornecimento.</p>
+          <a href="[[URL_PATH]]mudas" class="sidebar-link">Ver catálogo →</a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+<=*

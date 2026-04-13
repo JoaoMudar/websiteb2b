@@ -1,0 +1,163 @@
+*=>docOpen
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Viveiro Florestal Mudar — Produção de mudas nativas e exóticas desde 1996. Agrolândia, SC. Atendimento B2B em todo o Sul do Brasil." />
+  <meta name="keywords" content="viveiro florestal, mudas nativas, eucalyptus, pinus, reflorestamento, agrolândia, santa catarina, B2B" />
+  <meta name="robots" content="index, follow" />
+  <title>Viveiro Florestal Mudar — Mudas Nativas e Exóticas</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="[[CSS_PATH]]layout.css" />
+</head>
+<body>
+
+<!-- ===== HEADER / NAV ===== -->
+<header class="site-header" id="siteHeader">
+  <nav class="nav">
+    <a href="[[URL_PATH]]" class="nav-logo">
+      <span class="nav-logo-icon">🌿</span>
+      Viveiro <strong>Mudar</strong>
+    </a>
+
+    [[MENU]]
+
+    <a href="[[URL_PATH]]contato" class="nav-cta">Solicitar Orçamento</a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="site-main">
+<=*
+
+*=>docClose
+</main>
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <a href="[[URL_PATH]]" class="footer-logo">
+            🌿 Viveiro <span>Mudar</span>
+          </a>
+          <p>Produção especializada de mudas florestais nativas e exóticas desde 1996. Qualidade, responsabilidade técnica e atendimento em todo o Sul do Brasil.</p>
+          <address class="footer-crea">
+            Responsável Técnico: Eng. Florestal Gilberto Ferretti<br />
+            CREA/SC 35178-8
+          </address>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegação</h4>
+          <ul class="footer-links">
+            <li><a href="[[URL_PATH]]">Início</a></li>
+            <li><a href="[[URL_PATH]]empresa">A Empresa</a></li>
+            <li><a href="[[URL_PATH]]servicos">Serviços</a></li>
+            <li><a href="[[URL_PATH]]mudas">Catálogo de Mudas</a></li>
+            <li><a href="[[URL_PATH]]fotos">Galeria de Fotos</a></li>
+            <li><a href="[[URL_PATH]]contato">Contato</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Espécies</h4>
+          <ul class="footer-links">
+            <li><a href="[[URL_PATH]]mudas/especies-exoticas/">Espécies Exóticas</a></li>
+            <li><a href="[[URL_PATH]]mudas/especies-para-sombreamento/">Para Sombreamento</a></li>
+            <li><a href="[[URL_PATH]]mudas/especies-frutas-para-consumo-humano/">Frutíferas</a></li>
+            <li><a href="[[URL_PATH]]mudas/especies-com-floracao-exuberante/">Floração Exuberante</a></li>
+            <li><a href="[[URL_PATH]]mudas/especies-para-recuperacao-de-area-degradada-e-mata-ciliar/">Recuperação Ambiental</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <ul class="footer-contact">
+            <li>
+              <span class="fi">📍</span>
+              <span>Rua Wilhelm Doering, 300<br />Centro — Agrolândia, SC<br />CEP 88420-000</span>
+            </li>
+            <li>
+              <span class="fi">📞</span>
+              <span>(47) 98808-8614</span>
+            </li>
+            <li>
+              <span class="fi">🚛</span>
+              <span>Entrega em todo o Sul do Brasil com frota própria</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-inner">
+        <span>&copy; 2024 Viveiro Florestal Mudar. Todos os direitos reservados.</span>
+        <span>Agrolândia · SC · Alto Vale do Itajaí</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var header   = document.getElementById('siteHeader');
+  var toggle   = document.getElementById('navToggle');
+  var menu     = document.querySelector('.nav-menu');
+  var isHome   = document.querySelector('.hero') !== null;
+
+  // Solid header for inner pages
+  if (!isHome) { header.classList.add('solid'); }
+
+  // Scroll effect
+  function onScroll() {
+    if (window.scrollY > 40) {
+      header.classList.add('scrolled');
+    } else {
+      if (isHome) { header.classList.remove('scrolled'); }
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu toggle
+  if (toggle && menu) {
+    toggle.addEventListener('click', function() {
+      menu.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!header.contains(e.target)) { menu.classList.remove('open'); }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
+<=*
+
+*=>menu
+<ul class="nav-menu" id="navMenu">
+  <li><a href="[[URL_PATH]]" [[CURRENT_HOME]]>Início</a></li>
+  <li><a href="[[URL_PATH]]empresa" [[CURRENT_EMPRESA]]>Empresa</a></li>
+  <li><a href="[[URL_PATH]]servicos" [[CURRENT_SERVICOS]]>Serviços</a></li>
+  <li><a href="[[URL_PATH]]mudas" [[CURRENT_MUDAS]]>Mudas</a></li>
+  <li><a href="[[URL_PATH]]fotos" [[CURRENT_FOTOS]]>Galeria</a></li>
+  <li><a href="[[URL_PATH]]contato" [[CURRENT_CONTATO]]>Contato</a></li>
+</ul>
+<=*
