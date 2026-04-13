@@ -1,0 +1,12 @@
+Options -Indexes
+
+RewriteEngine On
+RewriteBase /
+
+# Serve arquivos e diretórios estáticos diretamente (css, js, imagens, etc.)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Redireciona tudo o mais para index.php
+RewriteRule ^(.*)$ index.php [L,QSA]
