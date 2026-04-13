@@ -21,7 +21,7 @@ abstract class _Path {
 
 	public static function getURL() {
 		$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-		$port = $_SERVER['SERVER_PORT'] ?? 80;
+		$port = isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : 80;
 		$defaultPort = ($scheme === 'https') ? 443 : 80;
 		$portSuffix = ($port != $defaultPort) ? ':' . $port : '';
 		return $scheme . '://' . $_SERVER['SERVER_NAME'] . $portSuffix . self::getURL_PATH();
