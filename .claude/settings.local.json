@@ -46,7 +46,14 @@
       "Bash(curl -s \"http://localhost:8181/contato\")",
       "Bash(git config:*)",
       "Bash(git version:*)",
-      "Bash(git init:*)"
+      "Bash(git init:*)",
+      "Bash(git remote:*)",
+      "Bash(git filter-branch:*)",
+      "Bash(git stash:*)",
+      "Bash(FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch --force --tree-filter \"find . -name 'Email.class.php' | xargs -I{} sed -i \\\\\"s/viveiro321%/REDACTED/g\\\\\" {} 2>/dev/null; true\" --tag-name-filter cat -- --all)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
