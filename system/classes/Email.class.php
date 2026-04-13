@@ -147,18 +147,32 @@ class Email {
 		require_once __DIR__ . '/PHPMailer/class.phpmailer.php';
 		require_once __DIR__ . '/PHPMailer/class.smtp.php';
 
+		// Carrega variáveis do .env se ainda não estiverem definidas
+		$envFile = __DIR__ . '/../../../.env';
+		if (file_exists($envFile)) {
+			foreach (file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+				if (strpos(trim($line), '#') === 0) continue;
+				if (strpos($line, '=') !== false) {
+					list($key, $value) = explode('=', $line, 2);
+					if (!isset($_ENV[trim($key)])) {
+						$_ENV[trim($key)] = trim($value);
+					}
+				}
+			}
+		}
+
 		$mail = new PHPMailer;
 
 		$mail->isSMTP();
-		$mail->Host = 'mail.viveiromudar.com.br';
+		$mail->Host = $_ENV['SMTP_HOST'];
 		$mail->SMTPAuth = true;
-		$mail->Username = 'contato@viveiromudar.com.br';
-		$mail->Password = 'REDACTED';
-		$mail->SMTPSecure = 'tls';
-		$mail->Port = 587;
+		$mail->Username = $_ENV['SMTP_USER'];
+		$mail->Password = $_ENV['SMTP_PASS'];
+		$mail->SMTPSecure = $_ENV['SMTP_SECURE'];
+		$mail->Port = (int) $_ENV['SMTP_PORT'];
 
-		$mail->From = 'contato@viveiromudar.com.br';
-		$mail->FromName = 'Viveiro Mudar';
+		$mail->From = $_ENV['SMTP_FROM'];
+		$mail->FromName = $_ENV['SMTP_FROM_NAME'];
 		$mail->addAddress($this->to, 'Gilberto Ferretti');
 
 		$mail->Subject = $this->subject;
