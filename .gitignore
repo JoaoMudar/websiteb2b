@@ -8,3 +8,19 @@ Thumbs.db
 # Editor
 .vscode/
 *.swp
+
+# Imagens não utilizadas no site
+site_antigo/
+phpmailer/
+system/js/table/examples/
+system/classes/PHPMailer/examples/
+system/images/bg.jpg
+system/images/clock.gif
+system/images/comment.gif
+system/images/firefox-gray.jpg
+system/images/gradientbg.jpg
+system/images/logo.gif
+system/images/page.gif
+system/images/mudas/mapa48.png
+system/images/pictures/DSC07751.jpg
+system/images/pictures/ipe_roxo.jpg

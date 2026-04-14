@@ -20,7 +20,11 @@ abstract class _Path {
 	}
 
 	public static function getURL() {
-		$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+		$https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+			|| (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+			|| (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on')
+			|| (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
+		$scheme = $https ? 'https' : 'http';
 		$port = isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : 80;
 		$defaultPort = ($scheme === 'https') ? 443 : 80;
 		$portSuffix = ($port != $defaultPort) ? ':' . $port : '';
