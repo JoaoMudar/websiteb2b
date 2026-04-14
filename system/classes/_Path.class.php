@@ -25,7 +25,12 @@ abstract class _Path {
 			|| (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on')
 			|| (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
 		$scheme = $https ? 'https' : 'http';
-		$port = isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : 80;
+		$port = isset($_SERVER['SERVER_PORT']) ? (int)$_SERVER['SERVER_PORT'] : 80;
+		// Quando o servidor está atrás de um proxy que termina SSL, SERVER_PORT pode
+		// retornar 80 internamente mesmo com HTTPS ativo. Normaliza para 443.
+		if ($https && $port === 80) {
+			$port = 443;
+		}
 		$defaultPort = ($scheme === 'https') ? 443 : 80;
 		$portSuffix = ($port != $defaultPort) ? ':' . $port : '';
 		return $scheme . '://' . $_SERVER['SERVER_NAME'] . $portSuffix . self::getURL_PATH();
