@@ -48,7 +48,7 @@ abstract class ViewContato implements IView {
 			if ($return === true) {
 				$mensagem = '<p class="form-success">Mensagem enviada com sucesso!</p>';
 			} else {
-				$mensagem = '<p class="form-error">Não foi possível enviar o e-mail. Tente novamente ou ligue: (47) 3534-4709.</p>';
+				$mensagem = '<p class="form-error">Não foi possível enviar o e-mail. Tente novamente ou ligue: +55 47 98433-7854.</p>';
 			}
 		}
 		$tpl->setVar ( 'MENSAGEM', $mensagem );
