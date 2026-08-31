@@ -82,6 +82,39 @@ abstract class _Path {
 }
 
 /**
+ * Compatibilidade: o site passou a usar mb_* para tratar acentuação. Quase todo
+ * servidor traz a extensão mbstring, mas quando ela falta o site inteiro
+ * quebraria com erro fatal — estas versões de reserva evitam isso.
+ */
+if (! function_exists ( 'mb_strlen' )) {
+
+	function mb_strlen($str, $encoding = null) {
+
+		return preg_match_all ( '/./us', $str );
+	}
+
+	function mb_substr($str, $start, $length = null, $encoding = null) {
+
+		$caracteres = preg_split ( '//u', $str, -1, PREG_SPLIT_NO_EMPTY );
+
+		return implode ( '', array_slice ( $caracteres, $start, $length ) );
+	}
+
+	function mb_strtolower($str, $encoding = null) {
+
+		$acentuadas = array (
+			'Á' => 'á', 'À' => 'à', 'Â' => 'â', 'Ã' => 'ã', 'Ä' => 'ä',
+			'Ç' => 'ç', 'É' => 'é', 'È' => 'è', 'Ê' => 'ê', 'Ë' => 'ë',
+			'Í' => 'í', 'Ì' => 'ì', 'Î' => 'î', 'Ï' => 'ï', 'Ñ' => 'ñ',
+			'Ó' => 'ó', 'Ò' => 'ò', 'Ô' => 'ô', 'Õ' => 'õ', 'Ö' => 'ö',
+			'Ú' => 'ú', 'Ù' => 'ù', 'Û' => 'û', 'Ü' => 'ü', 'Ý' => 'ý'
+		);
+
+		return strtolower ( strtr ( $str, $acentuadas ) );
+	}
+}
+
+/**
  * Inclui o arquivo de uma classe caso ele ainda n�o foi incluido
  *
  * @param String $class_name Nome da classe

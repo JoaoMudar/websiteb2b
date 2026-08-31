@@ -30,39 +30,7 @@ class HtmlMainPoupUp extends Html implements IHtml {
 	 */
 	public function docOpen($xajax = false) {
 		
-		if (strlen ( $this->title ) == 0) {
-			
-			$this->template->setVar ( "TITLE", parent::TITLE_PADRAO );
-		} else {
-			
-			$this->template->setVar ( "TITLE", $this->title );
-		}
-		
-		if (! $this->keywords) {
-			
-			$this->template->setVar ( 'KEYWORDS', parent::KEYWORDS );
-		} else {
-			
-			$this->template->setVar ( 'KEYWORDS', $this->keywords );
-		}
-		
-		if (! $this->description) {
-			
-			$this->template->setVar ( 'DESCRIPTION', parent::DESCRIPTION );
-		} else {
-			
-			$this->template->setVar ( 'DESCRIPTION', $this->description );
-		}
-		
-		$this->template->setVar ( "CSS_PATH", _Path::getCSS_PATH () );
-		$this->template->setVar ( "JS_PATH", _Path::getJS_PATH () );
-		$this->template->setVar ( "URL_PATH", _Path::getURL_PATH () );
-		$this->template->setVar ( "UPLOAD_BAS", _Path::getUPLOAD_BAS () );
-		$this->template->setVar ( "URL_BAS", _Path::getURL_BAS () );
-		$this->template->setVar ( "IMAGE_PATH", _Path::getIMAGE_PATH () );
-		
-		$this->template->setVar ( 'css', '' );
-		$this->template->setVar ( 'javascript', '' );
+		$this->setVarsCabecalho ();
 		
 		$this->template->show ( "docOpen" );
 	}
