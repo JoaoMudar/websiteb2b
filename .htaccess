@@ -1,76 +1,12 @@
 Options -Indexes
 
-# ---------------------------------------------------------------------------
-# Arquivos que nunca devem ser servidos
-# A regra de reescrita abaixo entrega qualquer arquivo existente. Sem este
-# bloco, /.env devolveria as credenciais de SMTP em texto puro.
-# ---------------------------------------------------------------------------
-<FilesMatch "^\.|\.(env|example|md|csv|xls|xlsx|log|sql|bak|ini)$">
-  <IfModule mod_authz_core.c>
-    Require all denied
-  </IfModule>
-  <IfModule !mod_authz_core.c>
-    Order allow,deny
-    Deny from all
-  </IfModule>
-</FilesMatch>
-
 RewriteEngine On
 RewriteBase /
 
-# ---------------------------------------------------------------------------
-# Forçar HTTPS
-# ---------------------------------------------------------------------------
-RewriteCond %{HTTPS} !=on
-RewriteCond %{HTTP:X-Forwarded-Proto} !=https
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
-
-# ---------------------------------------------------------------------------
-# Domínio canônico — ATIVAR UMA DAS DUAS, e só depois de decidir qual versão
-# fica como propriedade no Search Console. Manter as duas ativas cria laço de
-# redirecionamento; manter as duas desativadas faz o site responder nos dois
-# endereços, o que divide a autoridade entre eles.
-# ---------------------------------------------------------------------------
-
-# (A) sem www  —  www.viveiromudar.com.br  ->  viveiromudar.com.br
-# RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-# RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
-
-# (B) com www  —  viveiromudar.com.br  ->  www.viveiromudar.com.br
-# RewriteCond %{HTTP_HOST} !^www\. [NC]
-# RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
-
-# ---------------------------------------------------------------------------
-# Roteamento
-# ---------------------------------------------------------------------------
-# Arquivos e diretórios reais (css, js, imagens) são servidos direto
+# Serve arquivos e diretórios estáticos diretamente (css, js, imagens, etc.)
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Todo o resto vai para o roteador
+# Redireciona tudo o mais para index.php
 RewriteRule ^(.*)$ index.php [L,QSA]
-
-# ---------------------------------------------------------------------------
-# Compressão
-# ---------------------------------------------------------------------------
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
-  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
-  AddOutputFilterByType DEFLATE application/json application/xml image/svg+xml
-</IfModule>
-
-# ---------------------------------------------------------------------------
-# Cache do navegador
-# ---------------------------------------------------------------------------
-<IfModule mod_expires.c>
-  ExpiresActive On
-  ExpiresByType image/jpeg              "access plus 6 months"
-  ExpiresByType image/png               "access plus 6 months"
-  ExpiresByType image/gif               "access plus 6 months"
-  ExpiresByType image/svg+xml           "access plus 6 months"
-  ExpiresByType image/x-icon            "access plus 1 year"
-  ExpiresByType text/css                "access plus 1 month"
-  ExpiresByType application/javascript  "access plus 1 month"
-  ExpiresByType text/html               "access plus 0 seconds"
-</IfModule>

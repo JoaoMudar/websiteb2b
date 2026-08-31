@@ -1,21 +1,22 @@
 *=>index
-<script src="[[JS_PATH]]jquery-1.3.2.js"></script>
-<script src="[[JS_PATH]]table/media/js/jquery.dataTables.min.js"></script>
-<script>
+<script type="text/javascript" src="[[JS_PATH]]jquery-1.3.2.js"></script>
+<script type="text/javascript" src="[[JS_PATH]]table/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
 $(document).ready(function() {
   $('#example').dataTable({
     "bStateSave": true,
     "sPaginationType": "full_numbers",
-    "aoColumns": [ null, null, null, { "bSortable": false }, null ],
     "oLanguage": {
-      "sLengthMenu": "Exibindo _MENU_ espécies por página",
-      "sSearch": "Buscar espécie:",
-      "sInfo": "_START_ a _END_ de _TOTAL_ espécies",
-      "sInfoEmpty": "Nenhuma espécie",
-      "sInfoFiltered": "(de _MAX_ no total)",
-      "sZeroRecords": "Nenhuma espécie encontrada",
+      "sLengthMenu": "Exibindo _MENU_ mudas por página",
+      "sSearch": "Pesquisar:",
+      "sInfo": "_START_ a _END_ de _TOTAL_ mudas",
+      "sInfoEmpty": "0 mudas encontradas",
+      "sInfoFiltered": "(filtrado de _MAX_ no total)",
+      "sZeroRecords": "Nenhuma muda encontrada",
       "sProcessing": "Carregando...",
-      "oPaginate": { "sFirst": "«", "sNext": "›", "sPrevious": "‹", "sLast": "»" }
+      "oPaginate": {
+        "sFirst": "«", "sNext": "›", "sPrevious": "‹", "sLast": "»"
+      }
     }
   });
 });
@@ -25,55 +26,53 @@ function referenciasBibliograficas() {
 }
 </script>
 
+<!-- Page Hero -->
 <section class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="container">
-    <ol class="breadcrumb">
-      <li><a href="[[URL_PATH]]">Início</a></li>
-      <li>Mudas</li>
-    </ol>
-    <span class="section-tag light">Catálogo</span>
-    <h1>[[H1]]</h1>
-    <p>[[INTRO]]</p>
+    <span class="section-tag light" style="margin-bottom:16px;display:inline-block;">Catálogo</span>
+    <h1>Relação de Mudas</h1>
+    <p>Mais de 100 espécies nativas e exóticas disponíveis. Clique no nome popular para detalhes de cada espécie.</p>
   </div>
 </section>
 
+<!-- Mudas Content -->
 <section class="mudas-section">
   <div class="container">
 
-    <nav class="mudas-filters" id="mudas-filters" aria-label="Filtrar espécies">
-      <a href="[[URL_PATH]]mudas" class="mudas-filter-btn" data-filter="">Todas</a>
-      <a href="[[URL_PATH]]mudas/especies-nativas/" class="mudas-filter-btn" data-filter="especies-nativas">Nativas</a>
-      <a href="[[URL_PATH]]mudas/especies-para-recuperacao-de-area-degradada-e-mata-ciliar/" class="mudas-filter-btn" data-filter="especies-para-recuperacao-de-area-degradada-e-mata-ciliar">Recuperação ambiental</a>
-      <a href="[[URL_PATH]]mudas/especies-com-floracao-exuberante/" class="mudas-filter-btn" data-filter="especies-com-floracao-exuberante">Floração exuberante</a>
-      <a href="[[URL_PATH]]mudas/especies-para-sombreamento/" class="mudas-filter-btn" data-filter="especies-para-sombreamento">Sombreamento</a>
-      <a href="[[URL_PATH]]mudas/especies-frutas-para-consumo-humano/" class="mudas-filter-btn" data-filter="especies-frutas-para-consumo-humano">Frutíferas</a>
-      <a href="[[URL_PATH]]mudas/especies-exoticas/" class="mudas-filter-btn" data-filter="especies-exoticas">Exóticas</a>
-    </nav>
+    <!-- Filters -->
+    <div class="mudas-filters" id="mudas-filters">
+      <a href="[[URL_PATH]]mudas" class="mudas-filter-btn" data-filter="">🌿 Todas as Espécies</a>
+      <a href="[[URL_PATH]]mudas/especies-exoticas/" class="mudas-filter-btn" data-filter="especies-exoticas">🌍 Exóticas</a>
+      <a href="[[URL_PATH]]mudas/especies-para-sombreamento/" class="mudas-filter-btn" data-filter="especies-para-sombreamento">☀️ Sombreamento</a>
+      <a href="[[URL_PATH]]mudas/especies-frutas-para-consumo-humano/" class="mudas-filter-btn" data-filter="especies-frutas-para-consumo-humano">🍃 Frutíferas</a>
+      <a href="[[URL_PATH]]mudas/especies-com-floracao-exuberante/" class="mudas-filter-btn" data-filter="especies-com-floracao-exuberante">🌸 Floração Exuberante</a>
+      <a href="[[URL_PATH]]mudas/especies-para-recuperacao-de-area-degradada-e-mata-ciliar/" class="mudas-filter-btn" data-filter="especies-para-recuperacao-de-area-degradada-e-mata-ciliar">💧 Recuperação Ambiental</a>
+    </div>
     <script>
     (function() {
-      var caminho = window.location.pathname.replace(/\/$/, '');
-      var slug = caminho.split('/').pop();
-      var botoes = document.querySelectorAll('#mudas-filters .mudas-filter-btn');
-      Array.prototype.forEach.call(botoes, function(botao) {
-        var f = botao.getAttribute('data-filter');
+      var path = window.location.pathname.replace(/\/$/, '');
+      var slug = path.split('/').pop();
+      var btns = document.querySelectorAll('#mudas-filters .mudas-filter-btn');
+      btns.forEach(function(btn) {
+        var f = btn.getAttribute('data-filter');
         if (f === slug || (f === '' && (slug === 'mudas' || slug === ''))) {
-          botao.classList.add('active');
-          botao.setAttribute('aria-current', 'page');
+          btn.classList.add('active');
         }
       });
     })();
     </script>
 
+    <!-- Table -->
     <div class="mudas-table-wrap">
       <table id="example">
         <thead>
           <tr>
-            <th scope="col">Cód.</th>
-            <th scope="col">Nome popular</th>
-            <th scope="col">Nome científico</th>
-            <th scope="col">Porte adulto</th>
-            <th scope="col">Floração</th>
+            <th>Código</th>
+            <th>Nome Popular</th>
+            <th>Nome Científico</th>
+            <th>Floração</th>
+            <th>Frutificação</th>
           </tr>
         </thead>
         <tbody>
@@ -82,26 +81,21 @@ function referenciasBibliograficas() {
       </table>
     </div>
 
-    <div class="convert">
-      <p><strong>Encontrou as espécies que precisa?</strong> Mande a lista, a quantidade e o prazo pelo WhatsApp que respondemos com disponibilidade e orçamento.</p>
-      [[WHATSAPP_CATALOGO]]
-      [[PLACA_CLARA]]
-    </div>
-
-    <div style="margin-top: 40px;">
-      <button onclick="referenciasBibliograficas()" class="refs-toggle" aria-expanded="false" aria-controls="refBib">
-        Referências bibliográficas
+    <!-- References -->
+    <div style="margin-top: 48px;">
+      <button onclick="referenciasBibliograficas()" style="background:none;border:none;cursor:pointer;font-family:var(--font-heading);font-size:.85rem;font-weight:600;color:var(--color-accent);padding:0;display:flex;align-items:center;gap:6px;">
+        📚 Referências Bibliográficas <span style="font-size:.75rem;color:var(--color-text-muted);">(clique para expandir)</span>
       </button>
-      <div id="refBib" style="display:none;margin-top:18px;">
-        <ul class="arrow-list">
-          <li>CARVALHO, P. E. R. <em>Espécies florestais brasileiras.</em> EMBRAPA-CNPF. Brasília, 1994. 640 p.</li>
+      <div id="refBib" style="display:none;margin-top:20px;">
+        <ul class="arrow-list content-body">
+          <li>CARVALHO, P. E. R. Espécies florestais brasileiras. EMBRAPA-CNPF. Brasília, 1994. 640 p.</li>
           <li>HERBÁRIO FLORESTAL DA UFSM. Disponível em: w3.ufsm.br/herbarioflorestal. Acesso: mar. 2010.</li>
-          <li>LORENZI, H. <em>Árvores brasileiras: manual de identificação e cultivo.</em> Vol. 1. Nova Odessa: Plantarum, 1992. 384 p.</li>
-          <li>LORENZI, H. <em>Árvores brasileiras.</em> Vol. 2. Nova Odessa: Plantarum, 1998. 384 p.</li>
-          <li>LORENZI, H. <em>Árvores brasileiras.</em> Vol. 3. Nova Odessa: Plantarum, 2009. 384 p.</li>
-          <li>LORENZI, H. et al. <em>Árvores exóticas no Brasil.</em> Instituto Plantarum, 2003. 384 p.</li>
-          <li>LORENZI, H. et al. <em>Frutas brasileiras e exóticas.</em> Instituto Plantarum, 2006. 672 p.</li>
-          <li>LORENZI, H. et al. <em>Palmeiras brasileiras e exóticas cultivadas.</em> Instituto Plantarum, 2004. 432 p.</li>
+          <li>LORENZI, H. Árvores brasileiras: manual de identificação e cultivo. Vol. 1. Nova Odessa: Editora Plantarum, 1992. 384 p.</li>
+          <li>LORENZI, H. Árvores brasileiras. Vol. 2. Nova Odessa: Editora Plantarum, 1998. 384 p.</li>
+          <li>LORENZI, H. Árvores brasileiras. Vol. 3. Nova Odessa: Editora Plantarum, 2009. 384 p.</li>
+          <li>LORENZI, H. et al. Árvores exóticas no Brasil. Instituto Plantarum, 2003. 384 p.</li>
+          <li>LORENZI, H. et al. Frutas brasileiras e exóticas. Instituto Plantarum, 2006. 672 p.</li>
+          <li>LORENZI, H. et al. Palmeiras brasileiras e exóticas cultivadas. Instituto Plantarum, 2004. 432 p.</li>
         </ul>
       </div>
     </div>
@@ -112,10 +106,10 @@ function referenciasBibliograficas() {
 
 *=>linhaMuda
 <tr>
-  <td class="col-cod">%03d</td>
-  <td><a href="[[URL_PATH]]mudas/%s">%s</a></td>
+  <td>%d</td>
+  <td><a href="[[URL_PATH]]mudas/%d" target="_blank">%s</a></td>
   <td><em>%s</em></td>
-  <td class="col-porte">%s%s</td>
+  <td>%s</td>
   <td>%s</td>
 </tr>
 <=*

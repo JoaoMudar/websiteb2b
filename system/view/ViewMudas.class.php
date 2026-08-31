@@ -1,74 +1,11 @@
 <?php
 
 /**
- * Classe responsável por administrar as views das mudas.
+ * Classe responsável por administrar as views das mudas
  *
  * @author Tiago Piske
  */
 abstract class ViewMudas implements IView {
-
-	/**
-	 * Recortes do catálogo que têm URL própria.
-	 *
-	 * Cada recorte é uma página indexável com H1 e descrição próprios — por
-	 * isso "nativas" vem primeiro: "árvores nativas" é o termo de maior volume
-	 * com menor concorrência na pesquisa de palavras-chave.
-	 *
-	 * @return Array
-	 */
-	private static function recortes() {
-
-		return array (
-
-			'especies-nativas' => array (
-				'fins' => FimPlantio::NA,
-				'h1' => 'Mudas de árvores nativas',
-				'title' => 'Mudas de Árvores Nativas — Catálogo de Espécies',
-				'descricao' => 'Espécies nativas do Brasil produzidas em Agrolândia (SC) para reflorestamento, compensação florestal, mata ciliar e arborização. Ficha técnica de cada espécie.',
-				'intro' => 'Espécies nativas do Brasil, com ocorrência natural na Mata Atlântica e nos biomas do Sul. São as espécies exigidas em projetos de compensação florestal, PRAD e recomposição de mata ciliar.'
-			),
-
-			'especies-para-recuperacao-de-area-degradada-e-mata-ciliar' => array (
-				'fins' => array (FimPlantio::RMC, FimPlantio::RAD ),
-				'h1' => 'Mudas para recuperação de área degradada e mata ciliar',
-				'title' => 'Mudas para Recuperação de Área Degradada e Mata Ciliar',
-				'descricao' => 'Espécies indicadas para PRAD, recomposição de mata ciliar e recuperação de áreas degradadas, produzidas em Agrolândia (SC) com responsabilidade técnica.',
-				'intro' => 'Espécies indicadas para recomposição de faixa ciliar, nascentes e áreas degradadas — a base de qualquer PRAD e de projetos de compensação ambiental.'
-			),
-
-			'especies-com-floracao-exuberante' => array (
-				'fins' => FimPlantio::FLOR,
-				'h1' => 'Mudas de árvores com floração exuberante',
-				'title' => 'Mudas de Árvores com Floração Exuberante',
-				'descricao' => 'Espécies de floração ornamental para arborização urbana, praças e paisagismo, com período e cor de floração informados. Viveiro em Agrolândia (SC).',
-				'intro' => 'Espécies de floração marcante, usadas em arborização urbana, praças e paisagismo. O período e a cor da floração estão na ficha de cada espécie.'
-			),
-
-			'especies-para-sombreamento' => array (
-				'fins' => FimPlantio::S,
-				'h1' => 'Mudas de árvores para sombreamento',
-				'title' => 'Mudas de Árvores para Sombreamento',
-				'descricao' => 'Espécies de copa densa para sombreamento de pastagens, pátios, estacionamentos e áreas de convivência. Viveiro florestal em Agrolândia (SC).',
-				'intro' => 'Espécies de copa ampla, indicadas para sombreamento de pastagens, pátios, estacionamentos e áreas de convivência.'
-			),
-
-			'especies-frutas-para-consumo-humano' => array (
-				'fins' => FimPlantio::FH,
-				'h1' => 'Mudas de árvores frutíferas',
-				'title' => 'Mudas de Árvores Frutíferas para Consumo Humano',
-				'descricao' => 'Espécies frutíferas nativas e exóticas com fruto de consumo humano, com época de frutificação informada. Viveiro florestal em Agrolândia (SC).',
-				'intro' => 'Espécies cujo fruto é próprio para consumo humano, nativas e exóticas, com a época de frutificação informada na ficha.'
-			),
-
-			'especies-exoticas' => array (
-				'fins' => FimPlantio::EX,
-				'h1' => 'Mudas de espécies exóticas',
-				'title' => 'Mudas de Espécies Exóticas',
-				'descricao' => 'Espécies exóticas cultivadas no Brasil, incluindo Pinus e Eucalyptus para reflorestamento industrial. Viveiro florestal em Agrolândia (SC).',
-				'intro' => 'Espécies introduzidas e cultivadas no Brasil, incluindo Pinus e Eucalyptus para reflorestamento industrial, além de ornamentais consolidadas.'
-			)
-		);
-	}
 
 	/**
 	 * Inicializa a classe view
@@ -78,376 +15,157 @@ abstract class ViewMudas implements IView {
 	public static function init() {
 
 		$area = _Formatting::returnAccessedArea ( 'mudas' );
-		$recortes = self::recortes ();
+		switch (true) {
 
-		// catálogo completo
-		if (preg_match ( '/^\\/?$/', $area )) {
-			self::index ();
-			return;
+			case (bool)preg_match ( '/^\\/?$/', $area ) : // home
+				self::index ();
+				break;
+
+			case (bool)preg_match ( '/^\\/especies-exoticas\\/?$/', $area ) : // Espécies Exóticas
+				self::pesquisaAvancada ( FimPlantio::EX );
+				break;
+
+			case (bool)preg_match ( '/^\\/especies-para-sombreamento\\/?$/', $area ) : // Espécies para sombreamento
+				self::pesquisaAvancada ( FimPlantio::S );
+				break;
+
+			case (bool)preg_match ( '/^\\/especies-frutas-para-consumo-humano\\/?$/', $area ) : // Espécies Frutas para consumo humano
+				self::pesquisaAvancada ( FimPlantio::FH );
+				break;
+
+			case (bool)preg_match ( '/^\\/especies-com-floracao-exuberante\\/?$/', $area ) : // Espécies Com floração exuberante
+				self::pesquisaAvancada ( FimPlantio::FLOR );
+				break;
+
+			case (bool)preg_match ( '/^\\/especies-para-recuperacao-de-area-degradada-e-mata-ciliar\\/?$/', $area ) : // Espécies Para recuperação de área degradada e mata ciliar
+				self::pesquisaAvancada ( Array (FimPlantio::RMC, FimPlantio::RAD ) );
+				break;
+
+			case (bool)preg_match ( '/^\\/(.)*$/', $area ) : // descrição das mudas
+				$idMuda = substr ( $area, 1 );
+				self::mudas ( $idMuda );
+				break;
+
+			default : // página inexistente
+				ViewPageNotFound::init ();
+				break;
 		}
-
-		// recortes com URL própria
-		if (preg_match ( '/^\\/([a-z0-9-]+)\\/?$/', $area, $partes ) && isset ( $recortes [$partes [1]] )) {
-			self::index ( $recortes [$partes [1]], $partes [1] );
-			return;
-		}
-
-		// URL antiga por id: leva para o endereço com nome, preservando o que
-		// já foi indexado e o que está linkado por aí
-		if (preg_match ( '/^\\/(\\d+)\\/?$/', $area, $partes )) {
-
-			$muda = new Muda ( $partes [1] );
-
-			if ($muda->existe ()) {
-				header ( 'Location: ' . _Path::getURL () . 'mudas/' . $muda->getSlug (), true, 301 );
-				exit ();
-			}
-
-			ViewPageNotFound::init ();
-			return;
-		}
-
-		// página da espécie
-		if (preg_match ( '/^\\/([a-z0-9-]+)\\/?$/', $area, $partes )) {
-
-			$idMuda = Muda::idPorSlug ( $partes [1] );
-
-			if ($idMuda) {
-				self::muda ( new Muda ( $idMuda ) );
-				return;
-			}
-		}
-
-		ViewPageNotFound::init ();
 	}
 
 	/**
-	 * Apresenta o catálogo, inteiro ou recortado por fim de plantio.
+	 * Apresenta a página das mudas e embalagens.
 	 *
-	 * @param Array $recorte
-	 * @param String $slugRecorte
 	 * @return void
 	 */
-	private static function index($recorte = null, $slugRecorte = '') {
-
-		$total = Muda::total ();
+	private static function index() {
 
 		$html = new HtmlMain ( );
-
-		if ($recorte) {
-
-			$html->setTitle ( $recorte ['title'] );
-			$html->setDescription ( $recorte ['descricao'] );
-			$html->setCanonical ( 'mudas/' . $slugRecorte . '/' );
-			$listaMudas = Muda::pesquisaAvancada ( $recorte ['fins'] );
-			$h1 = $recorte ['h1'];
-			$intro = $recorte ['intro'];
-
-		} else {
-
-			$html->setTitle ( 'Catálogo: ' . $total . ' Espécies de Mudas Nativas e Exóticas' );
-			$html->setDescription ( 'Catálogo completo com ' . $total . ' espécies de mudas florestais nativas e exóticas produzidas pelo Viveiro Mudar, em Agrolândia (SC). Porte, floração e ficha técnica de cada espécie.' );
-			$html->setCanonical ( 'mudas' );
-			$listaMudas = Muda::retornaListaMudas ();
-			$h1 = 'Catálogo de mudas';
-			$intro = 'Todas as espécies que produzimos, com porte adulto, época de floração e ficha técnica. Clique no nome para ver a ficha completa da espécie.';
-		}
-
-		$html->setWhatsappMessage ( 'Olá! Estou vendo o catálogo de mudas no site e queria um orçamento.', 'Pedir orçamento' );
-		$html->addJsonLd ( Seo::breadcrumbJsonLd ( array (
-			array ('nome' => 'Início', 'url' => _Path::getURL () ),
-			array ('nome' => 'Mudas', 'url' => _Path::getURL () . 'mudas' )
-		) ) );
-		$html->addJsonLd ( self::listaJsonLd ( $listaMudas, $h1 ) );
-
 		$tpl = new Template ( _Path::getTEMPLATE_BAS () . 'mudas/index.tpl.html' );
 		$tpl->setVar ( 'IMAGE_PATH', _Path::getIMAGE_PATH () );
 		$tpl->setVar ( 'JS_PATH', _Path::getJS_PATH () );
 		$tpl->setVar ( 'URL_PATH', _Path::getURL_PATH () );
-		$tpl->setVar ( 'H1', htmlspecialchars ( $h1, ENT_QUOTES, 'UTF-8' ) );
-		$tpl->setVar ( 'INTRO', htmlspecialchars ( $intro, ENT_QUOTES, 'UTF-8' ) );
-		$tpl->setVar ( 'PLACA_CLARA', Seo::specPlateHtml ( 'spec-plate-light' ) );
-		$tpl->setVar ( 'WHATSAPP_CATALOGO', Seo::whatsappButtonHtml (
-			'Olá! Estou vendo o catálogo de mudas no site e queria um orçamento.',
-			'Pedir orçamento no WhatsApp',
-			'catalogo' ) );
-
+		
 		$html->docOpen ();
-
-		$linha = $tpl->get ( 'linhaMuda' );
-		$linhas = '';
-
-		foreach ( $listaMudas as $muda ) {
-
-			$linhas .= sprintf ( $linha,
-				$muda->getIdMuda (),
-				$muda->getSlug (),
-				htmlspecialchars ( $muda->getNomePopular (), ENT_QUOTES, 'UTF-8' ),
-				htmlspecialchars ( $muda->getNomeCientifico (), ENT_QUOTES, 'UTF-8' ),
-				Porte::mini ( $muda ),
-				htmlspecialchars ( $muda->getAltura (), ENT_QUOTES, 'UTF-8' ),
-				htmlspecialchars ( $muda->getFloracao (), ENT_QUOTES, 'UTF-8' ) );
+		
+		$listaMudas = Muda::retornaListaMudas ();
+		
+		$strLinhasMudas = '';
+		$linhaMuda = $tpl->get ( 'linhaMuda' );
+		for($i = 0; $i < count ( $listaMudas ); $i ++) {
+			$muda = $listaMudas [$i];
+			$strLinhasMudas .= sprintf ( $linhaMuda, $muda->getIdMuda (), //identificador da muda para exibir na tabela 
+														$muda->getIdMuda (), //identificador da muda para chamada poupup
+														$muda->getNomePopular (), //nome popular
+														$muda->getNomeCientifico (), //nome científico
+														$muda->getFloracao (), //floração
+														$muda->getFrutificacao () ); //frutificação
 		}
-
-		$tpl->setVar ( 'LINHAS_MUDAS', $linhas );
-
+		
+		$tpl->setVar ( 'LINHAS_MUDAS', $strLinhasMudas );
+		
 		$tpl->show ( 'index' );
-
+		
 		$html->docClose ();
 	}
 
 	/**
-	 * Dados estruturados da listagem.
-	 *
-	 * @param Muda[] $listaMudas
-	 * @param String $nome
-	 * @return Array
+	 * Apresenta a página das mudas de acordo com um tipo de plantio
+	 * 
+	 * @param FimPlantio[array] - $tipoPlantio
+	 * 
+	 * @return void
 	 */
-	private static function listaJsonLd($listaMudas, $nome) {
+	private static function pesquisaAvancada($tipoPlantio) {
 
-		$itens = array ();
-		$posicao = 1;
-
-		foreach ( $listaMudas as $muda ) {
-			$itens [] = array (
-				'@type' => 'ListItem',
-				'position' => $posicao ++,
-				'name' => $muda->getNomePopular (),
-				'url' => _Path::getURL () . 'mudas/' . $muda->getSlug ()
-			);
+		$html = new HtmlMain ( );
+		$tpl = new Template ( _Path::getTEMPLATE_BAS () . 'mudas/index.tpl.html' );
+		$tpl->setVar ( 'IMAGE_PATH', _Path::getIMAGE_PATH () );
+		$tpl->setVar ( 'JS_PATH', _Path::getJS_PATH () );
+		$tpl->setVar ( 'URL_PATH', _Path::getURL_PATH () );
+		
+		$html->docOpen ();
+		
+		$listaMudas = Muda::pesquisaAvancada ( $tipoPlantio );
+		
+		$strLinhasMudas = '';
+		$linhaMuda = $tpl->get ( 'linhaMuda' );
+		for($i = 0; $i < count ( $listaMudas ); $i ++) {
+			$muda = $listaMudas [$i];
+			$strLinhasMudas .= sprintf ( $linhaMuda, $muda->getIdMuda (), //identificador da muda para exibir na tabela 
+													$muda->getIdMuda (), //identificador da muda para chamada poupup
+													$muda->getNomePopular (), //nome popular
+													$muda->getNomeCientifico (), //nome científico
+													$muda->getFloracao (), //floração
+													$muda->getFrutificacao () ); //frutificação
 		}
-
-		return array (
-			'@context' => 'https://schema.org',
-			'@type' => 'ItemList',
-			'name' => $nome,
-			'numberOfItems' => count ( $itens ),
-			'itemListElement' => $itens
-		);
+		
+		$tpl->setVar ( 'LINHAS_MUDAS', $strLinhasMudas );
+		
+		$tpl->show ( 'index' );
+		
+		$html->docClose ();
 	}
 
 	/**
-	 * Apresenta a ficha de uma espécie.
-	 *
-	 * @param Muda $muda
+	 * Apresenta a página da das mudas.
+	 * 
+	 * @param Integer $idMuda
 	 * @return void
 	 */
-	private static function muda($muda) {
+	private static function mudas($idMuda) {
 
-		$nome = $muda->getNomePopular ();
-		$sciCurto = $muda->getNomeCientificoCurto ();
-		$mensagem = 'Olá! Vi a página da muda ' . $nome . ' no site e queria fazer um orçamento.';
-
-		$html = new HtmlMain ( );
-		$html->setTitle ( 'Muda de ' . $nome . ' (' . $sciCurto . ') | Viveiro Mudar', true );
-		$html->setDescription ( self::descricaoDaMuda ( $muda ) );
-		$html->setCanonical ( 'mudas/' . $muda->getSlug () );
-		$html->setOgType ( 'product' );
-		$html->setWhatsappMessage ( $mensagem, 'Pedir orçamento' );
-
-		if ($muda->getMapaRegiao ()) {
-			$html->setOgImage ( $muda->getMapaRegiao () );
-		}
-
-		$html->addJsonLd ( Seo::mudaJsonLd ( $muda ) );
-		$html->addJsonLd ( Seo::breadcrumbJsonLd ( array (
-			array ('nome' => 'Início', 'url' => _Path::getURL () ),
-			array ('nome' => 'Mudas', 'url' => _Path::getURL () . 'mudas' ),
-			array ('nome' => $nome, 'url' => _Path::getURL () . 'mudas/' . $muda->getSlug () )
-		) ) );
-
+		$html = new HtmlMainPoupUp ( );
 		$tpl = new Template ( _Path::getTEMPLATE_BAS () . 'mudas/mudas.tpl.html' );
 		$tpl->setVar ( 'IMAGE_PATH', _Path::getIMAGE_PATH () );
 		$tpl->setVar ( 'JS_PATH', _Path::getJS_PATH () );
 		$tpl->setVar ( 'URL_PATH', _Path::getURL_PATH () );
-
-		$escNome = htmlspecialchars ( $nome, ENT_QUOTES, 'UTF-8' );
-		$escSci = htmlspecialchars ( $muda->getNomeCientifico (), ENT_QUOTES, 'UTF-8' );
-
-		$tpl->setVar ( 'NOME_POPULAR', $escNome );
-		$tpl->setVar ( 'NOME_CIENTIFICO', $escSci );
-		$tpl->setVar ( 'RESUMO', $muda->getResumo () );
-		$tpl->setVar ( 'PORTE', Porte::single ( $muda ) );
-		$tpl->setVar ( 'FENOLOGIA', Porte::fenologia ( $muda ) );
-		$tpl->setVar ( 'CHIPS', self::chips ( $tpl, $muda ) );
-		$tpl->setVar ( 'FICHA', self::ficha ( $tpl, $muda ) );
-		$tpl->setVar ( 'LEGENDA', self::legenda ( $tpl, $muda ) );
-		$tpl->setVar ( 'RELACIONADAS', self::relacionadas ( $tpl, $muda ) );
-		$tpl->setVar ( 'MAPA', self::mapa ( $tpl, $muda ) );
-		$tpl->setVar ( 'PLACA_CLARA', Seo::specPlateHtml ( 'spec-plate-light' ) );
-		$tpl->setVar ( 'WHATSAPP_CORPO', Seo::whatsappButtonHtml ( $mensagem, 'Pedir orçamento no WhatsApp', 'especie' ) );
-
+		
 		$html->docOpen ();
-
+		
+		$muda = new Muda ( $idMuda );
+		
+		$tpl->setVar ( 'NOME_POPULAR', $muda->getNomePopular () );
+		$tpl->setVar ( 'NOME_CIENTIFICO', $muda->getNomeCientifico () );
+		
+		$strFinsPlantio = '';
+		$finsPlantio = $muda->getFinsPlantio ();
+		for($i = 0; $i < count ( $finsPlantio ); $i ++) {
+			$strFinsPlantio .= $tpl->get ( $finsPlantio [$i] );
+		}
+		$tpl->setVar ( 'FINS_PLANTIO', $strFinsPlantio );
+		
+		$tpl->setVar ( 'COMPORTAMENTO_FOLHAR', $tpl->get ( $muda->getComportamentoFolhar () ) );
+		$tpl->setVar ( 'ALTURA', $muda->getAltura () );
+		$tpl->setVar ( 'FLORACAO', $muda->getFloracao () );
+		$tpl->setVar ( 'FRUTIFICACAO', $muda->getFrutificacao () );
+		$tpl->setVar ( 'COR_FLORACAO', $muda->getCorFloracao () );
+		$tpl->setVar ( 'REGIOES_CULTIVO', $muda->getRegioesCultivo () );
+		$tpl->setVar ( 'URL_MAPA_REGIAO', $muda->getMapaRegiao () );
+		$tpl->setVar ( 'MAPA_REGIAO', $tpl->get ( 'mapaRegiao' ) );
+		
 		$tpl->show ( 'muda' );
-
+		
 		$html->docClose ();
-	}
-
-	/**
-	 * Meta description da ficha: fato primeiro, intenção comercial no fim.
-	 *
-	 * @param Muda $muda
-	 * @return String
-	 */
-	private static function descricaoDaMuda($muda) {
-
-		$partes = array ();
-		$partes [] = 'Muda de ' . $muda->getNomePopular () . ' (' . $muda->getNomeCientificoCurto () . ')';
-
-		$faixa = Porte::faixaTexto ( $muda );
-		if ($faixa) {
-			$partes [] = 'porte ' . str_replace ( '–', ' a ', $faixa );
-		}
-
-		if ($muda->getComportamentoFolharExtenso ()) {
-			$partes [] = mb_strtolower ( $muda->getComportamentoFolharExtenso (), 'UTF-8' );
-		}
-
-		return implode ( ', ', $partes ) . '. Produzida no Viveiro Mudar, em Agrolândia/SC. Orçamento pelo WhatsApp.';
-	}
-
-	/**
-	 * Chips do vocabulário controlado da espécie.
-	 *
-	 * @param Template $tpl
-	 * @param Muda $muda
-	 * @return String
-	 */
-	private static function chips($tpl, $muda) {
-
-		$modelo = $tpl->get ( 'chip' );
-		$extenso = $muda->getFinsPlantioExtenso ();
-
-		$html = '<div class="code-chips">';
-
-		foreach ( $muda->getFinsPlantio () as $i => $codigo ) {
-
-			$descricao = isset ( $extenso [$i] ) ? $extenso [$i] : '';
-
-			$classe = '';
-			if ($codigo == FimPlantio::NA) {
-				$classe = 'code-chip-na';
-			} elseif ($codigo == FimPlantio::RMC || $codigo == FimPlantio::RAD) {
-				$classe = 'code-chip-rec';
-			}
-
-			$html .= sprintf ( $modelo,
-				$classe,
-				htmlspecialchars ( $descricao, ENT_QUOTES, 'UTF-8' ),
-				htmlspecialchars ( $codigo, ENT_QUOTES, 'UTF-8' ),
-				htmlspecialchars ( $descricao, ENT_QUOTES, 'UTF-8' ) );
-		}
-
-		return $html . '</div>';
-	}
-
-	/**
-	 * Linhas da ficha técnica. Campo sem valor não vira linha vazia.
-	 *
-	 * @param Template $tpl
-	 * @param Muda $muda
-	 * @return String
-	 */
-	private static function ficha($tpl, $muda) {
-
-		$modelo = $tpl->get ( 'fichaLinha' );
-
-		$campos = array (
-			'Nome popular' => htmlspecialchars ( $muda->getNomePopular (), ENT_QUOTES, 'UTF-8' ),
-			'Nome científico' => '<em>' . htmlspecialchars ( $muda->getNomeCientifico (), ENT_QUOTES, 'UTF-8' ) . '</em>',
-			'Origem' => htmlspecialchars ( $muda->getOrigem (), ENT_QUOTES, 'UTF-8' ),
-			'Porte adulto' => htmlspecialchars ( $muda->getAltura (), ENT_QUOTES, 'UTF-8' ),
-			'Comportamento foliar' => htmlspecialchars ( $muda->getComportamentoFolharExtenso (), ENT_QUOTES, 'UTF-8' ),
-			'Floração' => htmlspecialchars ( $muda->getFloracao (), ENT_QUOTES, 'UTF-8' ),
-			'Cor da floração' => htmlspecialchars ( $muda->getCorFloracao (), ENT_QUOTES, 'UTF-8' ),
-			'Frutificação' => htmlspecialchars ( $muda->getFrutificacao (), ENT_QUOTES, 'UTF-8' ),
-			'Ocorrência e cultivo' => htmlspecialchars ( $muda->getRegioesCultivo (), ENT_QUOTES, 'UTF-8' )
-		);
-
-		$html = '';
-		foreach ( $campos as $rotulo => $valor ) {
-			if ($valor !== '' && $valor !== '<em></em>') {
-				$html .= sprintf ( $modelo, $rotulo, $valor );
-			}
-		}
-
-		return $html;
-	}
-
-	/**
-	 * Legenda apenas dos códigos que esta espécie usa — despejar as treze
-	 * definições em toda ficha só cansaria o leitor.
-	 *
-	 * @param Template $tpl
-	 * @param Muda $muda
-	 * @return String
-	 */
-	private static function legenda($tpl, $muda) {
-
-		$modelo = $tpl->get ( 'legendaItem' );
-		$extenso = $muda->getFinsPlantioExtenso ();
-
-		$html = '';
-
-		foreach ( $muda->getFinsPlantio () as $i => $codigo ) {
-			if (isset ( $extenso [$i] )) {
-				$html .= sprintf ( $modelo,
-					htmlspecialchars ( $codigo, ENT_QUOTES, 'UTF-8' ),
-					htmlspecialchars ( $extenso [$i], ENT_QUOTES, 'UTF-8' ) );
-			}
-		}
-
-		if ($muda->getComportamentoFolhar () && $muda->getComportamentoFolharExtenso ()) {
-			$html .= sprintf ( $modelo,
-				htmlspecialchars ( $muda->getComportamentoFolhar (), ENT_QUOTES, 'UTF-8' ),
-				htmlspecialchars ( $muda->getComportamentoFolharExtenso (), ENT_QUOTES, 'UTF-8' ) );
-		}
-
-		return $html;
-	}
-
-	/**
-	 * Espécies relacionadas — resolve a orfandade das fichas e distribui
-	 * autoridade interna entre elas.
-	 *
-	 * @param Template $tpl
-	 * @param Muda $muda
-	 * @return String
-	 */
-	private static function relacionadas($tpl, $muda) {
-
-		$modelo = $tpl->get ( 'relacionada' );
-		$html = '';
-
-		foreach ( Muda::relacionadas ( $muda, 6 ) as $relacionada ) {
-			$html .= sprintf ( $modelo,
-				$relacionada->getUrl (),
-				htmlspecialchars ( $relacionada->getNomePopular (), ENT_QUOTES, 'UTF-8' ),
-				htmlspecialchars ( $relacionada->getNomeCientificoCurto (), ENT_QUOTES, 'UTF-8' ) );
-		}
-
-		return $html;
-	}
-
-	/**
-	 * Prancha do mapa de ocorrência.
-	 *
-	 * @param Template $tpl
-	 * @param Muda $muda
-	 * @return String
-	 */
-	private static function mapa($tpl, $muda) {
-
-		if (! $muda->getMapaRegiao ()) {
-			return '';
-		}
-
-		return sprintf ( $tpl->get ( 'mapa' ),
-			htmlspecialchars ( $muda->getMapaRegiao (), ENT_QUOTES, 'UTF-8' ),
-			htmlspecialchars ( $muda->getNomePopular (), ENT_QUOTES, 'UTF-8' ),
-			htmlspecialchars ( $muda->getNomeCientificoCurto (), ENT_QUOTES, 'UTF-8' ),
-			htmlspecialchars ( $muda->getRegioesCultivo (), ENT_QUOTES, 'UTF-8' ) );
 	}
 
 }
