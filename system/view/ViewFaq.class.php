@@ -32,7 +32,7 @@ abstract class ViewFaq implements IView {
 				'resposta' => 'Sim. Toda entrega é acompanhada de nota fiscal. A produção é conduzida sob responsabilidade técnica do Eng. Florestal Gilberto Ferretti, CREA/SC 35178-8.' ),
 
 			array ('pergunta' => 'Quantas espécies vocês produzem?',
-				'resposta' => 'São ' . Muda::total () . ' espécies em catálogo, sendo ' . count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) . ' nativas e ' . count ( Muda::pesquisaAvancada ( FimPlantio::EX ) ) . ' exóticas. Do total, ' . count ( Muda::pesquisaAvancada ( FimPlantio::RAD ) ) . ' são indicadas para recuperação de área degradada e ' . count ( Muda::pesquisaAvancada ( FimPlantio::RMC ) ) . ' para recomposição de mata ciliar. Cada espécie tem ficha própria com porte adulto, floração, frutificação e mapa de ocorrência.' ),
+				'resposta' => 'São ' . Muda::total () . ' espécies em catálogo, sendo ' . count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) . ' nativas e ' . count ( Muda::pesquisaAvancada ( FimPlantio::EX ) ) . ' exóticas. Do total, ' . count ( Muda::pesquisaAvancada ( FimPlantio::RAD ) ) . ' são indicadas para recuperação de área degradada e ' . count ( Muda::pesquisaAvancada ( FimPlantio::RMC ) ) . ' para recomposição de mata ciliar. Cada espécie tem ficha própria com floração, frutificação, mapa de ocorrência e o tamanho de muda disponível em cada embalagem.' ),
 
 			array ('pergunta' => 'Que espécies usar em compensação florestal ou PRAD?',
 				'resposta' => 'A lista sai do projeto aprovado pelo órgão ambiental. Se ele ainda estiver em elaboração, podemos indicar espécies nativas de ocorrência regional compatíveis com o tipo de área, usando o mapa de ocorrência natural de cada espécie do catálogo.' ),

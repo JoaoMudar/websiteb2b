@@ -457,252 +457,69 @@ em, i { font-style: italic; }
 }
 
 /* --------------------------------------------------------------------------
-   PRANCHA DE DISPONIBILIDADE — o que o hero mostra no lugar do gráfico
-   É a lista que o viveiro manda por WhatsApp quando perguntam o que tem
-   pronto: nome, binômio e porte adulto. Dado medido em mono, binômio em
-   itálico, como manda o resto do site.
+   CARD DE RESPOSTA RÁPIDA — o que o hero mostra no lugar da prancha de portes
+   O visitante não precisa saber quanto a árvore cresce: precisa saber o que
+   mandar para receber um orçamento. Prova e botão ficam no mesmo card, que é
+   o princípio de conversão do site.
    -------------------------------------------------------------------------- */
-.prod-list {
+.hero-card {
+  padding: 26px;
   border: 1px solid var(--bark-600);
+  border-top: 2px solid var(--foliage);
   border-radius: var(--radius);
   background: var(--soil-800);
 }
 
-.prod-head {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 0;
-  padding: 13px 18px;
-  border-bottom: 1px solid var(--bark-600);
+.hero-card h2 {
+  font-size: var(--step-1);
+  line-height: 1.15;
+  color: var(--paper);
+}
+
+.hero-card-lead {
+  margin-top: 10px;
   font-family: var(--font-mono);
   font-size: .62rem;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--foliage);
 }
-.prod-head span:last-child { color: var(--bark-300); }
 
-.prod-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  column-gap: 16px;
-  padding: 13px 18px;
-  border-top: 1px solid var(--soil-700);
-  text-decoration: none;
-  transition: background var(--transition);
+.hero-card-list { margin-top: 14px; }
+.hero-card-list li {
+  position: relative;
+  padding: 10px 0 10px 22px;
+  border-bottom: 1px solid var(--soil-700);
+  font-size: .97rem;
+  line-height: 1.45;
+  color: var(--ink-on-dark-muted);
 }
-.prod-row:first-of-type { border-top: 0; }
-.prod-row:hover, .prod-row:focus-visible { background: var(--soil-700); }
-
-.prod-name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: .98rem;
-  line-height: 1.2;
-  color: var(--paper);
+.hero-card-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 19px;
+  width: 10px; height: 2px;
+  background: var(--foliage);
 }
-.prod-row:hover .prod-name { color: var(--foliage-pale); }
+.hero-card-list li:last-child { border-bottom: none; }
+.hero-card-list strong { color: var(--paper); font-weight: 600; }
 
-.prod-size {
-  font-family: var(--font-mono);
-  font-size: .68rem;
-  white-space: nowrap;
-  color: var(--foliage);
-}
-
-.prod-sci {
-  grid-column: 1 / -1;
-  font-family: var(--font-body);
-  font-style: italic;
-  font-size: .92rem;
-  line-height: 1.3;
+.hero-card-close {
+  margin-top: 14px;
+  font-size: .95rem;
   color: var(--ink-on-dark-muted);
 }
 
-.prod-foot {
+.hero-card .wa-inline {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 18px;
-  border-top: 1px solid var(--bark-600);
-  font-family: var(--font-mono);
-  font-size: .66rem;
-  letter-spacing: .04em;
-  color: var(--ink-on-dark);
-  text-decoration: none;
-  transition: color var(--transition);
-}
-.prod-foot:hover, .prod-foot:focus-visible { color: var(--foliage); }
-
-/* ==========================================================================
-   RÉGUA DE PORTE — o elemento assinatura da ficha
-   Escala compartilhada 0–60 m. Toda espécie do catálogo é medida contra ela.
-   ========================================================================== */
-.porte-axis {
-  position: relative;
-  height: 100%;
-  font-size: .62rem;
-  color: var(--bark-300);
-  letter-spacing: .02em;
-}
-.porte-axis span {
-  position: absolute;
-  right: 0;
-  bottom: var(--at);
-  transform: translateY(50%);
-  white-space: nowrap;
-}
-
-.porte-plot {
-  position: relative;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  gap: 10px;
-  border-left: 1px solid var(--bark-600);
-  padding-left: 12px;
-}
-/* linhas-guia da escala, desenhadas atrás das barras */
-.porte-plot::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: repeating-linear-gradient(
-    to top, var(--soil-700) 0 1px, transparent 1px calc(100% / 4)
-  );
-  pointer-events: none;
-}
-
-.porte-col {
-  position: relative;
-  flex: 1 1 0;
-  height: 100%;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-.porte-bar {
-  position: relative;
   width: 100%;
-  height: var(--max);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  transform-origin: bottom;
-  animation: porte-cresce .55s cubic-bezier(.2,.7,.3,1) backwards;
+  justify-content: center;
+  margin-top: 20px;
+  text-align: center;
 }
-/* faixa incerta (do mínimo ao máximo) em hachura, faixa certa sólida */
-.porte-range {
-  height: calc(100% - var(--minrel));
-  background: repeating-linear-gradient(
-    -45deg, var(--foliage) 0 2px, transparent 2px 5px
-  );
-  border-top: 2px solid var(--foliage);
-}
-.porte-sure {
-  height: var(--minrel);
-  background: var(--foliage-deep);
-  border-top: 1px solid var(--foliage);
-}
-.porte-label {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%) rotate(180deg);
-  writing-mode: vertical-rl;
-  font-size: .66rem;
-  letter-spacing: .02em;
-  color: var(--paper);
-  white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(34,26,18,.9);
-  pointer-events: none;
-}
-.porte-val {
-  position: absolute;
-  bottom: calc(var(--max) + 6px);
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: .62rem;
-  color: var(--foliage);
-  white-space: nowrap;
-}
+.hero-card .wa-inline:hover { background: var(--laterite); }
 
-/* marcas de referência: o que o leitor já sabe medir */
-.porte-ref {
-  position: absolute;
-  left: 0; right: 0;
-  bottom: var(--at);
-  border-top: 1px dashed var(--bark-500);
-  pointer-events: none;
-}
-.porte-ref span {
-  position: absolute;
-  right: 0;
-  bottom: 3px;
-  font-size: .58rem;
-  color: var(--bark-300);
-  letter-spacing: .02em;
-  background: var(--soil-900);
-  padding-left: 5px;
-}
-
-@keyframes porte-cresce { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-
-/* Variante da página de espécie, sobre fundo claro */
-.porte-single {
-  display: grid;
-  grid-template-columns: 32px 1fr;
-  gap: 10px;
-  height: 250px;
-  font-family: var(--font-mono);
-  margin-bottom: 10px;
-}
-.porte-single .porte-axis { color: var(--ink-muted); }
-.porte-single .porte-plot {
-  border-left-color: var(--sombrite-dark);
-  gap: 0;
-  padding-left: 14px;
-}
-.porte-single .porte-plot::before {
-  background-image: repeating-linear-gradient(
-    to top, var(--sombrite-dark) 0 1px, transparent 1px calc(100% / 4)
-  );
-}
-.porte-single .porte-col { max-width: 66px; }
-.porte-single .porte-label { color: var(--soil-900); text-shadow: none; }
-.porte-single .porte-val { color: var(--foliage-deep); font-weight: 600; }
-.porte-single .porte-ref { border-top-color: var(--bark-300); }
-.porte-single .porte-ref span { color: var(--ink-muted); background: var(--paper); }
-
-.porte-caption {
-  font-family: var(--font-mono);
-  font-size: .64rem;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-}
-
-/* Micro-barra do catálogo: dá para varrer o catálogo inteiro por porte com o olho */
-.porte-mini {
-  display: inline-flex;
-  align-items: center;
-  width: 68px;
-  height: 9px;
-  background: var(--sombrite);
-  border-radius: 1px;
-  overflow: hidden;
-  vertical-align: middle;
-}
-.porte-mini i { display: block; height: 100%; }
-.porte-mini .m-sure { width: var(--minrel); background: var(--foliage-deep); }
-.porte-mini .m-range {
-  width: var(--rangerel);
-  background: repeating-linear-gradient(-45deg, var(--foliage) 0 2px, transparent 2px 4px);
-}
+.hero-card .spec-plate { margin-top: 18px; }
 
 /* ==========================================================================
    FENOLOGIA — módulo secundário, só aparece quando o dado existe
@@ -931,6 +748,36 @@ em, i { font-style: italic; }
 .sidebar-card p { font-size: .95rem; color: var(--ink-muted); }
 .sidebar-card > * + * { margin-top: 12px; }
 
+/* Tamanho na entrega: o dado de altura que interessa ao comprador — o da muda
+   quando sai do viveiro, não o da árvore adulta. */
+.tamanho-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: var(--rule);
+  font-size: .92rem;
+  color: var(--ink-muted);
+}
+.tamanho-list li:last-child { border-bottom: none; }
+.tamanho-list b {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--foliage-deep);
+}
+
+.tamanho-nota { font-size: .92rem; color: var(--ink-muted); }
+
+.sidebar-card .wa-inline {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
 .contact-line {
   display: flex;
   align-items: flex-start;
@@ -1050,6 +897,12 @@ a.service-pill:hover .ic { color: var(--foliage); }
    ========================================================================== */
 .mudas-section { padding: 64px 0 84px; }
 
+.mudas-nota {
+  max-width: 62ch;
+  margin-bottom: 22px;
+  font-size: .97rem;
+  color: var(--ink-muted);
+}
 .mudas-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
 .mudas-filter-btn {
   display: inline-flex;
@@ -1093,8 +946,6 @@ a.service-pill:hover .ic { color: var(--foliage); }
 #example tbody td a:hover { color: var(--laterite-700); }
 #example tbody td em { color: var(--ink-muted); }
 #example .col-cod { font-family: var(--font-mono); font-size: .68rem; color: var(--bark-500); }
-#example .col-porte { white-space: nowrap; font-family: var(--font-mono); font-size: .66rem; color: var(--ink-muted); }
-#example .col-porte .porte-mini { margin-right: 8px; }
 
 .dataTables_wrapper { padding: 18px 18px 22px; }
 .dataTables_filter { margin-bottom: 14px; }
@@ -1186,6 +1037,17 @@ span.next:hover, span.last:hover { color: var(--soil-900); text-decoration: unde
   color: var(--ink);
 }
 .ficha td em { font-style: italic; }
+
+/* A ressalva que impede ler o porte adulto como o tamanho da muda vendida */
+.ficha-nota {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .6rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 3px;
+}
 
 .legenda-list { margin-top: 14px; }
 .legenda-list li {
@@ -1452,14 +1314,12 @@ span.next:hover, span.last:hover { color: var(--soil-900); text-decoration: unde
 @media (max-width: 420px) {
   .spec-plate { font-size: .68rem; gap: 8px 14px; }
   .breadcrumb { font-size: .58rem; }
-  .prod-head, .prod-row, .prod-foot { padding-left: 14px; padding-right: 14px; }
-  .prod-name { font-size: .92rem; }
+  .hero-card { padding: 20px; }
 }
 
 /* ==========================================================================
    MOVIMENTO
-   Um único momento orquestrado, na régua da ficha da espécie. Quem pediu menos
-   movimento recebe tudo já assentado.
+   Quem pediu menos movimento recebe tudo já assentado.
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

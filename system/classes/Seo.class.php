@@ -286,8 +286,10 @@ abstract class Seo {
 
 		$propriedades = array ();
 
+		// A altura da árvore adulta não entra aqui de propósito: este é um schema
+		// Product chamado "Muda de X", e publicar "Altura: 20-35m" nele diz ao
+		// buscador que o produto vendido tem 35 metros.
 		$campos = array (
-			'Altura' => $muda->getAltura (),
 			'Comportamento foliar' => $muda->getComportamentoFolharExtenso (),
 			'Origem' => $muda->getOrigem (),
 			'Floração' => $muda->getFloracao (),

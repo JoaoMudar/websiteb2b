@@ -4,9 +4,9 @@
 <script>
 $(document).ready(function() {
   $('#example').dataTable({
-    "bStateSave": true,
+    "bStateSave": false,
     "sPaginationType": "full_numbers",
-    "aoColumns": [ null, null, null, { "bSortable": false }, null ],
+    "aoColumns": [ null, null, null, null ],
     "oLanguage": {
       "sLengthMenu": "Exibindo _MENU_ espécies por página",
       "sSearch": "Buscar espécie:",
@@ -41,6 +41,8 @@ function referenciasBibliograficas() {
 <section class="mudas-section">
   <div class="container">
 
+    <p class="mudas-nota">Todas as espécies saem em tubete, saco ou balde — de 10 cm a 2,5 m de altura na entrega, conforme o que o projeto pedir.</p>
+
     <nav class="mudas-filters" id="mudas-filters" aria-label="Filtrar espécies">
       <a href="[[URL_PATH]]mudas" class="mudas-filter-btn" data-filter="">Todas</a>
       <a href="[[URL_PATH]]mudas/especies-nativas/" class="mudas-filter-btn" data-filter="especies-nativas">Nativas</a>
@@ -72,7 +74,6 @@ function referenciasBibliograficas() {
             <th scope="col">Cód.</th>
             <th scope="col">Nome popular</th>
             <th scope="col">Nome científico</th>
-            <th scope="col">Porte adulto</th>
             <th scope="col">Floração</th>
           </tr>
         </thead>
@@ -115,7 +116,6 @@ function referenciasBibliograficas() {
   <td class="col-cod">%03d</td>
   <td><a href="[[URL_PATH]]mudas/%s">%s</a></td>
   <td><em>%s</em></td>
-  <td class="col-porte">%s%s</td>
   <td>%s</td>
 </tr>
 <=*

@@ -8,13 +8,6 @@
 abstract class ViewHome implements IView {
 
 	/**
-	 * Espécies da prancha do hero: nativas reconhecíveis, em ordem crescente de
-	 * porte, do ipê-amarelo à araucária. É a lista de disponibilidade que o
-	 * viveiro manda por WhatsApp, no lugar de um gráfico.
-	 */
-	private static $especiesEmProducao = array (83, 87, 8, 31, 82, 121 );
-
-	/**
 	 * Inicializa a classe view
 	 *
 	 * @return void
@@ -52,8 +45,6 @@ abstract class ViewHome implements IView {
 		$tpl->setVar ( 'URL_PATH', _Path::getURL_PATH () );
 		$tpl->setVar ( 'TOTAL_NATIVAS', count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) );
 
-		$tpl->setVar ( 'LISTA_PRODUCAO', self::listaProducao ( $tpl ) );
-
 		$tpl->setVar ( 'PLACA', Seo::specPlateHtml () );
 
 		$tpl->setVar ( 'WHATSAPP_HERO', Seo::whatsappButtonHtml (
@@ -74,37 +65,6 @@ abstract class ViewHome implements IView {
 		$tpl->show ( 'indexHome' );
 
 		$html->docClose ();
-	}
-
-	/**
-	 * Monta a prancha de disponibilidade do hero.
-	 *
-	 * O porte vai como texto, não como barra: o dado que o comprador usa
-	 * continua ali, o gráfico não.
-	 *
-	 * @param Template $tpl
-	 * @return String
-	 */
-	private static function listaProducao($tpl) {
-
-		$linha = $tpl->get ( 'especieLinha' );
-		$html = '';
-
-		foreach ( self::$especiesEmProducao as $id ) {
-
-			$muda = new Muda ( $id );
-			if (! $muda->existe ()) {
-				continue;
-			}
-
-			$html .= sprintf ( $linha,
-				$muda->getSlug (),
-				htmlspecialchars ( $muda->getNomePopular (), ENT_QUOTES, 'UTF-8' ),
-				Porte::faixaTexto ( $muda ),
-				htmlspecialchars ( $muda->getNomeCientificoCurto (), ENT_QUOTES, 'UTF-8' ) );
-		}
-
-		return $html;
 	}
 
 	/**

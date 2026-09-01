@@ -13,12 +13,6 @@
 class Muda {
 
 	/**
-	 * Topo da escala da régua de porte, em metros.
-	 * A espécie mais alta do catálogo chega a 60 m.
-	 */
-	const ALTURA_MAX_ESCALA = 60;
-
-	/**
 	 * Registros do CSV indexados por id. Carregado uma única vez por requisição.
 	 *
 	 * @var Array
@@ -336,30 +330,8 @@ class Muda {
 	}
 
 	/* ------------------------------------------------------------------ *
-	 * Dados derivados — régua de porte e fenologia
+	 * Dados derivados — fenologia
 	 * ------------------------------------------------------------------ */
-
-	/**
-	 * Extrai a faixa de altura em metros de textos como "15-25m" ou
-	 * "5-8m (10-15m na mata)" — sempre a primeira faixa informada.
-	 *
-	 * @return Array|null array('min' => Float, 'max' => Float)
-	 */
-	public function alturaMinMax() {
-
-		if (! $this->altura) {
-			return null; // trepadeiras não têm porte arbóreo
-		}
-
-		if (! preg_match ( '/(\d+(?:[.,]\d+)?)\s*-\s*(\d+(?:[.,]\d+)?)\s*m/i', $this->altura, $partes )) {
-			return null;
-		}
-
-		$min = ( float ) str_replace ( ',', '.', $partes [1] );
-		$max = ( float ) str_replace ( ',', '.', $partes [2] );
-
-		return array ('min' => min ( $min, $max ), 'max' => max ( $min, $max ) );
-	}
 
 	/**
 	 * Converte um período textual ("julho-agosto", "novembro-janeiro",
@@ -463,11 +435,6 @@ class Muda {
 
 		$frase = 'O ' . mb_strtolower ( $this->nomePopular, 'UTF-8' ) . ' (<em>' . $this->nomeCientifico . '</em>) é uma ' . $origem;
 
-		$faixa = $this->alturaMinMax ();
-		if ($faixa) {
-			$frase .= ', que atinge de ' . self::numeroBr ( $faixa ['min'] ) . ' a ' . self::numeroBr ( $faixa ['max'] ) . ' metros de altura';
-		}
-
 		if ($this->comportamentoFolharExtenso) {
 			$frase .= ', de folhagem ' . mb_strtolower ( $this->comportamentoFolharExtenso, 'UTF-8' );
 		}
@@ -513,17 +480,6 @@ class Muda {
 
 		$ultimo = array_pop ( $itens );
 		return implode ( ', ', $itens ) . ' e ' . $ultimo;
-	}
-
-	/**
-	 * Formata número no padrão brasileiro, sem casa decimal desnecessária.
-	 *
-	 * @param Float $numero
-	 * @return String
-	 */
-	private static function numeroBr($numero) {
-
-		return rtrim ( rtrim ( number_format ( $numero, 1, ',', '' ), '0' ), ',' );
 	}
 
 	/* ------------------------------------------------------------------ *

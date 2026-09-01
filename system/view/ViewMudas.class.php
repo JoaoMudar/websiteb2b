@@ -163,11 +163,11 @@ abstract class ViewMudas implements IView {
 		} else {
 
 			$html->setTitle ( 'Catálogo: ' . $total . ' Espécies de Mudas Nativas e Exóticas' );
-			$html->setDescription ( 'Catálogo completo com ' . $total . ' espécies de mudas florestais nativas e exóticas produzidas pelo Viveiro Mudar, em Agrolândia (SC). Porte, floração e ficha técnica de cada espécie.' );
+			$html->setDescription ( 'Catálogo completo com ' . $total . ' espécies de mudas florestais nativas e exóticas produzidas pelo Viveiro Mudar, em Agrolândia (SC). Floração, mapa de ocorrência e ficha técnica de cada espécie. Orçamento pelo WhatsApp.' );
 			$html->setCanonical ( 'mudas' );
 			$listaMudas = Muda::retornaListaMudas ();
 			$h1 = 'Catálogo de mudas';
-			$intro = 'Todas as espécies que produzimos, com porte adulto, época de floração e ficha técnica. Clique no nome para ver a ficha completa da espécie.';
+			$intro = 'Todas as espécies que produzimos, com época de floração, mapa de ocorrência e ficha técnica. Clique no nome para ver a ficha completa da espécie.';
 		}
 
 		$html->setWhatsappMessage ( 'Olá! Estou vendo o catálogo de mudas no site e queria um orçamento.', 'Pedir orçamento' );
@@ -201,8 +201,6 @@ abstract class ViewMudas implements IView {
 				$muda->getSlug (),
 				htmlspecialchars ( $muda->getNomePopular (), ENT_QUOTES, 'UTF-8' ),
 				htmlspecialchars ( $muda->getNomeCientifico (), ENT_QUOTES, 'UTF-8' ),
-				Porte::mini ( $muda ),
-				htmlspecialchars ( $muda->getAltura (), ENT_QUOTES, 'UTF-8' ),
 				htmlspecialchars ( $muda->getFloracao (), ENT_QUOTES, 'UTF-8' ) );
 		}
 
@@ -284,8 +282,7 @@ abstract class ViewMudas implements IView {
 		$tpl->setVar ( 'NOME_POPULAR', $escNome );
 		$tpl->setVar ( 'NOME_CIENTIFICO', $escSci );
 		$tpl->setVar ( 'RESUMO', $muda->getResumo () );
-		$tpl->setVar ( 'PORTE', Porte::single ( $muda ) );
-		$tpl->setVar ( 'FENOLOGIA', Porte::fenologia ( $muda ) );
+		$tpl->setVar ( 'FENOLOGIA', Fenologia::fenologia ( $muda ) );
 		$tpl->setVar ( 'CHIPS', self::chips ( $tpl, $muda ) );
 		$tpl->setVar ( 'FICHA', self::ficha ( $tpl, $muda ) );
 		$tpl->setVar ( 'LEGENDA', self::legenda ( $tpl, $muda ) );
@@ -293,6 +290,7 @@ abstract class ViewMudas implements IView {
 		$tpl->setVar ( 'MAPA', self::mapa ( $tpl, $muda ) );
 		$tpl->setVar ( 'PLACA_CLARA', Seo::specPlateHtml ( 'spec-plate-light' ) );
 		$tpl->setVar ( 'WHATSAPP_CORPO', Seo::whatsappButtonHtml ( $mensagem, 'Pedir orçamento no WhatsApp', 'especie' ) );
+		$tpl->setVar ( 'WHATSAPP_LATERAL', Seo::whatsappButtonHtml ( $mensagem, 'Ver tamanho e preço', 'especie-lateral' ) );
 
 		$html->docOpen ();
 
@@ -304,6 +302,10 @@ abstract class ViewMudas implements IView {
 	/**
 	 * Meta description da ficha: fato primeiro, intenção comercial no fim.
 	 *
+	 * O tamanho que aparece aqui é o da muda na entrega, não o da árvore adulta:
+	 * é o que o comprador precisa saber e o que evita a leitura de que vendemos
+	 * a árvore pronta.
+	 *
 	 * @param Muda $muda
 	 * @return String
 	 */
@@ -312,16 +314,11 @@ abstract class ViewMudas implements IView {
 		$partes = array ();
 		$partes [] = 'Muda de ' . $muda->getNomePopular () . ' (' . $muda->getNomeCientificoCurto () . ')';
 
-		$faixa = Porte::faixaTexto ( $muda );
-		if ($faixa) {
-			$partes [] = 'porte ' . str_replace ( '–', ' a ', $faixa );
-		}
-
 		if ($muda->getComportamentoFolharExtenso ()) {
 			$partes [] = mb_strtolower ( $muda->getComportamentoFolharExtenso (), 'UTF-8' );
 		}
 
-		return implode ( ', ', $partes ) . '. Produzida no Viveiro Mudar, em Agrolândia/SC. Orçamento pelo WhatsApp.';
+		return implode ( ', ', $partes ) . '. Viveiro Mudar, Agrolândia/SC — muda de 10 cm a 2,5 m. Orçamento pelo WhatsApp.';
 	}
 
 	/**
@@ -360,6 +357,28 @@ abstract class ViewMudas implements IView {
 	}
 
 	/**
+	 * Altura da árvore adulta, com a ressalva que impede a leitura errada.
+	 *
+	 * Este é o único lugar do site onde o dado aparece: é informação de escolha
+	 * de espécie para projeto, não o tamanho da muda que vendemos — a muda sai
+	 * do viveiro com 10 cm a 2,5 m, conforme a embalagem.
+	 *
+	 * @param Muda $muda
+	 * @return String
+	 */
+	private static function alturaAdulta($muda) {
+
+		$altura = $muda->getAltura ();
+
+		if (! $altura) {
+			return '';
+		}
+
+		return htmlspecialchars ( $altura, ENT_QUOTES, 'UTF-8' )
+			. ' <span class="ficha-nota">na natureza, quando adulta</span>';
+	}
+
+	/**
 	 * Linhas da ficha técnica. Campo sem valor não vira linha vazia.
 	 *
 	 * @param Template $tpl
@@ -374,7 +393,7 @@ abstract class ViewMudas implements IView {
 			'Nome popular' => htmlspecialchars ( $muda->getNomePopular (), ENT_QUOTES, 'UTF-8' ),
 			'Nome científico' => '<em>' . htmlspecialchars ( $muda->getNomeCientifico (), ENT_QUOTES, 'UTF-8' ) . '</em>',
 			'Origem' => htmlspecialchars ( $muda->getOrigem (), ENT_QUOTES, 'UTF-8' ),
-			'Porte adulto' => htmlspecialchars ( $muda->getAltura (), ENT_QUOTES, 'UTF-8' ),
+			'Altura da árvore adulta' => self::alturaAdulta ( $muda ),
 			'Comportamento foliar' => htmlspecialchars ( $muda->getComportamentoFolharExtenso (), ENT_QUOTES, 'UTF-8' ),
 			'Floração' => htmlspecialchars ( $muda->getFloracao (), ENT_QUOTES, 'UTF-8' ),
 			'Cor da floração' => htmlspecialchars ( $muda->getCorFloracao (), ENT_QUOTES, 'UTF-8' ),

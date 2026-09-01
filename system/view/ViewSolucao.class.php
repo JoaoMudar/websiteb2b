@@ -86,7 +86,7 @@ abstract class ViewSolucao implements IView {
 
 <h2>Espécies nativas para compensação e PRAD</h2>
 <p>Do nosso catálogo, <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) . ' espécies são nativas</strong>. Delas, <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::RAD ) ) . ' são indicadas para recuperação de área degradada</strong> e <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::RMC ) ) . ' para recomposição de mata ciliar</strong> — as duas categorias que mais aparecem em exigência de órgão ambiental.</p>
-<p>Cada ficha traz porte adulto, comportamento foliar, época de floração e frutificação e o mapa de ocorrência natural da espécie no Brasil, que é o que sustenta o argumento de "espécie nativa de ocorrência regional" diante do analista.</p>
+<p>Cada ficha traz comportamento foliar, época de floração e frutificação e o mapa de ocorrência natural da espécie no Brasil, que é o que sustenta o argumento de "espécie nativa de ocorrência regional" diante do analista.</p>
 
 <h2>Projetos já entregues</h2>
 <ul class="clients-done-list">
@@ -142,7 +142,7 @@ abstract class ViewSolucao implements IView {
 
 <h2>Espécies que usamos</h2>
 <p>Das ' . count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) . ' espécies nativas do nosso catálogo, <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::RMC ) ) . ' são indicadas para recomposição de mata ciliar</strong>. São espécies com ocorrência natural na região, tolerantes a solo úmido e, em boa parte dos casos, atrativas para fauna — o que acelera a dispersão natural e a regeneração da área.</p>
-<p>Cada ficha do catálogo mostra o mapa de ocorrência natural da espécie no Brasil, o porte adulto e a época de frutificação, que é o dado que interessa para atrair fauna.</p>
+<p>Cada ficha do catálogo mostra o mapa de ocorrência natural da espécie no Brasil e a época de frutificação, que é o dado que interessa para atrair fauna.</p>
 
 <h2>O que fornecemos</h2>
 <ul class="arrow-list">
