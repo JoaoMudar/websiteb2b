@@ -60,6 +60,25 @@ abstract class _Path {
 		return self::prepareReturn( self::getURL() . 'system/css/' );
 	}
 
+	/**
+	 * URL de um asset com a data de modificação embutida na query string.
+	 *
+	 * O Cloudflare e o navegador guardam css e js por horas. Sem a versão na
+	 * URL, um deploy entrega HTML novo junto com folha de estilo antiga — e a
+	 * página fica quebrada até o cache expirar sozinho.
+	 *
+	 * @param String $relativo Caminho a partir da raiz, ex: 'system/css/layout.css'
+	 * @return String
+	 */
+	public static function asset($relativo) {
+
+		$relativo = ltrim( $relativo, '/' );
+		$absoluto = self::getURL_BAS() . $relativo;
+		$versao   = is_file( $absoluto ) ? filemtime( $absoluto ) : 0;
+
+		return self::prepareReturn( self::getURL() . $relativo ) . '?v=' . $versao;
+	}
+
 	public static function getIMAGE_PATH() {
 		return self::prepareReturn( self::getURL() . 'system/images/' );
 	}
@@ -78,6 +97,39 @@ abstract class _Path {
 
 	public static function prepareReturn($str) {
 		return str_replace( '\\', '/', $str );
+	}
+}
+
+/**
+ * Compatibilidade: o site passou a usar mb_* para tratar acentuação. Quase todo
+ * servidor traz a extensão mbstring, mas quando ela falta o site inteiro
+ * quebraria com erro fatal — estas versões de reserva evitam isso.
+ */
+if (! function_exists ( 'mb_strlen' )) {
+
+	function mb_strlen($str, $encoding = null) {
+
+		return preg_match_all ( '/./us', $str );
+	}
+
+	function mb_substr($str, $start, $length = null, $encoding = null) {
+
+		$caracteres = preg_split ( '//u', $str, -1, PREG_SPLIT_NO_EMPTY );
+
+		return implode ( '', array_slice ( $caracteres, $start, $length ) );
+	}
+
+	function mb_strtolower($str, $encoding = null) {
+
+		$acentuadas = array (
+			'Á' => 'á', 'À' => 'à', 'Â' => 'â', 'Ã' => 'ã', 'Ä' => 'ä',
+			'Ç' => 'ç', 'É' => 'é', 'È' => 'è', 'Ê' => 'ê', 'Ë' => 'ë',
+			'Í' => 'í', 'Ì' => 'ì', 'Î' => 'î', 'Ï' => 'ï', 'Ñ' => 'ñ',
+			'Ó' => 'ó', 'Ò' => 'ò', 'Ô' => 'ô', 'Õ' => 'õ', 'Ö' => 'ö',
+			'Ú' => 'ú', 'Ù' => 'ù', 'Û' => 'û', 'Ü' => 'ü', 'Ý' => 'ý'
+		);
+
+		return strtolower ( strtr ( $str, $acentuadas ) );
 	}
 }
 

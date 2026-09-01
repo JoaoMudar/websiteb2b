@@ -4,45 +4,127 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Viveiro Florestal Mudar — Produção de mudas nativas e exóticas desde 1996. Agrolândia, SC. Atendimento B2B em todo o Sul do Brasil." />
-  <meta name="keywords" content="viveiro florestal, mudas nativas, eucalyptus, pinus, reflorestamento, agrolândia, santa catarina, B2B" />
-  <meta name="robots" content="index, follow" />
-  <title>Viveiro Florestal Mudar — Mudas Nativas e Exóticas</title>
 
-  <!-- Google Fonts -->
+  <title>[[TITLE]]</title>
+  <meta name="description" content="[[DESCRIPTION]]" />
+  <meta name="robots" content="[[ROBOTS]]" />
+  <link rel="canonical" href="[[CANONICAL]]" />
+
+  <meta property="og:type" content="[[OG_TYPE]]" />
+  <meta property="og:title" content="[[TITLE]]" />
+  <meta property="og:description" content="[[DESCRIPTION]]" />
+  <meta property="og:url" content="[[CANONICAL]]" />
+  <meta property="og:image" content="[[OG_IMAGE]]" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Viveiro Florestal Mudar" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#221A12" />
+  <link rel="icon" href="[[URL_PATH]]favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="[[URL_PATH]]apple-touch-icon.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=Martian+Mono:wght@400;600&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="[[CSS_PATH]]layout.css" />
+  <link rel="stylesheet" href="[[CSS_LAYOUT]]" />
+  [[css]]
+  [[javascript]]
+
+  [[JSONLD]]
+  [[ANALYTICS]]
 </head>
 <body>
 
-<!-- ===== HEADER / NAV ===== -->
+<a class="sr-only" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- Marcas desenhadas do vocabulário do viveiro: tubete, bandeja, baú, selo.
+     Substituem o emoji, que era o que mais fazia a página parecer template. -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ic-tubete" viewBox="0 0 24 24">
+    <path d="M6.5 8.5h11l-1.4 11.6a1.2 1.2 0 0 1-1.2 1.1H9.1a1.2 1.2 0 0 1-1.2-1.1L6.5 8.5Z"/>
+    <path d="M12 8.5V4.4"/>
+    <path d="M12 6.4c0-1.5 1.2-2.7 2.7-2.7 0 1.5-1.2 2.7-2.7 2.7Z"/>
+    <path d="M12 7.7c0-1.3-1-2.3-2.3-2.3 0 1.3 1 2.3 2.3 2.3Z"/>
+  </symbol>
+  <symbol id="ic-bandeja" viewBox="0 0 24 24">
+    <rect x="3" y="6" width="18" height="12" rx="1"/>
+    <path d="M9 6v12M15 6v12M3 12h18"/>
+  </symbol>
+  <symbol id="ic-bau" viewBox="0 0 24 24">
+    <path d="M2.5 6.5h11.5v10H2.5z"/>
+    <path d="M14 10h3.7l3.3 3.3v3.2H14z"/>
+    <circle cx="7" cy="18.6" r="1.9"/>
+    <circle cx="17.4" cy="18.6" r="1.9"/>
+  </symbol>
+  <symbol id="ic-selo" viewBox="0 0 24 24">
+    <circle cx="12" cy="9.3" r="5.6"/>
+    <path d="M8.4 14 7 21l5-2.3 5 2.3-1.4-7"/>
+  </symbol>
+  <symbol id="ic-pin" viewBox="0 0 24 24">
+    <path d="M12 21.2s6.4-6.1 6.4-10.6a6.4 6.4 0 1 0-12.8 0c0 4.5 6.4 10.6 6.4 10.6Z"/>
+    <circle cx="12" cy="10.4" r="2.3"/>
+  </symbol>
+  <symbol id="ic-fone" viewBox="0 0 24 24">
+    <path d="M6.4 3.4h3l1.5 4-2 1.5a12.2 12.2 0 0 0 6.2 6.2l1.5-2 4 1.5v3a2 2 0 0 1-2.1 2A16.6 16.6 0 0 1 4.4 5.5a2 2 0 0 1 2-2.1Z"/>
+  </symbol>
+  <symbol id="ic-agua" viewBox="0 0 24 24">
+    <path d="M12 3.4s5.6 6.1 5.6 9.9A5.6 5.6 0 0 1 6.4 13.3C6.4 9.5 12 3.4 12 3.4Z"/>
+  </symbol>
+  <symbol id="ic-cidade" viewBox="0 0 24 24">
+    <path d="M3 21V9.2l5.6-2.8V21"/>
+    <path d="M8.6 21V11l5.6-2.8V21"/>
+    <path d="M14.2 21v-8.2L21 10.4V21"/>
+    <path d="M2 21h20"/>
+  </symbol>
+  <symbol id="ic-poda" viewBox="0 0 24 24">
+    <circle cx="6" cy="18" r="2.4"/>
+    <circle cx="6" cy="6" r="2.4"/>
+    <path d="M8.2 7.6 20 18M8.2 16.4 20 6"/>
+  </symbol>
+  <symbol id="ic-broto" viewBox="0 0 24 24">
+    <path d="M12 21v-7.2"/>
+    <path d="M12 13.8c0-3 2.4-5.4 5.4-5.4 0 3-2.4 5.4-5.4 5.4Z"/>
+    <path d="M12 16.4c0-2.5-2-4.5-4.5-4.5 0 2.5 2 4.5 4.5 4.5Z"/>
+  </symbol>
+  <symbol id="ic-pinheiro" viewBox="0 0 24 24">
+    <path d="M12 3 7.6 9.8h2.6L6 16.2h5V21h2v-4.8h5l-4.2-6.4h2.6z"/>
+  </symbol>
+  <symbol id="ic-doc" viewBox="0 0 24 24">
+    <path d="M14 3H7.2A1.6 1.6 0 0 0 5.6 4.6v14.8A1.6 1.6 0 0 0 7.2 21h9.6a1.6 1.6 0 0 0 1.6-1.6V7.4Z"/>
+    <path d="M14 3v4.4h4.4"/>
+    <path d="M8.6 13h6.8M8.6 16.4h4.4"/>
+  </symbol>
+</svg>
+
+<!-- ===== CABEÇALHO ===== -->
 <header class="site-header" id="siteHeader">
-  <nav class="nav">
+  <nav class="nav" aria-label="Principal">
     <a href="[[URL_PATH]]" class="nav-logo">
-      <span class="nav-logo-icon">🌿</span>
+      <svg class="ic" aria-hidden="true"><use href="#ic-tubete"/></svg>
       Viveiro <strong>Mudar</strong>
     </a>
 
     [[MENU]]
 
-    <a href="[[URL_PATH]]contato" class="nav-cta">Solicitar Orçamento</a>
+    <a href="[[WHATSAPP_URL]]" target="_blank" rel="noopener" class="nav-cta" data-wa="cabecalho">
+      Pedir orçamento
+    </a>
 
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMenu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 </header>
 
-<!-- ===== MAIN CONTENT ===== -->
-<main class="site-main">
+<!-- ===== CONTEÚDO ===== -->
+<main class="site-main" id="conteudo">
 <=*
 
 *=>docClose
 </main>
-<!-- ===== FOOTER ===== -->
+
+<!-- ===== RODAPÉ ===== -->
 <footer class="site-footer">
   <div class="footer-main">
     <div class="container">
@@ -50,11 +132,12 @@
 
         <div class="footer-brand">
           <a href="[[URL_PATH]]" class="footer-logo">
-            🌿 Viveiro <span>Mudar</span>
+            <svg class="ic" aria-hidden="true"><use href="#ic-tubete"/></svg>
+            Viveiro <span>Mudar</span>
           </a>
-          <p>Produção especializada de mudas florestais nativas e exóticas desde 1996. Qualidade, responsabilidade técnica e atendimento em todo o Sul do Brasil.</p>
+          <p>Viveiro florestal em Agrolândia (SC) desde 1996. Produção de mudas de árvores nativas e exóticas para reflorestamento, compensação florestal, PRAD e arborização, com entrega em todo o Sul do Brasil.</p>
           <address class="footer-crea">
-            Responsável Técnico: Eng. Florestal Gilberto Ferretti<br />
+            Responsável técnico: Eng. Florestal Gilberto Ferretti<br />
             CREA/SC 35178-8
           </address>
         </div>
@@ -63,22 +146,25 @@
           <h4>Navegação</h4>
           <ul class="footer-links">
             <li><a href="[[URL_PATH]]">Início</a></li>
-            <li><a href="[[URL_PATH]]empresa">A Empresa</a></li>
+            <li><a href="[[URL_PATH]]empresa">A empresa</a></li>
             <li><a href="[[URL_PATH]]servicos">Serviços</a></li>
-            <li><a href="[[URL_PATH]]mudas">Catálogo de Mudas</a></li>
-            <li><a href="[[URL_PATH]]fotos">Galeria de Fotos</a></li>
+            <li><a href="[[URL_PATH]]mudas">Catálogo de mudas</a></li>
+            <li><a href="[[URL_PATH]]perguntas-frequentes">Perguntas frequentes</a></li>
+            <li><a href="[[URL_PATH]]fotos">Galeria de fotos</a></li>
+            <li><a href="[[URL_PATH]]links">Links úteis</a></li>
             <li><a href="[[URL_PATH]]contato">Contato</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Espécies</h4>
+          <h4>Soluções</h4>
           <ul class="footer-links">
-            <li><a href="[[URL_PATH]]mudas/especies-exoticas/">Espécies Exóticas</a></li>
-            <li><a href="[[URL_PATH]]mudas/especies-para-sombreamento/">Para Sombreamento</a></li>
-            <li><a href="[[URL_PATH]]mudas/especies-frutas-para-consumo-humano/">Frutíferas</a></li>
-            <li><a href="[[URL_PATH]]mudas/especies-com-floracao-exuberante/">Floração Exuberante</a></li>
-            <li><a href="[[URL_PATH]]mudas/especies-para-recuperacao-de-area-degradada-e-mata-ciliar/">Recuperação Ambiental</a></li>
+            <li><a href="[[URL_PATH]]compensacao-florestal-e-prad">Compensação florestal e PRAD</a></li>
+            <li><a href="[[URL_PATH]]recuperacao-de-mata-ciliar">Recuperação de mata ciliar</a></li>
+            <li><a href="[[URL_PATH]]arborizacao-urbana">Arborização urbana</a></li>
+            <li><a href="[[URL_PATH]]mudas/especies-para-recuperacao-de-area-degradada-e-mata-ciliar/">Espécies para recuperação</a></li>
+            <li><a href="[[URL_PATH]]mudas/especies-com-floracao-exuberante/">Espécies de floração exuberante</a></li>
+            <li><a href="[[URL_PATH]]entrega">Cidades atendidas</a></li>
           </ul>
         </div>
 
@@ -86,15 +172,15 @@
           <h4>Contato</h4>
           <ul class="footer-contact">
             <li>
-              <span class="fi">📍</span>
+              <svg class="ic" aria-hidden="true"><use href="#ic-pin"/></svg>
               <span>Rua Wilhelm Doering, 300<br />Centro — Agrolândia, SC<br />CEP 88420-000</span>
             </li>
             <li>
-              <span class="fi">📞</span>
-              <span>+55 47 98433-7854</span>
+              <svg class="ic" aria-hidden="true"><use href="#ic-fone"/></svg>
+              <span><a href="tel:+5547984337854">+55 47 98433-7854</a></span>
             </li>
             <li>
-              <span class="fi">🚛</span>
+              <svg class="ic" aria-hidden="true"><use href="#ic-bau"/></svg>
               <span>Entrega em todo o Sul do Brasil com frota própria</span>
             </li>
           </ul>
@@ -107,42 +193,65 @@
   <div class="footer-bottom">
     <div class="container">
       <div class="footer-bottom-inner">
-        <span>&copy; 2024 Viveiro Florestal Mudar. Todos os direitos reservados.</span>
+        <span>&copy; [[ANO]] Viveiro Florestal Mudar</span>
         <span>Agrolândia · SC · Alto Vale do Itajaí</span>
       </div>
     </div>
   </div>
 </footer>
 
+<a class="wa-float" href="[[WHATSAPP_URL]]" target="_blank" rel="noopener" data-wa="flutuante" aria-label="[[WHATSAPP_LABEL]]">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span>[[WHATSAPP_LABEL]]</span>
+</a>
+
 <script>
 (function() {
-  var header   = document.getElementById('siteHeader');
-  var toggle   = document.getElementById('navToggle');
-  var menu     = document.querySelector('.nav-menu');
-  var isHome   = document.querySelector('.hero') !== null;
+  var header = document.getElementById('siteHeader');
+  var toggle = document.getElementById('navToggle');
+  var menu   = document.querySelector('.nav-menu');
+  var temHeroEscuro = document.querySelector('.hero, .page-hero') !== null;
 
-  // Solid header for inner pages
-  if (!isHome) { header.classList.add('solid'); }
+  if (!temHeroEscuro) { header.classList.add('solid'); }
 
-  // Scroll effect
-  function onScroll() {
-    if (window.scrollY > 40) {
-      header.classList.add('scrolled');
-    } else {
-      if (isHome) { header.classList.remove('scrolled'); }
-    }
+  function aoRolar() {
+    if (window.scrollY > 30) { header.classList.add('scrolled'); }
+    else if (temHeroEscuro)  { header.classList.remove('scrolled'); }
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  window.addEventListener('scroll', aoRolar, { passive: true });
+  aoRolar();
 
-  // Mobile menu toggle
   if (toggle && menu) {
     toggle.addEventListener('click', function() {
-      menu.classList.toggle('open');
+      var aberto = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', aberto ? 'true' : 'false');
     });
     document.addEventListener('click', function(e) {
-      if (!header.contains(e.target)) { menu.classList.remove('open'); }
+      if (!header.contains(e.target)) {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
     });
+  }
+
+  // Todo clique de WhatsApp vira evento, com a página de origem junto —
+  // é assim que se descobre qual página traz lead.
+  document.addEventListener('click', function(e) {
+    var alvo = e.target.closest ? e.target.closest('[data-wa]') : null;
+    if (!alvo || typeof window.gtag !== 'function') { return; }
+    window.gtag('event', 'click_whatsapp', {
+      tipo_botao: alvo.getAttribute('data-wa'),
+      origem_pagina: window.location.pathname
+    });
+  });
+
+  // Régua da home: as barras assentam uma vez, em sequência.
+  var prefereMenos = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefereMenos) {
+    var barras = document.querySelectorAll('.porte-chart .porte-bar');
+    for (var i = 0; i < barras.length; i++) {
+      barras[i].style.animationDelay = (i * 70) + 'ms';
+    }
   }
 })();
 </script>
@@ -157,7 +266,7 @@
   <li><a href="[[URL_PATH]]empresa" [[CURRENT_EMPRESA]]>Empresa</a></li>
   <li><a href="[[URL_PATH]]servicos" [[CURRENT_SERVICOS]]>Serviços</a></li>
   <li><a href="[[URL_PATH]]mudas" [[CURRENT_MUDAS]]>Mudas</a></li>
-  <li><a href="[[URL_PATH]]fotos" [[CURRENT_FOTOS]]>Galeria</a></li>
+  <li><a href="[[URL_PATH]]compensacao-florestal-e-prad" [[CURRENT_PRAD]]>Compensação florestal</a></li>
   <li><a href="[[URL_PATH]]contato" [[CURRENT_CONTATO]]>Contato</a></li>
 </ul>
 <=*

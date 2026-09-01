@@ -333,7 +333,7 @@ abstract class _Formatting {
 	 * @param String $mes
 	 * @return Integer
 	 */
-	public function numericMonth($mes) {
+	public static function numericMonth($mes) {
 		
 		$lista = array ();
 		$lista ['jan'] = 1;
