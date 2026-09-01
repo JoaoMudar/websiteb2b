@@ -23,7 +23,7 @@ abstract class Html {
 	/**
 	 * Descrição usada quando a view não define a sua.
 	 */
-	const DESCRIPTION = 'Viveiro florestal em Agrolândia (SC) desde 1996. Mudas de árvores nativas e exóticas para reflorestamento, compensação florestal, PRAD e arborização. Entrega em todo o Sul do Brasil.';
+	const DESCRIPTION = 'Viveiro florestal em Agrolândia (SC) desde 1996. Mudas de árvores nativas para compensação florestal, PRAD e recuperação de áreas. Entrega em todo o Sul do Brasil.';
 
 	/**
 	 * Comprimento máximo da meta description antes do Google truncar.

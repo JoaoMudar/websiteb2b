@@ -21,7 +21,6 @@ abstract class ViewSitemap implements IView {
 		// institucionais
 		$urls [] = array ('loc' => $base, 'priority' => '1.0', 'changefreq' => 'monthly' );
 		$urls [] = array ('loc' => $base . 'empresa', 'priority' => '0.7', 'changefreq' => 'yearly' );
-		$urls [] = array ('loc' => $base . 'servicos', 'priority' => '0.7', 'changefreq' => 'yearly' );
 		$urls [] = array ('loc' => $base . 'contato', 'priority' => '0.8', 'changefreq' => 'yearly' );
 		$urls [] = array ('loc' => $base . 'perguntas-frequentes', 'priority' => '0.8', 'changefreq' => 'monthly' );
 		$urls [] = array ('loc' => $base . 'fotos', 'priority' => '0.4', 'changefreq' => 'yearly' );
@@ -30,7 +29,6 @@ abstract class ViewSitemap implements IView {
 		// soluções — o cluster de maior valor comercial
 		$urls [] = array ('loc' => $base . 'compensacao-florestal-e-prad', 'priority' => '0.9', 'changefreq' => 'monthly' );
 		$urls [] = array ('loc' => $base . 'recuperacao-de-mata-ciliar', 'priority' => '0.8', 'changefreq' => 'monthly' );
-		$urls [] = array ('loc' => $base . 'arborizacao-urbana', 'priority' => '0.8', 'changefreq' => 'monthly' );
 
 		// entrega
 		$urls [] = array ('loc' => $base . 'entrega', 'priority' => '0.6', 'changefreq' => 'monthly' );

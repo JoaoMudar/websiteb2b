@@ -45,7 +45,7 @@ abstract class ViewEntrega implements IView {
 
 		$html = new HtmlMain ( );
 		$html->setTitle ( 'Onde Entregamos — Mudas Nativas em SC, PR e RS' );
-		$html->setDescription ( 'Entrega de mudas florestais nativas e exóticas com frota própria em Santa Catarina, Paraná e Rio Grande do Sul. Viveiro em Agrolândia, no Alto Vale do Itajaí.' );
+		$html->setDescription ( 'Entrega de mudas de árvores nativas com frota própria em Santa Catarina, Paraná e Rio Grande do Sul. Viveiro em Agrolândia, no Alto Vale do Itajaí.' );
 		$html->setCanonical ( 'entrega' );
 		$html->setWhatsappMessage ( 'Olá! Queria saber sobre entrega de mudas do Viveiro Mudar na minha cidade.', 'Falar no WhatsApp' );
 		$html->addJsonLd ( Seo::breadcrumbJsonLd ( array (
@@ -93,7 +93,7 @@ abstract class ViewEntrega implements IView {
 		$url = _Path::getURL () . 'entrega/' . $slug;
 
 		$h1 = 'Mudas nativas em ' . $nomeCompleto;
-		$descricao = 'Entrega de mudas de árvores nativas e exóticas em ' . $nomeCompleto . ', no ' . $cidade ['regiao'] . '. Viveiro próprio em Agrolândia/SC, frota própria e engenheiro florestal responsável.';
+		$descricao = 'Entrega de mudas de árvores nativas em ' . $nomeCompleto . ', no ' . $cidade ['regiao'] . '. Viveiro próprio em Agrolândia/SC, frota própria e engenheiro florestal responsável.';
 
 		$html = new HtmlMain ( );
 		$html->setTitle ( 'Mudas Nativas em ' . $nomeCompleto . ' — Entrega do Viveiro Mudar', true );

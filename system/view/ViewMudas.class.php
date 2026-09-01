@@ -8,6 +8,15 @@
 abstract class ViewMudas implements IView {
 
 	/**
+	 * Fichas que saíram do ar com o fim da produção de Pinus e Eucalyptus.
+	 *
+	 * @var Array
+	 */
+	private static $especiesAposentadas = array (
+		'pinus', 'eucalipto-limao', 'eucalipto-cidra', 'eucalipto-rosa'
+	);
+
+	/**
 	 * Recortes do catálogo que têm URL própria.
 	 *
 	 * Cada recorte é uma página indexável com H1 e descrição próprios — por
@@ -24,7 +33,7 @@ abstract class ViewMudas implements IView {
 				'fins' => FimPlantio::NA,
 				'h1' => 'Mudas de árvores nativas',
 				'title' => 'Mudas de Árvores Nativas — Catálogo de Espécies',
-				'descricao' => 'Espécies nativas do Brasil produzidas em Agrolândia (SC) para reflorestamento, compensação florestal, mata ciliar e arborização. Ficha técnica de cada espécie.',
+				'descricao' => 'Espécies nativas do Brasil produzidas em Agrolândia (SC) para compensação florestal, PRAD, mata ciliar e reserva legal. Ficha técnica de cada espécie.',
 				'intro' => 'Espécies nativas do Brasil, com ocorrência natural na Mata Atlântica e nos biomas do Sul. São as espécies exigidas em projetos de compensação florestal, PRAD e recomposição de mata ciliar.'
 			),
 
@@ -40,8 +49,8 @@ abstract class ViewMudas implements IView {
 				'fins' => FimPlantio::FLOR,
 				'h1' => 'Mudas de árvores com floração exuberante',
 				'title' => 'Mudas de Árvores com Floração Exuberante',
-				'descricao' => 'Espécies de floração ornamental para arborização urbana, praças e paisagismo, com período e cor de floração informados. Viveiro em Agrolândia (SC).',
-				'intro' => 'Espécies de floração marcante, usadas em arborização urbana, praças e paisagismo. O período e a cor da floração estão na ficha de cada espécie.'
+				'descricao' => 'Espécies de floração ornamental para praças, ruas e loteamentos, com período e cor de floração informados. Viveiro florestal em Agrolândia (SC).',
+				'intro' => 'Espécies de floração marcante, procuradas para praças, ruas e loteamentos. O período e a cor da floração estão na ficha de cada espécie, para escalonar a floração ao longo do ano.'
 			),
 
 			'especies-para-sombreamento' => array (
@@ -64,8 +73,8 @@ abstract class ViewMudas implements IView {
 				'fins' => FimPlantio::EX,
 				'h1' => 'Mudas de espécies exóticas',
 				'title' => 'Mudas de Espécies Exóticas',
-				'descricao' => 'Espécies exóticas cultivadas no Brasil, incluindo Pinus e Eucalyptus para reflorestamento industrial. Viveiro florestal em Agrolândia (SC).',
-				'intro' => 'Espécies introduzidas e cultivadas no Brasil, incluindo Pinus e Eucalyptus para reflorestamento industrial, além de ornamentais consolidadas.'
+				'descricao' => 'Espécies exóticas ornamentais e frutíferas já consolidadas no cultivo brasileiro, com ficha técnica de cada uma. Viveiro florestal em Agrolândia (SC).',
+				'intro' => 'Espécies introduzidas e já consolidadas no cultivo brasileiro — ornamentais e frutíferas. O foco da produção são as nativas, mas estas seguem em catálogo.'
 			)
 		);
 	}
@@ -115,6 +124,14 @@ abstract class ViewMudas implements IView {
 			if ($idMuda) {
 				self::muda ( new Muda ( $idMuda ) );
 				return;
+			}
+
+			// Espécies que saíram do catálogo quando o viveiro parou de produzir
+			// Pinus e Eucalyptus. As fichas estavam indexadas, então mandamos
+			// para o catálogo em vez de devolver 404.
+			if (in_array ( $partes [1], self::$especiesAposentadas )) {
+				header ( 'Location: ' . _Path::getURL () . 'mudas', true, 301 );
+				exit ();
 			}
 		}
 

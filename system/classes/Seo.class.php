@@ -142,7 +142,7 @@ abstract class Seo {
 			'telephone' => self::TELEFONE_E164,
 			'email' => self::EMAIL,
 			'foundingDate' => self::FUNDACAO,
-			'description' => 'Viveiro florestal em Agrolândia (SC) especializado na produção de mudas de árvores nativas e exóticas para reflorestamento, compensação florestal, PRAD, recuperação de mata ciliar e arborização urbana.',
+			'description' => 'Viveiro florestal em Agrolândia (SC) especializado na produção de mudas de árvores nativas para compensação florestal, PRAD, recuperação de área degradada e recomposição de mata ciliar.',
 			'image' => _Path::getIMAGE_PATH () . 'pictures/DSC07748.jpg',
 			'address' => array (
 				'@type' => 'PostalAddress',

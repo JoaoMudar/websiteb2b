@@ -77,18 +77,10 @@
     <path d="M14.2 21v-8.2L21 10.4V21"/>
     <path d="M2 21h20"/>
   </symbol>
-  <symbol id="ic-poda" viewBox="0 0 24 24">
-    <circle cx="6" cy="18" r="2.4"/>
-    <circle cx="6" cy="6" r="2.4"/>
-    <path d="M8.2 7.6 20 18M8.2 16.4 20 6"/>
-  </symbol>
   <symbol id="ic-broto" viewBox="0 0 24 24">
     <path d="M12 21v-7.2"/>
     <path d="M12 13.8c0-3 2.4-5.4 5.4-5.4 0 3-2.4 5.4-5.4 5.4Z"/>
     <path d="M12 16.4c0-2.5-2-4.5-4.5-4.5 0 2.5 2 4.5 4.5 4.5Z"/>
-  </symbol>
-  <symbol id="ic-pinheiro" viewBox="0 0 24 24">
-    <path d="M12 3 7.6 9.8h2.6L6 16.2h5V21h2v-4.8h5l-4.2-6.4h2.6z"/>
   </symbol>
   <symbol id="ic-doc" viewBox="0 0 24 24">
     <path d="M14 3H7.2A1.6 1.6 0 0 0 5.6 4.6v14.8A1.6 1.6 0 0 0 7.2 21h9.6a1.6 1.6 0 0 0 1.6-1.6V7.4Z"/>
@@ -135,7 +127,7 @@
             <svg class="ic" aria-hidden="true"><use href="#ic-tubete"/></svg>
             Viveiro <span>Mudar</span>
           </a>
-          <p>Viveiro florestal em Agrolândia (SC) desde 1996. Produção de mudas de árvores nativas e exóticas para reflorestamento, compensação florestal, PRAD e arborização, com entrega em todo o Sul do Brasil.</p>
+          <p>Viveiro florestal em Agrolândia (SC) desde 1996. Produção de mudas de árvores nativas para compensação florestal, PRAD e recuperação de áreas, com entrega em todo o Sul do Brasil.</p>
           <address class="footer-crea">
             Responsável técnico: Eng. Florestal Gilberto Ferretti<br />
             CREA/SC 35178-8
@@ -147,7 +139,6 @@
           <ul class="footer-links">
             <li><a href="[[URL_PATH]]">Início</a></li>
             <li><a href="[[URL_PATH]]empresa">A empresa</a></li>
-            <li><a href="[[URL_PATH]]servicos">Serviços</a></li>
             <li><a href="[[URL_PATH]]mudas">Catálogo de mudas</a></li>
             <li><a href="[[URL_PATH]]perguntas-frequentes">Perguntas frequentes</a></li>
             <li><a href="[[URL_PATH]]fotos">Galeria de fotos</a></li>
@@ -161,7 +152,6 @@
           <ul class="footer-links">
             <li><a href="[[URL_PATH]]compensacao-florestal-e-prad">Compensação florestal e PRAD</a></li>
             <li><a href="[[URL_PATH]]recuperacao-de-mata-ciliar">Recuperação de mata ciliar</a></li>
-            <li><a href="[[URL_PATH]]arborizacao-urbana">Arborização urbana</a></li>
             <li><a href="[[URL_PATH]]mudas/especies-para-recuperacao-de-area-degradada-e-mata-ciliar/">Espécies para recuperação</a></li>
             <li><a href="[[URL_PATH]]mudas/especies-com-floracao-exuberante/">Espécies de floração exuberante</a></li>
             <li><a href="[[URL_PATH]]entrega">Cidades atendidas</a></li>
@@ -244,15 +234,6 @@
       origem_pagina: window.location.pathname
     });
   });
-
-  // Régua da home: as barras assentam uma vez, em sequência.
-  var prefereMenos = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!prefereMenos) {
-    var barras = document.querySelectorAll('.porte-chart .porte-bar');
-    for (var i = 0; i < barras.length; i++) {
-      barras[i].style.animationDelay = (i * 70) + 'ms';
-    }
-  }
 })();
 </script>
 
@@ -264,7 +245,6 @@
 <ul class="nav-menu" id="navMenu">
   <li><a href="[[URL_PATH]]" [[CURRENT_HOME]]>Início</a></li>
   <li><a href="[[URL_PATH]]empresa" [[CURRENT_EMPRESA]]>Empresa</a></li>
-  <li><a href="[[URL_PATH]]servicos" [[CURRENT_SERVICOS]]>Serviços</a></li>
   <li><a href="[[URL_PATH]]mudas" [[CURRENT_MUDAS]]>Mudas</a></li>
   <li><a href="[[URL_PATH]]compensacao-florestal-e-prad" [[CURRENT_PRAD]]>Compensação florestal</a></li>
   <li><a href="[[URL_PATH]]contato" [[CURRENT_CONTATO]]>Contato</a></li>

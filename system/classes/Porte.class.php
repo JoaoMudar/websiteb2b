@@ -4,9 +4,9 @@
  * Desenha a régua de porte — a escala compartilhada de 0 a 60 m contra a qual
  * toda espécie do catálogo é medida.
  *
- * Existe porque altura é o único dado presente em praticamente todas as 142
- * espécies (floração, por exemplo, só existe em 36) e porque é a pergunta que o
- * comprador de arborização de fato faz: quanto isso cresce na calçada?
+ * Existe porque altura é o único dado presente em praticamente todas as
+ * espécies (floração, por exemplo, só existe em 36) e porque é a primeira
+ * pergunta de quem escolhe espécie para um projeto: quanto isso cresce?
  */
 abstract class Porte {
 
@@ -97,13 +97,12 @@ abstract class Porte {
 	}
 
 	/**
-	 * Uma coluna do gráfico.
+	 * Uma coluna da régua.
 	 *
 	 * @param Muda $muda
-	 * @param Boolean $comLink
 	 * @return String
 	 */
-	private static function coluna($muda, $comLink = false) {
+	private static function coluna($muda) {
 
 		$faixa = $muda->alturaMinMax ();
 		if (! $faixa) {
@@ -116,37 +115,11 @@ abstract class Porte {
 		$minrel = round ( ($faixa ['min'] / $faixa ['max']) * 100, 2 ) . '%';
 
 		$nome = htmlspecialchars ( $muda->getNomePopular (), ENT_QUOTES, 'UTF-8' );
-		$rotulo = $comLink ? '<a href="' . $muda->getUrl () . '">' . $nome . '</a>' : $nome;
 
 		return '<div class="porte-col" style="--max:' . $max . ';--minrel:' . $minrel . '">'
 			. '<span class="porte-val">' . self::faixaTexto ( $muda ) . '</span>'
 			. '<div class="porte-bar"><div class="porte-range"></div><div class="porte-sure"></div></div>'
-			. '<span class="porte-label">' . $rotulo . '</span>'
-			. '</div>';
-	}
-
-	/**
-	 * Gráfico com várias espécies — usado no hero da home.
-	 *
-	 * @param Muda[] $mudas
-	 * @return String
-	 */
-	public static function chart($mudas) {
-
-		$descricao = array ();
-		foreach ( $mudas as $muda ) {
-			$descricao [] = $muda->getNomePopular () . ', ' . self::faixaTexto ( $muda );
-		}
-
-		$colunas = '';
-		foreach ( $mudas as $muda ) {
-			$colunas .= self::coluna ( $muda, true );
-		}
-
-		return '<div class="porte-chart" role="img" aria-label="Porte de espécies do catálogo em escala de 0 a 60 metros: '
-			. htmlspecialchars ( implode ( '; ', $descricao ), ENT_QUOTES, 'UTF-8' ) . '.">'
-			. self::eixo ()
-			. '<div class="porte-plot">' . self::marcasReferencia () . $colunas . '</div>'
+			. '<span class="porte-label">' . $nome . '</span>'
 			. '</div>';
 	}
 
@@ -176,8 +149,8 @@ abstract class Porte {
 	}
 
 	/**
-	 * Barra minúscula para a linha do catálogo, para dar de varrer 142 espécies
-	 * por porte com o olho.
+	 * Barra minúscula para a linha do catálogo, para dar de varrer o catálogo
+	 * inteiro por porte com o olho.
 	 *
 	 * @param Muda $muda
 	 * @return String

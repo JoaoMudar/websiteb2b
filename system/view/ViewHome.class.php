@@ -8,10 +8,11 @@
 abstract class ViewHome implements IView {
 
 	/**
-	 * Espécies plotadas na régua do hero: nativas reconhecíveis, em ordem
-	 * crescente de porte, do ipê-amarelo à araucária.
+	 * Espécies da prancha do hero: nativas reconhecíveis, em ordem crescente de
+	 * porte, do ipê-amarelo à araucária. É a lista de disponibilidade que o
+	 * viveiro manda por WhatsApp, no lugar de um gráfico.
 	 */
-	private static $especiesDoHero = array (83, 87, 8, 31, 82, 121 );
+	private static $especiesEmProducao = array (83, 87, 8, 31, 82, 121 );
 
 	/**
 	 * Inicializa a classe view
@@ -42,23 +43,16 @@ abstract class ViewHome implements IView {
 
 		$html = new HtmlMain ( );
 		$html->setTitle ( 'Viveiro Florestal de Árvores Nativas em SC | Viveiro Mudar', true );
-		$html->setDescription ( 'Viveiro florestal em Agrolândia (SC) desde 1996. ' . Muda::total () . ' espécies de mudas nativas e exóticas para reflorestamento, compensação florestal e arborização. Orçamento pelo WhatsApp.' );
+		$html->setDescription ( 'Viveiro florestal em Agrolândia (SC) desde 1996. ' . count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) . ' espécies de mudas de árvores nativas para compensação florestal, PRAD e recuperação de áreas. Orçamento pelo WhatsApp.' );
 		$html->setCanonical ( '' );
 		$html->setWhatsappMessage ( 'Olá! Vim pelo site do Viveiro Mudar e queria falar sobre mudas nativas.', 'Falar no WhatsApp' );
 
 		$tpl = new Template ( _Path::getTEMPLATE_BAS () . 'home/index.tpl.html' );
 		$tpl->setVar ( 'IMAGE_PATH', _Path::getIMAGE_PATH () );
 		$tpl->setVar ( 'URL_PATH', _Path::getURL_PATH () );
-		$tpl->setVar ( 'TOTAL_MUDAS', Muda::total () );
+		$tpl->setVar ( 'TOTAL_NATIVAS', count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) );
 
-		$mudasDoHero = array ();
-		foreach ( self::$especiesDoHero as $id ) {
-			$muda = new Muda ( $id );
-			if ($muda->existe ()) {
-				$mudasDoHero [] = $muda;
-			}
-		}
-		$tpl->setVar ( 'PORTE_CHART', Porte::chart ( $mudasDoHero ) );
+		$tpl->setVar ( 'LISTA_PRODUCAO', self::listaProducao ( $tpl ) );
 
 		$tpl->setVar ( 'PLACA', Seo::specPlateHtml () );
 
@@ -80,6 +74,37 @@ abstract class ViewHome implements IView {
 		$tpl->show ( 'indexHome' );
 
 		$html->docClose ();
+	}
+
+	/**
+	 * Monta a prancha de disponibilidade do hero.
+	 *
+	 * O porte vai como texto, não como barra: o dado que o comprador usa
+	 * continua ali, o gráfico não.
+	 *
+	 * @param Template $tpl
+	 * @return String
+	 */
+	private static function listaProducao($tpl) {
+
+		$linha = $tpl->get ( 'especieLinha' );
+		$html = '';
+
+		foreach ( self::$especiesEmProducao as $id ) {
+
+			$muda = new Muda ( $id );
+			if (! $muda->existe ()) {
+				continue;
+			}
+
+			$html .= sprintf ( $linha,
+				$muda->getSlug (),
+				htmlspecialchars ( $muda->getNomePopular (), ENT_QUOTES, 'UTF-8' ),
+				Porte::faixaTexto ( $muda ),
+				htmlspecialchars ( $muda->getNomeCientificoCurto (), ENT_QUOTES, 'UTF-8' ) );
+		}
+
+		return $html;
 	}
 
 	/**

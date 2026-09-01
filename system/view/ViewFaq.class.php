@@ -26,7 +26,7 @@ abstract class ViewFaq implements IView {
 				'resposta' => 'Santa Catarina, Paraná e Rio Grande do Sul, com frota própria — caminhão baú preparado para transporte de mudas. Também é possível retirar no viveiro, em Agrolândia/SC, combinando antes.' ),
 
 			array ('pergunta' => 'Quais embalagens e tamanhos de muda existem?',
-				'resposta' => 'São oito formatos. Tubete de 50 g entrega mudas de 10 a 15 cm, para plantio em larga escala. Sacos de 10×18 a 28×32 entregam de 30 cm a 2,5 m. Baldes de 3,5, 5 e 8 litros entregam de 1,0 m a 2,5 m, indicados para arborização urbana.' ),
+				'resposta' => 'São oito formatos. Tubete de 50 g entrega mudas de 10 a 15 cm, para plantio em larga escala. Sacos de 10×18 a 28×32 entregam de 30 cm a 2,5 m. Baldes de 3,5, 5 e 8 litros entregam de 1,0 m a 2,5 m, indicados para plantio em praça e via pública.' ),
 
 			array ('pergunta' => 'As mudas vêm com nota fiscal?',
 				'resposta' => 'Sim. Toda entrega é acompanhada de nota fiscal. A produção é conduzida sob responsabilidade técnica do Eng. Florestal Gilberto Ferretti, CREA/SC 35178-8.' ),
@@ -38,13 +38,13 @@ abstract class ViewFaq implements IView {
 				'resposta' => 'A lista sai do projeto aprovado pelo órgão ambiental. Se ele ainda estiver em elaboração, podemos indicar espécies nativas de ocorrência regional compatíveis com o tipo de área, usando o mapa de ocorrência natural de cada espécie do catálogo.' ),
 
 			array ('pergunta' => 'Vocês só vendem mudas ou também executam o plantio?',
-				'resposta' => 'Os dois. Além do fornecimento, executamos recomposição de áreas degradadas, recuperação de mata ciliar, adensamento de capoeiras, reflorestamento, arborização urbana, poda e tratos silviculturais.' ),
+				'resposta' => 'Só vendemos as mudas. O plantio e a manutenção ficam com você ou com a empresa que executar a obra. O que fazemos é produzir a espécie certa, na altura certa, para a data do seu cronograma.' ),
 
 			array ('pergunta' => 'Vocês atendem prefeituras e órgãos públicos?',
-				'resposta' => 'Sim. Já executamos arborização urbana e poda para a Prefeitura Municipal de Agrolândia e fornecemos para obras públicas, como a duplicação da BR-101, nos consórcios dos lotes 6 e 8.' ),
+				'resposta' => 'Sim. Já fornecemos as mudas da arborização da Prefeitura Municipal de Agrolândia e de obras públicas como a duplicação da BR-101, nos consórcios dos lotes 6 e 8. Emitimos nota fiscal e temos engenheiro florestal responsável.' ),
 
 			array ('pergunta' => 'De onde vêm as sementes?',
-				'resposta' => 'As sementes de espécies nativas são coletadas na região e adquiridas de fontes idôneas. As de Pinus e Eucalyptus vêm de fornecedores certificados como International Paper, IPEF, Klabin e Rigesa.' ),
+				'resposta' => 'São coletadas na região e adquiridas de fontes idôneas. Isso importa além da qualidade: é o que sustenta o argumento de espécie nativa de ocorrência regional diante do analista do órgão ambiental.' ),
 
 			array ('pergunta' => 'Dá para visitar o viveiro antes de comprar?',
 				'resposta' => 'Sim. O viveiro fica na Rua Wilhelm Doering, 300, Centro, em Agrolândia/SC. Combine a visita pelo WhatsApp para que alguém possa acompanhar e mostrar a produção.' ),

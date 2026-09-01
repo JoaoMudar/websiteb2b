@@ -26,20 +26,12 @@ abstract class View implements IView {
 				ViewEmpresa::init ();
 				break;
 
-			case (bool)preg_match ( '/^servicos\\/?$/', $area ) : // servicos
-				ViewServicos::init ();
-				break;
-
 			case (bool)preg_match ( '/^compensacao-florestal-e-prad\\/?$/', $area ) : // compensação e PRAD
 				ViewSolucao::init ( 'compensacao-florestal-e-prad' );
 				break;
 
 			case (bool)preg_match ( '/^recuperacao-de-mata-ciliar\\/?$/', $area ) : // mata ciliar
 				ViewSolucao::init ( 'recuperacao-de-mata-ciliar' );
-				break;
-
-			case (bool)preg_match ( '/^arborizacao-urbana\\/?$/', $area ) : // arborização urbana
-				ViewSolucao::init ( 'arborizacao-urbana' );
 				break;
 
 			case (bool)preg_match ( '/^entrega(\\/.*)?$/', $area ) : // entrega por cidade
@@ -73,6 +65,13 @@ abstract class View implements IView {
 			case (bool)preg_match ( '/^sitemap\\.xml$/', $area ) : // sitemap
 				ViewSitemap::init ();
 				break;
+
+			// URLs de serviços que o viveiro deixou de prestar. Hoje só fornecemos
+			// mudas, então as duas caem no catálogo, que é a página que atende a
+			// intenção que sobrou.
+			case (bool)preg_match ( '/^(servicos|arborizacao-urbana)\\/?$/', $area ) :
+				header ( 'Location: ' . _Path::getURL () . 'mudas', true, 301 );
+				exit ();
 
 			default : // página inexistente
 				ViewPageNotFound::init ();

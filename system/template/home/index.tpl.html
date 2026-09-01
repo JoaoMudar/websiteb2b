@@ -1,6 +1,6 @@
 *=>indexHome
 
-<!-- ===== HERO — a régua é a tese: 142 espécies, de 4 a 50 m, documentadas ===== -->
+<!-- ===== HERO — a prancha de disponibilidade é a tese: nativas, documentadas, prontas ===== -->
 <section class="hero">
   <div class="hero-overlay"></div>
   <div class="container hero-content">
@@ -8,15 +8,21 @@
     <div>
       <span class="hero-badge">Desde 1996 · Agrolândia/SC · Alto Vale do Itajaí</span>
       <h1>Viveiro florestal de <em>árvores nativas</em> em Santa Catarina</h1>
-      <p class="hero-lead">Produzimos 500 mil mudas por ano, de [[TOTAL_MUDAS]] espécies nativas e exóticas, para reflorestamento, compensação florestal e arborização. Entrega com frota própria em todo o Sul do Brasil.</p>
+      <p class="hero-lead">Produzimos 500 mil mudas por ano. São [[TOTAL_NATIVAS]] espécies nativas para compensação florestal, PRAD e recuperação de área, entregues com frota própria em todo o Sul do Brasil.</p>
       <div class="hero-actions">
         [[WHATSAPP_HERO]]
-        <a href="[[URL_PATH]]mudas" class="btn btn-outline">Ver as [[TOTAL_MUDAS]] espécies</a>
+        <a href="[[URL_PATH]]mudas" class="btn btn-outline">Ver o catálogo completo</a>
       </div>
     </div>
 
     <div>
-      [[PORTE_CHART]]
+      <div class="prod-list">
+        <p class="prod-head"><span>Em produção</span><span>Porte adulto</span></p>
+        [[LISTA_PRODUCAO]]
+        <a class="prod-foot" href="[[URL_PATH]]mudas/especies-nativas/">
+          [[TOTAL_NATIVAS]] espécies nativas no catálogo <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
     </div>
 
   </div>
@@ -38,8 +44,8 @@
         <span class="section-tag">A empresa</span>
         <h2>Produção de mudas florestais desde 1996</h2>
         <p class="lede">O Viveiro Florestal Mudar fica em Agrolândia (SC), no Alto Vale do Itajaí, e produz mudas florestais há quase três décadas.</p>
-        <p>Mantemos viveiros em Agrolândia (3 ha) e Itapema (6 ha), somando 9 hectares de área produtiva. São cerca de 500 mil mudas por ano, de mais de 100 espécies nativas e exóticas, em tubetes, sacos e baldes de vários tamanhos — de 10 cm a 2,5 m de altura na entrega.</p>
-        <p>As sementes nativas são coletadas na região e adquiridas de fontes idôneas. As de Pinus e Eucalyptus vêm de fornecedores certificados como <strong>International Paper, IPEF, Klabin e Rigesa</strong>.</p>
+        <p>Mantemos viveiros em Agrolândia (3 ha) e Itapema (6 ha), somando 9 hectares de área produtiva. São cerca de 500 mil mudas por ano, em tubetes, sacos e baldes de vários tamanhos — de 10 cm a 2,5 m de altura na entrega.</p>
+        <p>As sementes das espécies nativas são coletadas na região e adquiridas de fontes idôneas, o que sustenta o argumento de ocorrência regional diante do órgão ambiental.</p>
         <p>Toda a operação é conduzida sob responsabilidade técnica do <strong>Eng. Florestal Gilberto Ferretti (CREA/SC 35178-8)</strong>.</p>
         <a href="[[URL_PATH]]empresa" class="btn btn-ghost">Conhecer a empresa</a>
       </div>
@@ -47,8 +53,8 @@
       <div class="about-features">
         <div class="feature-card">
           <span class="feature-icon"><svg class="ic" aria-hidden="true"><use href="#ic-bandeja"/></svg></span>
-          <h3>[[TOTAL_MUDAS]] espécies em catálogo</h3>
-          <p>Nativas da Mata Atlântica e dos biomas sulinos, com ficha técnica de cada espécie.</p>
+          <h3>[[TOTAL_NATIVAS]] espécies nativas</h3>
+          <p>Da Mata Atlântica e dos biomas sulinos, com ficha técnica e mapa de ocorrência.</p>
         </div>
         <div class="feature-card">
           <span class="feature-icon"><svg class="ic" aria-hidden="true"><use href="#ic-bau"/></svg></span>
@@ -71,52 +77,39 @@
   </div>
 </section>
 
-<!-- ===== SOLUÇÕES ===== -->
+<!-- ===== PARA QUE SERVEM — tipo de projeto do comprador, não serviço que prestamos ===== -->
 <section class="section section-dark">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag light">O que resolvemos</span>
-      <h2>Da obrigação legal ao plantio executado</h2>
+      <span class="section-tag light">Para que servem</span>
+      <h2>A muda certa para a obrigação que você tem</h2>
     </div>
 
     <div class="services-grid">
       <div class="service-card">
         <span class="service-icon"><svg class="ic" aria-hidden="true"><use href="#ic-doc"/></svg></span>
         <h3>Compensação florestal e PRAD</h3>
-        <p>Reposição florestal obrigatória, reserva legal e Projeto de Recuperação de Área Degradada, com as espécies nativas exigidas e documentação técnica.</p>
+        <p>Reposição florestal obrigatória, condicionante de licença e Projeto de Recuperação de Área Degradada, com as espécies nativas que o projeto exige.</p>
         <a href="[[URL_PATH]]compensacao-florestal-e-prad">Como regularizar &rarr;</a>
       </div>
       <div class="service-card">
         <span class="service-icon"><svg class="ic" aria-hidden="true"><use href="#ic-agua"/></svg></span>
         <h3>Matas ciliares e nascentes</h3>
-        <p>Recomposição de faixa ripária em conformidade com o Código Florestal e a legislação ambiental estadual.</p>
-        <a href="[[URL_PATH]]recuperacao-de-mata-ciliar">Ver o serviço &rarr;</a>
-      </div>
-      <div class="service-card">
-        <span class="service-icon"><svg class="ic" aria-hidden="true"><use href="#ic-cidade"/></svg></span>
-        <h3>Arborização urbana</h3>
-        <p>Projetos de arborização, paisagismo e poda para prefeituras, condomínios e empreendimentos.</p>
-        <a href="[[URL_PATH]]arborizacao-urbana">Ver o serviço &rarr;</a>
-      </div>
-      <div class="service-card">
-        <span class="service-icon"><svg class="ic" aria-hidden="true"><use href="#ic-pinheiro"/></svg></span>
-        <h3>Reflorestamento industrial</h3>
-        <p>Fornecimento e plantio de Pinus sp. e Eucalyptus para produção madeireira em larga escala.</p>
+        <p>Recomposição de faixa ripária e de nascentes em conformidade com o Código Florestal e a legislação ambiental estadual.</p>
+        <a href="[[URL_PATH]]recuperacao-de-mata-ciliar">Ver as espécies &rarr;</a>
       </div>
       <div class="service-card">
         <span class="service-icon"><svg class="ic" aria-hidden="true"><use href="#ic-broto"/></svg></span>
-        <h3>Adensamento de capoeiras</h3>
-        <p>Enriquecimento e aceleração da regeneração natural em áreas em recuperação.</p>
+        <h3>Reserva legal e CAR</h3>
+        <p>Regularização de reserva legal, adensamento de capoeira e enriquecimento de áreas em regeneração natural.</p>
+        <a href="[[URL_PATH]]mudas/especies-para-recuperacao-de-area-degradada-e-mata-ciliar/">Espécies para recuperação &rarr;</a>
       </div>
       <div class="service-card">
-        <span class="service-icon"><svg class="ic" aria-hidden="true"><use href="#ic-poda"/></svg></span>
-        <h3>Tratos silviculturais</h3>
-        <p>Manejo, manutenção e condução técnica de reflorestamentos e áreas verdes corporativas.</p>
+        <span class="service-icon"><svg class="ic" aria-hidden="true"><use href="#ic-cidade"/></svg></span>
+        <h3>Praças, ruas e loteamentos</h3>
+        <p>Mudas nativas já formadas, de 1,5 a 2,5 m em balde, para prefeituras e loteamentos — porte que resiste a via pública.</p>
+        <a href="[[URL_PATH]]mudas/especies-com-floracao-exuberante/">Espécies de floração &rarr;</a>
       </div>
-    </div>
-
-    <div class="section-cta">
-      <a href="[[URL_PATH]]servicos" class="btn btn-outline-light">Ver todos os serviços e projetos entregues</a>
     </div>
   </div>
 </section>
@@ -167,4 +160,12 @@
   <p>%s</p>
   <a href="[[URL_PATH]]entrega/%s">Entrega em %s &rarr;</a>
 </div>
+<=*
+
+*=>especieLinha
+<a class="prod-row" href="[[URL_PATH]]mudas/%s">
+  <span class="prod-name">%s</span>
+  <span class="prod-size">%s</span>
+  <em class="prod-sci">%s</em>
+</a>
 <=*

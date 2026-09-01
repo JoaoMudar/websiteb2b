@@ -55,10 +55,6 @@ class HtmlMain extends Html implements IHtml {
 				$this->template->setVar('CURRENT_EMPRESA', 'aria-current="page"');
 				break;
 
-			case (bool)preg_match ( '/^(servicos|recuperacao-de-mata-ciliar|arborizacao-urbana)\\/?$/', $area ) : // serviços
-				$this->template->setVar('CURRENT_SERVICOS', 'aria-current="page"');
-				break;
-
 			case (bool)preg_match ( '/^compensacao-florestal-e-prad\\/?$/', $area ) : // compensação
 				$this->template->setVar('CURRENT_PRAD', 'aria-current="page"');
 				break;
@@ -82,7 +78,6 @@ class HtmlMain extends Html implements IHtml {
 
 		$this->template->setVar('CURRENT_HOME', '');
 		$this->template->setVar('CURRENT_EMPRESA', '');
-		$this->template->setVar('CURRENT_SERVICOS', '');
 		$this->template->setVar('CURRENT_PRAD', '');
 		$this->template->setVar('CURRENT_FOTOS', '');
 		$this->template->setVar('CURRENT_LINKS', '');
