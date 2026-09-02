@@ -33,15 +33,14 @@ RewriteCond %{HTTP:X-Forwarded-Proto} !=https
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 # ---------------------------------------------------------------------------
-# Domínio canônico: ATIVAR UMA DAS DUAS, e só depois de decidir qual versão
-# fica como propriedade no Search Console. Manter as duas ativas cria laço de
-# redirecionamento; manter as duas desativadas faz o site responder nos dois
-# endereços, o que divide a autoridade entre eles.
+# Domínio canônico: decidido em sem-www, que é o que o robots.txt já declara
+# no Sitemap. O bloco (A) está ativo; (B) tem de continuar comentado, porque
+# manter os dois ativos cria laço de redirecionamento.
 # ---------------------------------------------------------------------------
 
-# (A) sem www  -  www.viveiromudar.com.br  ->  viveiromudar.com.br
-# RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-# RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+# (A) sem www  -  www.viveiromudar.com.br  ->  viveiromudar.com.br  [ATIVO]
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
 # (B) com www  -  viveiromudar.com.br  ->  www.viveiromudar.com.br
 # RewriteCond %{HTTP_HOST} !^www\. [NC]
