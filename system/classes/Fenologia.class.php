@@ -17,7 +17,7 @@ abstract class Fenologia {
 	 * @param Muda $muda
 	 * @return String
 	 */
-	public static function fenologia($muda) {
+	public static function faixa($muda) {
 
 		$floracao = $muda->mesesFloracao ();
 		$frutificacao = $muda->mesesFrutificacao ();

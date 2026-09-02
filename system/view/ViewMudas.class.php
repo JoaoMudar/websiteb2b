@@ -282,7 +282,7 @@ abstract class ViewMudas implements IView {
 		$tpl->setVar ( 'NOME_POPULAR', $escNome );
 		$tpl->setVar ( 'NOME_CIENTIFICO', $escSci );
 		$tpl->setVar ( 'RESUMO', $muda->getResumo () );
-		$tpl->setVar ( 'FENOLOGIA', Fenologia::fenologia ( $muda ) );
+		$tpl->setVar ( 'FENOLOGIA', Fenologia::faixa ( $muda ) );
 		$tpl->setVar ( 'CHIPS', self::chips ( $tpl, $muda ) );
 		$tpl->setVar ( 'FICHA', self::ficha ( $tpl, $muda ) );
 		$tpl->setVar ( 'LEGENDA', self::legenda ( $tpl, $muda ) );
