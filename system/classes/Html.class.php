@@ -265,6 +265,7 @@ abstract class Html {
 		}
 		$this->template->setVar ( 'JSONLD', $blocos );
 
+		$this->template->setVar ( 'VERIFICACAO_BUSCA', $this->verificacaoBusca () );
 		$this->template->setVar ( 'ANALYTICS', $this->analytics () );
 
 		$this->template->setVar ( 'WHATSAPP_URL', htmlspecialchars ( Seo::whatsappUrl ( $this->whatsappMessage ), ENT_QUOTES, 'UTF-8' ) );
@@ -301,6 +302,22 @@ abstract class Html {
 		return '<script async src="https://www.googletagmanager.com/gtag/js?id=' . $id . '"></script>' . "\n"
 			. '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}'
 			. 'gtag(\'js\',new Date());gtag(\'config\',\'' . $id . '\');</script>';
+	}
+
+	/**
+	 * Meta tag de verificação do Search Console. Sem código configurado não
+	 * escreve nada.
+	 *
+	 * @return String
+	 */
+	protected function verificacaoBusca() {
+
+		if (! Seo::GSC_VERIFICACAO) {
+			return '';
+		}
+
+		return '<meta name="google-site-verification" content="'
+			. htmlspecialchars ( Seo::GSC_VERIFICACAO, ENT_QUOTES, 'UTF-8' ) . '" />';
 	}
 
 	/**

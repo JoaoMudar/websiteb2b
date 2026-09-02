@@ -69,7 +69,9 @@ abstract class ViewContato implements IView {
 				isset ( $data ['mensagem'] ) ? $data ['mensagem'] : '' );
 
 			if ($retorno === true) {
-				$aviso = '<p class="form-success">Mensagem enviada. Respondemos em breve.</p>';
+				// data-evento é lido pelo script do rodapé e vira conversão no
+				// analytics; aqui o head já foi enviado e não dá para injetar lá.
+				$aviso = '<p class="form-success" data-evento="envio_formulario">Mensagem enviada. Respondemos em breve.</p>';
 			} else {
 				$aviso = '<p class="form-error">Não foi possível enviar a mensagem. Chame no WhatsApp ou ligue para ' . Seo::TELEFONE . '.</p>';
 			}

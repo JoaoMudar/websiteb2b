@@ -69,7 +69,16 @@ abstract class Seo {
 	/* ---------------- Analytics ---------------- */
 
 	/** Measurement ID do GA4 (G-XXXXXXXXXX). Vazio desliga o rastreamento. */
-	const GA4_ID = '';
+	const GA4_ID = 'G-ZLK9K271VQ';
+
+	/**
+	 * Valor do content= da tag de verificação do Search Console, só o código,
+	 * sem a tag em volta. Vazio não escreve a meta tag.
+	 *
+	 * Só é necessário para propriedade do tipo "Prefixo de URL". Quem verifica
+	 * o domínio por registro TXT no DNS pode deixar vazio.
+	 */
+	const GSC_VERIFICACAO = '';
 
 	/* ------------------------------------------------------------------ *
 	 * Conversão

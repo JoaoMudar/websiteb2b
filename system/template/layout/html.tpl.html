@@ -32,6 +32,7 @@
   [[javascript]]
 
   [[JSONLD]]
+  [[VERIFICACAO_BUSCA]]
   [[ANALYTICS]]
 </head>
 <body>
@@ -224,16 +225,38 @@
     });
   }
 
-  // Todo clique de WhatsApp vira evento, com a página de origem junto:
-  // é assim que se descobre qual página traz lead.
+  // Todo contato vira evento, com a página de origem junto: é assim que se
+  // descobre qual página traz lead. Um listener só para os três canais.
+  function evento(nome, extras) {
+    if (typeof window.gtag !== 'function') { return; }
+    var dados = { origem_pagina: window.location.pathname };
+    for (var chave in extras) {
+      if (Object.prototype.hasOwnProperty.call(extras, chave)) { dados[chave] = extras[chave]; }
+    }
+    window.gtag('event', nome, dados);
+  }
+
   document.addEventListener('click', function(e) {
-    var alvo = e.target.closest ? e.target.closest('[data-wa]') : null;
-    if (!alvo || typeof window.gtag !== 'function') { return; }
-    window.gtag('event', 'click_whatsapp', {
-      tipo_botao: alvo.getAttribute('data-wa'),
-      origem_pagina: window.location.pathname
-    });
+    if (!e.target.closest) { return; }
+
+    var wa = e.target.closest('[data-wa]');
+    if (wa) {
+      evento('click_whatsapp', { tipo_botao: wa.getAttribute('data-wa') });
+      return;
+    }
+
+    if (e.target.closest('a[href^="tel:"]')) {
+      evento('click_telefone', {});
+    }
   });
+
+  // O formulário de contato recarrega a página com o aviso de sucesso no HTML.
+  // O head já foi enviado quando o PHP sabe se o envio deu certo, então o
+  // evento sai daqui, lendo a marca deixada no aviso.
+  var aviso = document.querySelector('[data-evento]');
+  if (aviso) {
+    evento(aviso.getAttribute('data-evento'), {});
+  }
 })();
 </script>
 
