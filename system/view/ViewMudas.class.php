@@ -32,7 +32,7 @@ abstract class ViewMudas implements IView {
 			'especies-nativas' => array (
 				'fins' => FimPlantio::NA,
 				'h1' => 'Mudas de árvores nativas',
-				'title' => 'Mudas de Árvores Nativas - Catálogo de Espécies',
+				'title' => 'Mudas de Árvores Nativas: Catálogo',
 				'descricao' => 'Espécies nativas do Brasil produzidas em Agrolândia (SC) para compensação florestal, PRAD, mata ciliar e reserva legal. Ficha técnica de cada espécie.',
 				'intro' => 'Espécies nativas do Brasil, com ocorrência natural na Mata Atlântica e nos biomas do Sul. São as espécies exigidas em projetos de compensação florestal, PRAD e recomposição de mata ciliar.'
 			),
@@ -40,7 +40,7 @@ abstract class ViewMudas implements IView {
 			'especies-para-recuperacao-de-area-degradada-e-mata-ciliar' => array (
 				'fins' => array (FimPlantio::RMC, FimPlantio::RAD ),
 				'h1' => 'Mudas para recuperação de área degradada e mata ciliar',
-				'title' => 'Mudas para Recuperação de Área Degradada e Mata Ciliar',
+				'title' => 'Mudas para Área Degradada e Mata Ciliar',
 				'descricao' => 'Espécies indicadas para PRAD, recomposição de mata ciliar e recuperação de áreas degradadas, produzidas em Agrolândia (SC) com responsabilidade técnica.',
 				'intro' => 'Espécies indicadas para recomposição de faixa ciliar, nascentes e áreas degradadas: a base de qualquer PRAD e de projetos de compensação ambiental.'
 			),
@@ -64,7 +64,7 @@ abstract class ViewMudas implements IView {
 			'especies-frutas-para-consumo-humano' => array (
 				'fins' => FimPlantio::FH,
 				'h1' => 'Mudas de árvores frutíferas',
-				'title' => 'Mudas de Árvores Frutíferas para Consumo Humano',
+				'title' => 'Mudas de Árvores Frutíferas Nativas',
 				'descricao' => 'Espécies frutíferas nativas e exóticas com fruto de consumo humano, com época de frutificação informada. Viveiro florestal em Agrolândia (SC).',
 				'intro' => 'Espécies cujo fruto é próprio para consumo humano, nativas e exóticas, com a época de frutificação informada na ficha.'
 			),
@@ -162,7 +162,7 @@ abstract class ViewMudas implements IView {
 
 		} else {
 
-			$html->setTitle ( 'Catálogo: ' . $total . ' Espécies de Mudas Nativas e Exóticas' );
+			$html->setTitle ( $total . ' Espécies de Mudas Nativas e Exóticas' );
 			$html->setDescription ( 'Catálogo completo com ' . $total . ' espécies de mudas florestais nativas e exóticas produzidas pelo Viveiro Mudar, em Agrolândia (SC). Floração, mapa de ocorrência e ficha técnica de cada espécie. Orçamento pelo WhatsApp.' );
 			$html->setCanonical ( 'mudas' );
 			$listaMudas = Muda::retornaListaMudas ();
@@ -254,7 +254,7 @@ abstract class ViewMudas implements IView {
 		$mensagem = 'Olá! Vi a página da muda ' . $nome . ' no site e queria fazer um orçamento.';
 
 		$html = new HtmlMain ( );
-		$html->setTitle ( 'Muda de ' . $nome . ' (' . $sciCurto . ') | Viveiro Mudar', true );
+		$html->setTitle ( 'Muda de ' . $nome . ' (' . $sciCurto . ')' );
 		$html->setDescription ( self::descricaoDaMuda ( $muda ) );
 		$html->setCanonical ( 'mudas/' . $muda->getSlug () );
 		$html->setOgType ( 'product' );

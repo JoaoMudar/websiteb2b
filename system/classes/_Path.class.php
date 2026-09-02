@@ -1,6 +1,11 @@
 <?php
 
-session_start ();
+/*
+ * Sem session_start() de propósito: o site é todo público e nenhuma página
+ * lê ou escreve $_SESSION. Abrir sessão faria o PHP mandar "Cache-Control:
+ * no-store" e um cookie PHPSESSID em toda resposta, e qualquer um dos dois
+ * sozinho impede a Cloudflare de cachear o HTML.
+ */
 
 /**
  * Possuí métodos para retornar os caminhos do sistema.

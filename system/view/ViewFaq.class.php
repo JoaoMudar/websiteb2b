@@ -80,7 +80,7 @@ abstract class ViewFaq implements IView {
 		$mensagem = 'Olá! Vim pela página de perguntas frequentes e queria tirar uma dúvida.';
 
 		$html = new HtmlMain ( );
-		$html->setTitle ( 'Perguntas Frequentes - Mudas, Prazo, Entrega e Embalagens' );
+		$html->setTitle ( 'Perguntas Frequentes sobre Mudas e Entrega' );
 		$html->setDescription ( 'Quantidade mínima, prazo de produção, embalagens, entrega no Sul do Brasil, nota fiscal e espécies para PRAD: as dúvidas mais comuns sobre mudas florestais.' );
 		$html->setCanonical ( 'perguntas-frequentes' );
 		$html->setWhatsappMessage ( $mensagem, 'Falar no WhatsApp' );

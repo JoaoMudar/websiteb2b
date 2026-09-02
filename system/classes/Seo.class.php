@@ -34,11 +34,19 @@ abstract class Seo {
 	const PAIS = 'BR';
 
 	/**
-	 * Coordenadas aproximadas do viveiro sede (centro de Agrolândia).
-	 * Conferir no Google Maps e ajustar para o ponto exato do portão.
+	 * Coordenadas do pino do Perfil do Google.
+	 *
+	 * Copiadas de lá de propósito, e não medidas no portão: o que este par
+	 * precisa fazer é bater com o ponto que o Google já usa para a empresa. As
+	 * anteriores (-27.4108, -49.8225) caíam a cerca de 1,1 km do pino, e essa
+	 * divergência enfraquece a ligação entre o site e o perfil.
+	 *
+	 * Valor exato do pino, lido do link do perfil (!8m2!3d...!4d...):
+	 * -27.4192813, -49.8288907. Arredondado aqui para a precisão que o schema
+	 * pede — quatro casas já são cerca de 10 metros.
 	 */
-	const LATITUDE = '-27.4108';
-	const LONGITUDE = '-49.8225';
+	const LATITUDE = '-27.4193';
+	const LONGITUDE = '-49.8289';
 
 	/* ---------------- Prova técnica ---------------- */
 
@@ -57,12 +65,25 @@ abstract class Seo {
 
 	/* ---------------- Perfis externos ---------------- */
 
-	/** Perfil do Google, Instagram etc. Alimentam o sameAs do JSON-LD. */
+	/**
+	 * Perfis oficiais da empresa fora do site. Alimentam o sameAs do JSON-LD, que
+	 * é o que diz ao buscador que o site e esses perfis são a mesma empresa.
+	 *
+	 * Entradas vazias são descartadas: melhor a lista curta do que um sameAs
+	 * apontando para um perfil que não é nosso.
+	 *
+	 * @return Array
+	 */
 	public static function perfis() {
 
 		return array_values ( array_filter ( array (
-			'', // https://www.google.com/maps/place/...
-			'', // https://www.instagram.com/...
+			// URL direta do perfil, e não o encurtado maps.app.goo.gl: o sameAs vale
+			// mais apontando para o destino do que para um redirecionamento. Os
+			// parâmetros de sessão do link compartilhado (entry, g_ep, skid) ficaram
+			// de fora porque expiram.
+			'https://www.google.com/maps/place/Viveiro+Mudar/@-27.4192765,-49.8314656,17z/data=!3m1!4b1!4m6!3m5!1s0x94dfe83e23304a79:0x6c5938ca30d7914e!8m2!3d-27.4192813!4d-49.8288907!16s%2Fg%2F11c46bfyfg',
+			'https://www.facebook.com/ViveiroMudar/',
+			'https://www.instagram.com/viveiromudar/',
 		) ) );
 	}
 

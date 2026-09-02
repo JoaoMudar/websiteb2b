@@ -7,6 +7,21 @@
 
 header ( 'Content-Type: text/html; charset=utf-8' );
 
+/**
+ * Sem sessão e sem conteúdo por visitante, a resposta serve a todo mundo igual.
+ * max-age=0 mantém o navegador revalidando, então uma correção de texto aparece
+ * na hora; s-maxage é o que autoriza a borda da Cloudflare a guardar a página.
+ *
+ * Só em leitura: o POST do formulário de contato passa por este mesmo arquivo e
+ * não pode sair marcado como público. HEAD entra junto com GET porque tem de
+ * devolver exatamente os cabeçalhos que o GET devolveria.
+ */
+$metodo = isset ( $_SERVER ['REQUEST_METHOD'] ) ? $_SERVER ['REQUEST_METHOD'] : '';
+
+if ($metodo === 'GET' || $metodo === 'HEAD') {
+	header ( 'Cache-Control: public, max-age=0, s-maxage=3600, stale-while-revalidate=86400' );
+}
+
 error_reporting(E_ALL & ~E_STRICT & ~E_NOTICE & ~E_DEPRECATED);
 
 /**

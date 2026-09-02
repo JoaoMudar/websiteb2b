@@ -37,7 +37,7 @@ abstract class ViewEmpresa implements IView {
 		$mensagem = 'Olá! Vim pela página da empresa no site e queria falar sobre mudas.';
 
 		$html = new HtmlMain ( );
-		$html->setTitle ( 'A Empresa - Viveiro Florestal desde 1996 em Agrolândia/SC' );
+		$html->setTitle ( 'A Empresa: Viveiro Florestal desde 1996' );
 		$html->setDescription ( 'Viveiro Florestal Mudar: 9 hectares em Agrolândia e Itapema (SC), 500 mil mudas por ano, ' . count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) . ' espécies nativas e engenheiro florestal responsável desde 1996.' );
 		$html->setCanonical ( 'empresa' );
 		$html->setWhatsappMessage ( $mensagem, 'Falar no WhatsApp' );

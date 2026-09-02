@@ -17,8 +17,16 @@ abstract class Html {
 
 	/**
 	 * Sufixo acrescentado aos títulos definidos pelas views.
+	 *
+	 * Curto de propósito: o nome por extenso comia 25 dos ~60 caracteres que o
+	 * Google exibe, sobrando menos da metade para a palavra-chave da página.
 	 */
-	const TITLE_SUFIXO = ' | Viveiro Florestal Mudar';
+	const TITLE_SUFIXO = ' | Viveiro Mudar';
+
+	/**
+	 * Comprimento máximo do título antes do Google truncar.
+	 */
+	const TITLE_MAX = 60;
 
 	/**
 	 * Descrição usada quando a view não define a sua.
@@ -130,14 +138,18 @@ abstract class Html {
 	/**
 	 * Seta o title da página.
 	 *
+	 * O sufixo com o nome da empresa só entra quando cabe: num título de ficha
+	 * de espécie ou de cidade, cujo comprimento depende do dado, é melhor perder
+	 * a marca no fim do que o Google cortar o nome da espécie no meio.
+	 *
 	 * @param String $title
-	 * @param Boolean $raw Quando true usa o título exatamente como informado,
-	 *                     sem acrescentar o nome da empresa
 	 * @return void
 	 */
-	public function setTitle($title, $raw = false) {
+	public function setTitle($title) {
 
-		$this->title = $raw ? $title : $title . self::TITLE_SUFIXO;
+		$comSufixo = $title . self::TITLE_SUFIXO;
+
+		$this->title = mb_strlen ( $comSufixo, 'UTF-8' ) <= self::TITLE_MAX ? $comSufixo : $title;
 	}
 
 	/**

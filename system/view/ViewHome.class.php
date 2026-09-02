@@ -35,7 +35,7 @@ abstract class ViewHome implements IView {
 	private static function indexHome() {
 
 		$html = new HtmlMain ( );
-		$html->setTitle ( 'Viveiro Florestal de Árvores Nativas em SC | Viveiro Mudar', true );
+		$html->setTitle ( 'Viveiro Florestal de Árvores Nativas em SC' );
 		$html->setDescription ( 'Viveiro florestal em Agrolândia (SC) desde 1996. ' . count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) . ' espécies de mudas de árvores nativas para compensação florestal, PRAD e recuperação de áreas. Orçamento pelo WhatsApp.' );
 		$html->setCanonical ( '' );
 		$html->setWhatsappMessage ( 'Olá! Vim pelo site do Viveiro Mudar e queria falar sobre mudas nativas.', 'Falar no WhatsApp' );

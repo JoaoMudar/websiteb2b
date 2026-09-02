@@ -44,7 +44,7 @@ abstract class ViewEntrega implements IView {
 	private static function hub() {
 
 		$html = new HtmlMain ( );
-		$html->setTitle ( 'Onde Entregamos - Mudas Nativas em SC, PR e RS' );
+		$html->setTitle ( 'Entrega de Mudas Nativas em SC, PR e RS' );
 		$html->setDescription ( 'Entrega de mudas de árvores nativas com frota própria em Santa Catarina, Paraná e Rio Grande do Sul. Viveiro em Agrolândia, no Alto Vale do Itajaí.' );
 		$html->setCanonical ( 'entrega' );
 		$html->setWhatsappMessage ( 'Olá! Queria saber sobre entrega de mudas do Viveiro Mudar na minha cidade.', 'Falar no WhatsApp' );
@@ -96,7 +96,7 @@ abstract class ViewEntrega implements IView {
 		$descricao = 'Entrega de mudas de árvores nativas em ' . $nomeCompleto . ', no ' . $cidade ['regiao'] . '. Viveiro próprio em Agrolândia/SC, frota própria e engenheiro florestal responsável.';
 
 		$html = new HtmlMain ( );
-		$html->setTitle ( 'Mudas Nativas em ' . $nomeCompleto . ' - Entrega do Viveiro Mudar', true );
+		$html->setTitle ( 'Mudas Nativas em ' . $nomeCompleto . ' - Entrega' );
 		$html->setDescription ( $descricao );
 		$html->setCanonical ( 'entrega/' . $slug );
 		$html->setWhatsappMessage ( $mensagem, 'Falar no WhatsApp' );
