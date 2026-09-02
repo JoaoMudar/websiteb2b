@@ -64,7 +64,7 @@ abstract class _Path {
 	 * URL de um asset com a data de modificação embutida na query string.
 	 *
 	 * O Cloudflare e o navegador guardam css e js por horas. Sem a versão na
-	 * URL, um deploy entrega HTML novo junto com folha de estilo antiga — e a
+	 * URL, um deploy entrega HTML novo junto com folha de estilo antiga, e a
 	 * página fica quebrada até o cache expirar sozinho.
 	 *
 	 * @param String $relativo Caminho a partir da raiz, ex: 'system/css/layout.css'
@@ -103,7 +103,7 @@ abstract class _Path {
 /**
  * Compatibilidade: o site passou a usar mb_* para tratar acentuação. Quase todo
  * servidor traz a extensão mbstring, mas quando ela falta o site inteiro
- * quebraria com erro fatal — estas versões de reserva evitam isso.
+ * quebraria com erro fatal; estas versões de reserva evitam isso.
  */
 if (! function_exists ( 'mb_strlen' )) {
 

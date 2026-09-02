@@ -25,7 +25,7 @@ system/images/mudas/mapa48.png
 system/images/pictures/DSC07751.jpg
 system/images/pictures/ipe_roxo.jpg
 
-# Ferramentas e documentos internos — não vão para o servidor
+# Ferramentas e documentos internos: não vão para o servidor
 .claude/
 skills-lock.json
 relatorio.md

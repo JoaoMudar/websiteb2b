@@ -44,14 +44,14 @@ abstract class ViewSolucao implements IView {
 		return array (
 
 			/* ---------------------------------------------------------------- *
-			 * Compensação florestal e PRAD — a página de maior valor comercial
+			 * Compensação florestal e PRAD: a página de maior valor comercial
 			 * ---------------------------------------------------------------- */
 			'compensacao-florestal-e-prad' => array (
 
 				'eyebrow' => 'Regularização ambiental',
 				'titulo_curto' => 'Compensação florestal e PRAD',
 				'h1' => 'Compensação florestal e PRAD: mudas nativas para cumprir a obrigação',
-				'title' => 'Compensação Florestal e PRAD — Mudas Nativas em SC',
+				'title' => 'Compensação Florestal e PRAD - Mudas Nativas em SC',
 				'descricao' => 'Mudas nativas para compensação florestal, reposição obrigatória e PRAD em Santa Catarina. Viveiro próprio, engenheiro florestal responsável e entrega em todo o Sul.',
 				'subtitulo' => 'Fornecimento de mudas nativas para quem precisa cumprir exigência de órgão ambiental em Santa Catarina, Paraná e Rio Grande do Sul.',
 				'lede' => 'Se a sua empresa suprimiu vegetação, extraiu material ou recebeu condicionante em licença ambiental, a obrigação costuma virar uma lista de espécies nativas, uma quantidade e um prazo. É exatamente isso que produzimos.',
@@ -69,11 +69,11 @@ abstract class ViewSolucao implements IView {
 				'corpo' => '
 <h2>O que é compensação florestal</h2>
 <p>Compensação florestal é a obrigação de repor a vegetação suprimida em um empreendimento. Ela aparece de várias formas: reposição florestal obrigatória para quem consome ou suprime matéria-prima florestal, condicionante de licença ambiental, compensação por intervenção em Área de Preservação Permanente e regularização de Reserva Legal prevista no Código Florestal (Lei 12.651/2012).</p>
-<p>Na prática, o empreendedor recebe do órgão ambiental — em Santa Catarina, o IMA — uma exigência com três variáveis: <strong>quais espécies</strong>, <strong>quantas mudas</strong> e <strong>até quando</strong>. Quem costuma passar por isso são construtoras e consórcios de obra viária, mineradoras e extratoras de saibro e brita, indústrias em ampliação, loteadores, produtores rurais em regularização de CAR e prefeituras.</p>
+<p>Na prática, o empreendedor recebe do órgão ambiental (em Santa Catarina, o IMA) uma exigência com três variáveis: <strong>quais espécies</strong>, <strong>quantas mudas</strong> e <strong>até quando</strong>. Quem costuma passar por isso são construtoras e consórcios de obra viária, mineradoras e extratoras de saibro e brita, indústrias em ampliação, loteadores, produtores rurais em regularização de CAR e prefeituras.</p>
 
 <h2>O que é um PRAD</h2>
-<p>O PRAD — Projeto de Recuperação de Área Degradada — é o documento técnico que descreve como uma área vai voltar a ter cobertura vegetal. Ele define o diagnóstico da área, as espécies nativas de ocorrência regional, o espaçamento e a densidade de plantio, o cronograma de execução e o monitoramento posterior.</p>
-<p>O PRAD é elaborado e protocolado por profissional habilitado e aprovado pelo órgão ambiental. Depois de aprovado, ele vira uma lista de compras muito específica — e é aí que a maior parte dos prazos escorrega, porque muda nativa de espécie certa não se compra de um dia para o outro.</p>
+<p>O PRAD (Projeto de Recuperação de Área Degradada) é o documento técnico que descreve como uma área vai voltar a ter cobertura vegetal. Ele define o diagnóstico da área, as espécies nativas de ocorrência regional, o espaçamento e a densidade de plantio, o cronograma de execução e o monitoramento posterior.</p>
+<p>O PRAD é elaborado e protocolado por profissional habilitado e aprovado pelo órgão ambiental. Depois de aprovado, ele vira uma lista de compras muito específica, e é aí que a maior parte dos prazos escorrega, porque muda nativa de espécie certa não se compra de um dia para o outro.</p>
 
 <h2>Como o Viveiro Mudar entra no processo</h2>
 <ul class="arrow-list">
@@ -85,15 +85,15 @@ abstract class ViewSolucao implements IView {
 <p>Não elaboramos o projeto nem executamos o plantio: o projeto é atribuição do responsável técnico que assina o seu PRAD, e o plantio, de quem você contratar para o campo. O que fazemos é garantir que as mudas certas existam, na quantidade certa, dentro do prazo.</p>
 
 <h2>Espécies nativas para compensação e PRAD</h2>
-<p>Do nosso catálogo, <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) . ' espécies são nativas</strong>. Delas, <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::RAD ) ) . ' são indicadas para recuperação de área degradada</strong> e <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::RMC ) ) . ' para recomposição de mata ciliar</strong> — as duas categorias que mais aparecem em exigência de órgão ambiental.</p>
+<p>Do nosso catálogo, <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) . ' espécies são nativas</strong>. Delas, <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::RAD ) ) . ' são indicadas para recuperação de área degradada</strong> e <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::RMC ) ) . ' para recomposição de mata ciliar</strong>: as duas categorias que mais aparecem em exigência de órgão ambiental.</p>
 <p>Cada ficha traz comportamento foliar, época de floração e frutificação e o mapa de ocorrência natural da espécie no Brasil, que é o que sustenta o argumento de "espécie nativa de ocorrência regional" diante do analista.</p>
 
 <h2>Projetos já entregues</h2>
 <ul class="clients-done-list">
-  <li><strong>Consórcio Lote 8 — Duplicação da BR-101</strong> — recomposição de áreas de extração de terra.</li>
-  <li><strong>Consórcio Lote 6 — Duplicação da BR-101</strong> — recomposição de áreas de extração de pedra e brita, no Morro do Boi.</li>
-  <li><strong>Novelsul — Rio do Sul</strong> — recuperação de mata ciliar.</li>
-  <li><strong>Metalúrgica Riosulense</strong> — plantio de espécies nativas.</li>
+  <li><strong>Consórcio Lote 8 - Duplicação da BR-101</strong>: recomposição de áreas de extração de terra.</li>
+  <li><strong>Consórcio Lote 6 - Duplicação da BR-101</strong>: recomposição de áreas de extração de pedra e brita, no Morro do Boi.</li>
+  <li><strong>Novelsul, Rio do Sul</strong>: recuperação de mata ciliar.</li>
+  <li><strong>Metalúrgica Riosulense</strong>: plantio de espécies nativas.</li>
 </ul>',
 
 				'faq' => array (
@@ -106,9 +106,9 @@ abstract class ViewSolucao implements IView {
 					array ('pergunta' => 'As mudas vêm com nota fiscal e documentação?',
 						'resposta' => 'Sim. Toda entrega é acompanhada de nota fiscal, e a produção é conduzida sob responsabilidade técnica do Eng. Florestal Gilberto Ferretti, CREA/SC 35178-8.' ),
 					array ('pergunta' => 'Vocês entregam fora de Santa Catarina?',
-						'resposta' => 'Sim. Entregamos em Santa Catarina, Paraná e Rio Grande do Sul com frota própria — caminhão baú preparado para o transporte seguro de mudas.' ),
+						'resposta' => 'Sim. Entregamos em Santa Catarina, Paraná e Rio Grande do Sul com frota própria: caminhão baú preparado para o transporte seguro de mudas.' ),
 					array ('pergunta' => 'Como escolher as espécies certas para a minha área?',
-						'resposta' => 'A lista sai do projeto aprovado. Se ele ainda estiver em elaboração, podemos indicar espécies nativas de ocorrência regional compatíveis com o tipo de área — mata ciliar, área degradada, adensamento de capoeira — a partir do mapa de ocorrência de cada espécie do catálogo.' )
+						'resposta' => 'A lista sai do projeto aprovado. Se ele ainda estiver em elaboração, podemos indicar espécies nativas de ocorrência regional compatíveis com o tipo de área (mata ciliar, área degradada, adensamento de capoeira) a partir do mapa de ocorrência de cada espécie do catálogo.' )
 				)
 			),
 
@@ -120,7 +120,7 @@ abstract class ViewSolucao implements IView {
 				'eyebrow' => 'Recuperação ambiental',
 				'titulo_curto' => 'Recuperação de mata ciliar',
 				'h1' => 'Recuperação de mata ciliar e nascentes',
-				'title' => 'Recuperação de Mata Ciliar e Nascentes — Mudas Nativas',
+				'title' => 'Recuperação de Mata Ciliar e Nascentes - Mudas Nativas',
 				'descricao' => 'Mudas nativas para recomposição de mata ciliar, nascentes e Áreas de Preservação Permanente em SC, PR e RS. Viveiro florestal em Agrolândia/SC, com entrega própria.',
 				'subtitulo' => 'Mudas nativas de ocorrência regional para recompor faixa ciliar e nascentes em conformidade com o Código Florestal.',
 				'lede' => 'A faixa de vegetação às margens de rios, córregos e nascentes é Área de Preservação Permanente. Quando ela precisa ser recomposta, o que resolve é espécie nativa certa, na densidade certa, plantada na época certa.',
@@ -137,11 +137,11 @@ abstract class ViewSolucao implements IView {
 
 				'corpo' => '
 <h2>O que a lei exige</h2>
-<p>O Código Florestal (Lei 12.651/2012) define como Área de Preservação Permanente as faixas marginais de qualquer curso d\'água natural, medidas a partir da borda da calha do leito regular. A largura da faixa varia conforme a largura do curso d\'água — para cursos com menos de 10 metros de largura, a faixa é de 30 metros. Nascentes e olhos d\'água têm raio mínimo de 50 metros.</p>
+<p>O Código Florestal (Lei 12.651/2012) define como Área de Preservação Permanente as faixas marginais de qualquer curso d\'água natural, medidas a partir da borda da calha do leito regular. A largura da faixa varia conforme a largura do curso d\'água: para cursos com menos de 10 metros de largura, a faixa é de 30 metros. Nascentes e olhos d\'água têm raio mínimo de 50 metros.</p>
 <p>Quando essa faixa está descoberta, a recomposição é obrigatória. Ela costuma aparecer como condicionante de licença, como pendência do Cadastro Ambiental Rural ou dentro de um Programa de Regularização Ambiental.</p>
 
 <h2>Espécies que usamos</h2>
-<p>Das ' . count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) . ' espécies nativas do nosso catálogo, <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::RMC ) ) . ' são indicadas para recomposição de mata ciliar</strong>. São espécies com ocorrência natural na região, tolerantes a solo úmido e, em boa parte dos casos, atrativas para fauna — o que acelera a dispersão natural e a regeneração da área.</p>
+<p>Das ' . count ( Muda::pesquisaAvancada ( FimPlantio::NA ) ) . ' espécies nativas do nosso catálogo, <strong>' . count ( Muda::pesquisaAvancada ( FimPlantio::RMC ) ) . ' são indicadas para recomposição de mata ciliar</strong>. São espécies com ocorrência natural na região, tolerantes a solo úmido e, em boa parte dos casos, atrativas para fauna, o que acelera a dispersão natural e a regeneração da área.</p>
 <p>Cada ficha do catálogo mostra o mapa de ocorrência natural da espécie no Brasil e a época de frutificação, que é o dado que interessa para atrair fauna.</p>
 
 <h2>O que fornecemos</h2>
@@ -214,7 +214,7 @@ abstract class ViewSolucao implements IView {
 		$tpl->setVar ( 'LATERAL_CIDADES', self::lateralCidades ( $tpl ) );
 
 		// Por último: o texto de cada landing também traz [[URL_PATH]], e a
-		// substituição é de uma passada só — se rodasse antes, os links do corpo
+		// substituição é de uma passada só; se rodasse antes, os links do corpo
 		// sairiam com o marcador cru na página.
 		$tpl->setVar ( 'URL_PATH', _Path::getURL_PATH () );
 		$tpl->setVar ( 'IMAGE_PATH', _Path::getIMAGE_PATH () );

@@ -26,7 +26,7 @@ abstract class ViewSitemap implements IView {
 		$urls [] = array ('loc' => $base . 'fotos', 'priority' => '0.4', 'changefreq' => 'yearly' );
 		$urls [] = array ('loc' => $base . 'links', 'priority' => '0.3', 'changefreq' => 'yearly' );
 
-		// soluções — o cluster de maior valor comercial
+		// soluções: o cluster de maior valor comercial
 		$urls [] = array ('loc' => $base . 'compensacao-florestal-e-prad', 'priority' => '0.9', 'changefreq' => 'monthly' );
 		$urls [] = array ('loc' => $base . 'recuperacao-de-mata-ciliar', 'priority' => '0.8', 'changefreq' => 'monthly' );
 

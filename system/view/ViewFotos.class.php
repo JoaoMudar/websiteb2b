@@ -52,7 +52,7 @@ abstract class ViewFotos implements IView {
 		$mensagem = 'Olá! Vi a galeria de fotos do site e queria falar sobre mudas.';
 
 		$html = new HtmlMain ( );
-		$html->setTitle ( 'Galeria de Fotos do Viveiro — Agrolândia e Itapema/SC' );
+		$html->setTitle ( 'Galeria de Fotos do Viveiro - Agrolândia e Itapema/SC' );
 		$html->setDescription ( 'Fotos das instalações do Viveiro Florestal Mudar, das espécies produzidas e dos projetos florestais executados no Sul do Brasil desde 1996.' );
 		$html->setCanonical ( 'fotos' );
 		$html->setWhatsappMessage ( $mensagem, 'Falar no WhatsApp' );

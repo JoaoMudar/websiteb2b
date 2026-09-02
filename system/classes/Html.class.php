@@ -13,7 +13,7 @@ abstract class Html {
 	/**
 	 * Título usado quando a view não define o seu.
 	 */
-	const TITLE_PADRAO = 'Viveiro Florestal Mudar — Mudas de Árvores Nativas em SC';
+	const TITLE_PADRAO = 'Viveiro Florestal Mudar - Mudas de Árvores Nativas em SC';
 
 	/**
 	 * Sufixo acrescentado aos títulos definidos pelas views.

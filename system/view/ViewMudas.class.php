@@ -19,7 +19,7 @@ abstract class ViewMudas implements IView {
 	/**
 	 * Recortes do catálogo que têm URL própria.
 	 *
-	 * Cada recorte é uma página indexável com H1 e descrição próprios — por
+	 * Cada recorte é uma página indexável com H1 e descrição próprios; por
 	 * isso "nativas" vem primeiro: "árvores nativas" é o termo de maior volume
 	 * com menor concorrência na pesquisa de palavras-chave.
 	 *
@@ -32,7 +32,7 @@ abstract class ViewMudas implements IView {
 			'especies-nativas' => array (
 				'fins' => FimPlantio::NA,
 				'h1' => 'Mudas de árvores nativas',
-				'title' => 'Mudas de Árvores Nativas — Catálogo de Espécies',
+				'title' => 'Mudas de Árvores Nativas - Catálogo de Espécies',
 				'descricao' => 'Espécies nativas do Brasil produzidas em Agrolândia (SC) para compensação florestal, PRAD, mata ciliar e reserva legal. Ficha técnica de cada espécie.',
 				'intro' => 'Espécies nativas do Brasil, com ocorrência natural na Mata Atlântica e nos biomas do Sul. São as espécies exigidas em projetos de compensação florestal, PRAD e recomposição de mata ciliar.'
 			),
@@ -42,7 +42,7 @@ abstract class ViewMudas implements IView {
 				'h1' => 'Mudas para recuperação de área degradada e mata ciliar',
 				'title' => 'Mudas para Recuperação de Área Degradada e Mata Ciliar',
 				'descricao' => 'Espécies indicadas para PRAD, recomposição de mata ciliar e recuperação de áreas degradadas, produzidas em Agrolândia (SC) com responsabilidade técnica.',
-				'intro' => 'Espécies indicadas para recomposição de faixa ciliar, nascentes e áreas degradadas — a base de qualquer PRAD e de projetos de compensação ambiental.'
+				'intro' => 'Espécies indicadas para recomposição de faixa ciliar, nascentes e áreas degradadas: a base de qualquer PRAD e de projetos de compensação ambiental.'
 			),
 
 			'especies-com-floracao-exuberante' => array (
@@ -74,7 +74,7 @@ abstract class ViewMudas implements IView {
 				'h1' => 'Mudas de espécies exóticas',
 				'title' => 'Mudas de Espécies Exóticas',
 				'descricao' => 'Espécies exóticas ornamentais e frutíferas já consolidadas no cultivo brasileiro, com ficha técnica de cada uma. Viveiro florestal em Agrolândia (SC).',
-				'intro' => 'Espécies introduzidas e já consolidadas no cultivo brasileiro — ornamentais e frutíferas. O foco da produção são as nativas, mas estas seguem em catálogo.'
+				'intro' => 'Espécies introduzidas e já consolidadas no cultivo brasileiro: ornamentais e frutíferas. O foco da produção são as nativas, mas estas seguem em catálogo.'
 			)
 		);
 	}
@@ -318,7 +318,7 @@ abstract class ViewMudas implements IView {
 			$partes [] = mb_strtolower ( $muda->getComportamentoFolharExtenso (), 'UTF-8' );
 		}
 
-		return implode ( ', ', $partes ) . '. Viveiro Mudar, Agrolândia/SC — muda de 10 cm a 2,5 m. Orçamento pelo WhatsApp.';
+		return implode ( ', ', $partes ) . '. Viveiro Mudar, Agrolândia/SC, muda de 10 cm a 2,5 m. Orçamento pelo WhatsApp.';
 	}
 
 	/**
@@ -360,7 +360,7 @@ abstract class ViewMudas implements IView {
 	 * Altura da árvore adulta, com a ressalva que impede a leitura errada.
 	 *
 	 * Este é o único lugar do site onde o dado aparece: é informação de escolha
-	 * de espécie para projeto, não o tamanho da muda que vendemos — a muda sai
+	 * de espécie para projeto, não o tamanho da muda que vendemos; a muda sai
 	 * do viveiro com 10 cm a 2,5 m, conforme a embalagem.
 	 *
 	 * @param Muda $muda
@@ -412,7 +412,7 @@ abstract class ViewMudas implements IView {
 	}
 
 	/**
-	 * Legenda apenas dos códigos que esta espécie usa — despejar as treze
+	 * Legenda apenas dos códigos que esta espécie usa; despejar as treze
 	 * definições em toda ficha só cansaria o leitor.
 	 *
 	 * @param Template $tpl
@@ -444,7 +444,7 @@ abstract class ViewMudas implements IView {
 	}
 
 	/**
-	 * Espécies relacionadas — resolve a orfandade das fichas e distribui
+	 * Espécies relacionadas: resolve a orfandade das fichas e distribui
 	 * autoridade interna entre elas.
 	 *
 	 * @param Template $tpl

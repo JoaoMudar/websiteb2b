@@ -3,7 +3,7 @@
 /**
  * Gerencia as informações de uma muda.
  *
- * Os dados das espécies vivem em system/data/arvores.csv — uma planilha que o
+ * Os dados das espécies vivem em system/data/arvores.csv, uma planilha que o
  * cliente edita sem tocar em PHP. O slug de cada espécie está gravado no CSV
  * (nunca calculado em tempo de execução) para que incluir uma espécie nova não
  * desloque URLs já indexadas.
@@ -276,7 +276,7 @@ class Muda {
 	}
 
 	/**
-	 * Binômio sem a autoridade — "Handroanthus albus" em vez de
+	 * Binômio sem a autoridade: "Handroanthus albus" em vez de
 	 * "Handroanthus albus (Cham.) Sandwith". É a forma usada em título de
 	 * página e em rótulo, onde a autoridade só ocuparia espaço.
 	 *
@@ -330,14 +330,14 @@ class Muda {
 	}
 
 	/* ------------------------------------------------------------------ *
-	 * Dados derivados — fenologia
+	 * Dados derivados: fenologia
 	 * ------------------------------------------------------------------ */
 
 	/**
 	 * Converte um período textual ("julho-agosto", "novembro-janeiro",
 	 * "junho-agosto e dezembro-março") em 12 posições booleanas.
 	 *
-	 * Devolve null quando o texto não é um período reconhecível — nesse caso a
+	 * Devolve null quando o texto não é um período reconhecível; nesse caso a
 	 * interface mostra o texto original em vez de desenhar uma faixa errada.
 	 *
 	 * @param String $periodo

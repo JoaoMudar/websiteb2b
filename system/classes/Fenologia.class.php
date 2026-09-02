@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Desenha a faixa de fenologia — os doze meses do ano com floração e
+ * Desenha a faixa de fenologia: os doze meses do ano com floração e
  * frutificação marcadas.
  *
  * É o dado que sobra da ficha depois que a régua de porte saiu: a altura da
@@ -12,7 +12,7 @@
 abstract class Fenologia {
 
 	/**
-	 * Faixa de fenologia — só aparece quando o período foi reconhecido.
+	 * Faixa de fenologia: só aparece quando o período foi reconhecido.
 	 *
 	 * @param Muda $muda
 	 * @return String

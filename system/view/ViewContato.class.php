@@ -40,7 +40,7 @@ abstract class ViewContato implements IView {
 		$mensagem = 'Olá! Vim pela página de contato do site e queria um orçamento de mudas.';
 
 		$html = new HtmlMain ( );
-		$html->setTitle ( 'Contato e Orçamento — Viveiro Florestal em Agrolândia/SC' );
+		$html->setTitle ( 'Contato e Orçamento - Viveiro Florestal em Agrolândia/SC' );
 		$html->setDescription ( 'Fale com o Viveiro Florestal Mudar: WhatsApp +55 47 98433-7854, Rua Wilhelm Doering, 300, Agrolândia/SC. Orçamento de mudas nativas para todo o Sul do Brasil.' );
 		$html->setCanonical ( 'contato' );
 		$html->setWhatsappMessage ( $mensagem, 'Falar no WhatsApp' );

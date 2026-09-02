@@ -4,7 +4,7 @@
  * Perguntas frequentes.
  *
  * Resposta direta e curta logo abaixo da pergunta é o formato que os resumos
- * gerados por IA e os blocos de resposta do Google mais citam — e é também o
+ * gerados por IA e os blocos de resposta do Google mais citam, e é também o
  * que economiza uma ida e volta no WhatsApp.
  */
 abstract class ViewFaq implements IView {
@@ -23,7 +23,7 @@ abstract class ViewFaq implements IView {
 				'resposta' => 'Espécies de produção corrente costumam ter disponibilidade imediata. Espécies específicas, mudas mais altas ou quantidades grandes exigem produção programada, que leva meses. Consulte assim que tiver a lista, e não às vésperas do prazo do órgão ambiental.' ),
 
 			array ('pergunta' => 'Vocês entregam em quais estados?',
-				'resposta' => 'Santa Catarina, Paraná e Rio Grande do Sul, com frota própria — caminhão baú preparado para transporte de mudas. Também é possível retirar no viveiro, em Agrolândia/SC, combinando antes.' ),
+				'resposta' => 'Santa Catarina, Paraná e Rio Grande do Sul, com frota própria: caminhão baú preparado para transporte de mudas. Também é possível retirar no viveiro, em Agrolândia/SC, combinando antes.' ),
 
 			array ('pergunta' => 'Quais embalagens e tamanhos de muda existem?',
 				'resposta' => 'São oito formatos. Tubete de 50 g entrega mudas de 10 a 15 cm, para plantio em larga escala. Sacos de 10×18 a 28×32 entregam de 30 cm a 2,5 m. Baldes de 3,5, 5 e 8 litros entregam de 1,0 m a 2,5 m, indicados para plantio em praça e via pública.' ),
@@ -80,7 +80,7 @@ abstract class ViewFaq implements IView {
 		$mensagem = 'Olá! Vim pela página de perguntas frequentes e queria tirar uma dúvida.';
 
 		$html = new HtmlMain ( );
-		$html->setTitle ( 'Perguntas Frequentes — Mudas, Prazo, Entrega e Embalagens' );
+		$html->setTitle ( 'Perguntas Frequentes - Mudas, Prazo, Entrega e Embalagens' );
 		$html->setDescription ( 'Quantidade mínima, prazo de produção, embalagens, entrega no Sul do Brasil, nota fiscal e espécies para PRAD: as dúvidas mais comuns sobre mudas florestais.' );
 		$html->setCanonical ( 'perguntas-frequentes' );
 		$html->setWhatsappMessage ( $mensagem, 'Falar no WhatsApp' );

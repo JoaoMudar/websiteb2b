@@ -2,7 +2,7 @@
    VIVEIRO FLORESTAL MUDAR
    --------------------------------------------------------------------------
    Direção: documental, não bucólica. O comprador está resolvendo uma obrigação
-   legal com prazo — precisa de prova e de velocidade, não de paisagem.
+   legal com prazo: precisa de prova e de velocidade, não de paisagem.
 
    Cor tem função: terra exposta (laterite) é o problema, folha nova (foliage)
    é a solução. Nada de verde decorativo.
@@ -47,7 +47,7 @@
   --font-body:    'Newsreader', Georgia, 'Times New Roman', serif;
   --font-mono:    'Martian Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
 
-  /* Escala de tipo — quatro degraus, sem tamanhos avulsos */
+  /* Escala de tipo: quatro degraus, sem tamanhos avulsos */
   --step--1: clamp(.75rem, .73rem + .1vw, .82rem);
   --step-0:  clamp(1rem, .97rem + .16vw, 1.09rem);
   --step-1:  clamp(1.2rem, 1.1rem + .5vw, 1.45rem);
@@ -104,7 +104,7 @@ em, i { font-style: italic; }
 
 ::selection { background: var(--foliage-pale); color: var(--soil-900); }
 
-/* Foco sempre visível — teclado é como muito comprador técnico navega */
+/* Foco sempre visível: teclado é como muito comprador técnico navega */
 :focus-visible {
   outline: 2px solid var(--laterite);
   outline-offset: 2px;
@@ -191,7 +191,7 @@ em, i { font-style: italic; }
 .btn-ghost:hover { background: var(--soil-900); color: var(--paper); }
 
 /* ==========================================================================
-   PLACA DE ESPECIFICAÇÃO — a prova, em linguagem de plaqueta de equipamento
+   PLACA DE ESPECIFICAÇÃO: a prova, em linguagem de plaqueta de equipamento
    ========================================================================== */
 .spec-plate {
   display: flex;
@@ -229,7 +229,7 @@ em, i { font-style: italic; }
 .spec-plate-light strong { color: var(--ink); }
 
 /* ==========================================================================
-   WHATSAPP — canal de conversão do site
+   WHATSAPP: canal de conversão do site
    ========================================================================== */
 .wa-float {
   position: fixed;
@@ -386,7 +386,7 @@ em, i { font-style: italic; }
 .site-main { min-height: 60vh; }
 
 /* ==========================================================================
-   HERO DA HOME — a régua é a tese
+   HERO DA HOME: a régua é a tese
    ========================================================================== */
 .hero {
   position: relative;
@@ -457,7 +457,7 @@ em, i { font-style: italic; }
 }
 
 /* --------------------------------------------------------------------------
-   CARD DE RESPOSTA RÁPIDA — o que o hero mostra no lugar da prancha de portes
+   CARD DE RESPOSTA RÁPIDA: o que o hero mostra no lugar da prancha de portes
    O visitante não precisa saber quanto a árvore cresce: precisa saber o que
    mandar para receber um orçamento. Prova e botão ficam no mesmo card, que é
    o princípio de conversão do site.
@@ -522,7 +522,7 @@ em, i { font-style: italic; }
 .hero-card .spec-plate { margin-top: 18px; }
 
 /* ==========================================================================
-   FENOLOGIA — módulo secundário, só aparece quando o dado existe
+   FENOLOGIA: módulo secundário, só aparece quando o dado existe
    ========================================================================== */
 .pheno { margin: 30px 0; }
 .pheno-row {
@@ -748,7 +748,7 @@ em, i { font-style: italic; }
 .sidebar-card p { font-size: .95rem; color: var(--ink-muted); }
 .sidebar-card > * + * { margin-top: 12px; }
 
-/* Tamanho na entrega: o dado de altura que interessa ao comprador — o da muda
+/* Tamanho na entrega: o dado de altura que interessa ao comprador: o da muda
    quando sai do viveiro, não o da árvore adulta. */
 .tamanho-list li {
   display: flex;
@@ -820,7 +820,7 @@ em, i { font-style: italic; }
 }
 
 /* ==========================================================================
-   HOME — blocos
+   HOME: blocos
    ========================================================================== */
 .about-grid {
   display: grid;

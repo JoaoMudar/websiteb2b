@@ -38,7 +38,7 @@ abstract class ViewLinks implements IView {
 
 		$html = new HtmlMain ( );
 		$html->setTitle ( 'Links Úteis do Setor Florestal e Ambiental' );
-		$html->setDescription ( 'Órgãos, institutos e associações do setor florestal e ambiental brasileiro — IBAMA, Embrapa Florestas, IPEF, FSC Brasil e outras referências técnicas.' );
+		$html->setDescription ( 'Órgãos, institutos e associações do setor florestal e ambiental brasileiro: IBAMA, Embrapa Florestas, IPEF, FSC Brasil e outras referências técnicas.' );
 		$html->setCanonical ( 'links' );
 		$html->setWhatsappMessage ( $mensagem, 'Falar no WhatsApp' );
 		$html->addJsonLd ( Seo::breadcrumbJsonLd ( array (

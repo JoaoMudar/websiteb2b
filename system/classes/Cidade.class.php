@@ -5,7 +5,7 @@
  *
  * A pesquisa de palavras-chave apontou termos locais do Vale do Itajaí e do
  * Meio-Oeste com pouquíssima concorrência e comprador certo. Cada cidade tem
- * H1, texto e mensagem de WhatsApp próprios — é isso que faz a página aparecer
+ * H1, texto e mensagem de WhatsApp próprios; é isso que faz a página aparecer
  * na busca local, e não uma lista de nomes numa página só.
  */
 abstract class Cidade {
