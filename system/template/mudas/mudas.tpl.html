@@ -59,6 +59,8 @@
           <a href="[[URL_PATH]]empresa" class="sidebar-link">Ver tabela de embalagens &rarr;</a>
         </div>
 
+        [[FOTO]]
+
         [[MAPA]]
 
         <div class="sidebar-card">
@@ -91,6 +93,13 @@
 
 *=>relacionada
 <li><a href="%s">%s<span class="rel-sci">%s</span></a></li>
+<=*
+
+*=>foto
+<figure class="plate">
+  <img src="%s" alt="Muda de %s (%s) produzida no Viveiro Mudar" loading="lazy" />
+  <figcaption>Muda de %s no viveiro, em Agrolândia/SC</figcaption>
+</figure>
 <=*
 
 *=>mapa

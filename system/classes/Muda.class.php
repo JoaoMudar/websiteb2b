@@ -42,7 +42,6 @@ class Muda {
 	private $regioesCultivo;
 	private $mapaRegiao;
 	private $descricao;
-	private $fotoMuda;
 
 	/**
 	 * Construtor
@@ -158,7 +157,6 @@ class Muda {
 		}
 
 		$this->setMapaRegiao ( $registro ['mapa_regiao'] !== '' ? _Path::getIMAGE_PATH () . $registro ['mapa_regiao'] : '' );
-		$this->setFotoMuda ( _Path::getIMAGE_PATH () . 'mudas/' );
 	}
 
 	/**
@@ -263,12 +261,28 @@ class Muda {
 		return $this->mapaRegiao;
 	}
 
-	public function setFotoMuda($fotoMuda) {
-		$this->fotoMuda = $fotoMuda;
-	}
+	/**
+	 * Foto da espécie, quando existe arquivo para ela.
+	 *
+	 * O nome do arquivo é o slug, que já é único e estável no CSV. Devolve vazio
+	 * quando não há foto, e quem chama decide o que pôr no lugar: assim a página
+	 * nunca declara uma imagem que não existe.
+	 *
+	 * @return String
+	 */
+	public function getFoto() {
 
-	public function getFotoMuda() {
-		return $this->fotoMuda;
+		if (! $this->slug) {
+			return '';
+		}
+
+		$relativo = 'mudas/fotos/' . $this->slug . '.jpg';
+
+		if (! is_file ( _Path::getIMAGE_BAS () . $relativo )) {
+			return '';
+		}
+
+		return _Path::getIMAGE_PATH () . $relativo;
 	}
 
 	public function getSlug() {

@@ -87,6 +87,134 @@ abstract class Seo {
 		) ) );
 	}
 
+
+	/* ---------------- Horário ---------------- */
+
+	/**
+	 * Horário de atendimento do viveiro.
+	 *
+	 * O Perfil do Google e o Instagram divergiam; este é o horário confirmado
+	 * pelo João. Sábado ficou de fora porque não foi informado, e a regra aqui é a
+	 * mesma do RENASEM: melhor omitir do que publicar um dado que não confere. A
+	 * linha está pronta abaixo, é só descomentar.
+	 *
+	 * Lista vazia não emite openingHoursSpecification nenhum.
+	 *
+	 * @return Array
+	 */
+	public static function horarios() {
+
+		$uteis = array ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' );
+
+		return array (
+			array ('dias' => $uteis, 'abre' => '07:30', 'fecha' => '12:00' ),
+			array ('dias' => $uteis, 'abre' => '13:30', 'fecha' => '18:00' )
+			// array ('dias' => array ('Saturday' ), 'abre' => '07:30', 'fecha' => '12:00' )
+		);
+	}
+
+	/**
+	 * O mesmo horário em texto: "Seg a Sex, 07:30-12:00 e 13:30-18:00".
+	 *
+	 * Sai da mesma fonte que o schema de propósito. Horário visível que não bate
+	 * com o openingHoursSpecification é justamente o que desmonta a confiança do
+	 * buscador no resto dos dados.
+	 *
+	 * @return String
+	 */
+	public static function horarioLinha() {
+
+		$horarios = self::horarios ();
+		if (! $horarios) {
+			return '';
+		}
+
+		$abreviado = array (
+			'Monday' => 'Seg', 'Tuesday' => 'Ter', 'Wednesday' => 'Qua',
+			'Thursday' => 'Qui', 'Friday' => 'Sex', 'Saturday' => 'Sáb',
+			'Sunday' => 'Dom'
+		);
+		$ordem = array_keys ( $abreviado );
+
+		// Turnos do mesmo conjunto de dias entram numa linha só, senão o rodapé
+		// repetiria "Seg a Sex" duas vezes seguidas.
+		$porDias = array ();
+
+		foreach ( $horarios as $faixa ) {
+
+			$indices = array ();
+			foreach ( $faixa ['dias'] as $dia ) {
+				$posicao = array_search ( $dia, $ordem );
+				if ($posicao !== false) {
+					$indices [] = $posicao;
+				}
+			}
+
+			if (! $indices) {
+				continue;
+			}
+
+			sort ( $indices );
+
+			$dias = array ();
+			foreach ( $indices as $indice ) {
+				$dias [] = $abreviado [$ordem [$indice]];
+			}
+
+			// "Seg a Sex" só vale para dias seguidos; Seg/Qua/Sex vira lista
+			$ultimo = $indices [count ( $indices ) - 1];
+			$seguidos = ($ultimo - $indices [0]) == (count ( $indices ) - 1);
+
+			if (count ( $dias ) == 1) {
+				$rotulo = $dias [0];
+			} elseif ($seguidos) {
+				$rotulo = $dias [0] . ' a ' . $dias [count ( $dias ) - 1];
+			} else {
+				$rotulo = implode ( ', ', $dias );
+			}
+
+			if (! isset ( $porDias [$rotulo] )) {
+				$porDias [$rotulo] = array ();
+			}
+
+			$porDias [$rotulo] [] = $faixa ['abre'] . '–' . $faixa ['fecha'];
+		}
+
+		$linhas = array ();
+		foreach ( $porDias as $rotulo => $turnos ) {
+			$linhas [] = $rotulo . ', ' . implode ( ' e ', $turnos );
+		}
+
+		return implode ( '; ', $linhas );
+	}
+
+	/**
+	 * Foto institucional, para onde não há imagem própria da página.
+	 *
+	 * Mora aqui pelo mesmo motivo que o telefone: um lugar só para trocar quando
+	 * chegar uma foto maior. A atual tem 208 px de largura, bem abaixo dos
+	 * 1200x630 que o Open Graph pede.
+	 *
+	 * @return String
+	 */
+	public static function fotoPadrao() {
+
+		return _Path::getIMAGE_PATH () . 'pictures/DSC07748.jpg';
+	}
+
+	/**
+	 * Logotipo da empresa, em 384x384 sobre fundo branco.
+	 *
+	 * É o que o Google usa no painel de conhecimento, e ele pede exatamente
+	 * isso: quadrado, fundo liso, no mínimo 112 px.
+	 *
+	 * @return String
+	 */
+	public static function logo() {
+
+		return _Path::getIMAGE_PATH () . 'logo-mudar.jpg';
+	}
+
 	/* ---------------- Analytics ---------------- */
 
 	/** Measurement ID do GA4 (G-XXXXXXXXXX). Vazio desliga o rastreamento. */
@@ -173,7 +301,8 @@ abstract class Seo {
 			'email' => self::EMAIL,
 			'foundingDate' => self::FUNDACAO,
 			'description' => 'Viveiro florestal em Agrolândia (SC) especializado na produção de mudas de árvores nativas para compensação florestal, PRAD, recuperação de área degradada e recomposição de mata ciliar.',
-			'image' => _Path::getIMAGE_PATH () . 'pictures/DSC07748.jpg',
+			'image' => self::fotoPadrao (),
+			'logo' => self::logo (),
 			'address' => array (
 				'@type' => 'PostalAddress',
 				'streetAddress' => self::LOGRADOURO,
@@ -203,6 +332,22 @@ abstract class Seo {
 		$perfis = self::perfis ();
 		if ($perfis) {
 			$schema ['sameAs'] = $perfis;
+		}
+
+		$horarios = self::horarios ();
+		if ($horarios) {
+
+			$especificacao = array ();
+			foreach ( $horarios as $faixa ) {
+				$especificacao [] = array (
+					'@type' => 'OpeningHoursSpecification',
+					'dayOfWeek' => $faixa ['dias'],
+					'opens' => $faixa ['abre'],
+					'closes' => $faixa ['fecha']
+				);
+			}
+
+			$schema ['openingHoursSpecification'] = $especificacao;
 		}
 
 		return $schema;
@@ -306,8 +451,10 @@ abstract class Seo {
 	/**
 	 * Uma espécie do catálogo.
 	 *
-	 * Product sem "offers" gera aviso não-crítico no Search Console; é o preço
-	 * de ser elegível a resultado rico e de ser citado por buscas com IA.
+	 * O "offers" vai sem preço: o viveiro orça por quantidade, embalagem e prazo,
+	 * e um número fixo aqui seria inventado. O Search Console segue avisando que
+	 * falta o price, mas é aviso não-crítico — e a regra é a mesma do RENASEM
+	 * vazio: preferir o aviso a publicar um dado que não confere.
 	 *
 	 * @param Muda $muda
 	 * @return Array
@@ -353,9 +500,20 @@ abstract class Seo {
 			'additionalProperty' => $propriedades
 		);
 
-		if ($muda->getMapaRegiao ()) {
-			$schema ['image'] = $muda->getMapaRegiao ();
-		}
+		// A imagem do Product é a foto da muda, nunca o mapa de ocorrência: declarar
+		// o mapa aqui diz ao buscador que o produto à venda é aquele desenho do
+		// Brasil. Sem foto da espécie, cai na foto do viveiro — genérica, mas
+		// verdadeira. O mapa continua na página, como mapa.
+		$foto = $muda->getFoto ();
+		$schema ['image'] = $foto ? $foto : self::fotoPadrao ();
+
+		$schema ['offers'] = array (
+			'@type' => 'Offer',
+			'url' => _Path::getURL () . 'mudas/' . $muda->getSlug (),
+			'availability' => 'https://schema.org/InStock',
+			'itemCondition' => 'https://schema.org/NewCondition',
+			'seller' => array ('@id' => _Path::getURL () . '#empresa' )
+		);
 
 		return $schema;
 	}

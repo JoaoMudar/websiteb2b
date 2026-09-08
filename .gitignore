@@ -25,6 +25,12 @@ system/images/mudas/mapa48.png
 system/images/pictures/DSC07751.jpg
 system/images/pictures/ipe_roxo.jpg
 
+# Acervo bruto de fotos, ainda sem curadoria: nao vai para o servidor
+system/images/galeria/Naopostadas/
+
+# Miniaturas geradas em tempo de execucao (Galeria::miniatura)
+system/images/thumbs/
+
 # Ferramentas e documentos internos: não vão para o servidor
 .claude/
 skills-lock.json

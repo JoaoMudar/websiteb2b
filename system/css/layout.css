@@ -819,6 +819,107 @@ em, i { font-style: italic; }
   color: var(--ink-muted);
 }
 
+/* ---------- Galeria de fotos ---------- */
+.galeria-grade {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 30px 0 6px;
+}
+.galeria-item {
+  flex: 0 1 auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 12px;
+  border: var(--rule);
+  border-top: 2px solid var(--soil-900);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+.galeria-item img {
+  display: block;
+  /* Nunca ampliar além do arquivo. As fotos herdadas do site antigo têm 208 px
+     de largura, e esticá-las só mostraria o borrão; a foto grande que entrar
+     depois é limitada a 340 px para a grade não virar uma coluna de pôsteres. */
+  max-width: min(100%, 340px);
+  height: auto;
+}
+.galeria-item figcaption {
+  max-width: 340px;
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: var(--rule);
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: var(--ink-muted);
+}
+.galeria-zoom { display: block; cursor: zoom-in; }
+.galeria-zoom:hover img { opacity: .88; }
+
+/* ---------- Lightbox ---------- */
+/* Sem esta linha o display:flex venceria o atributo hidden e a caixa nasceria
+   aberta em cima da página. */
+.lightbox[hidden] { display: none; }
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 26px;
+  background: rgba(34, 26, 18, .94);
+}
+.lightbox-palco { max-width: 100%; margin: 0; }
+.lightbox-palco img {
+  display: block;
+  max-width: 100%;
+  max-height: 76vh;
+  height: auto;
+  margin: 0 auto;
+}
+.lightbox-palco figcaption {
+  margin-top: 14px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  line-height: 1.6;
+  letter-spacing: .03em;
+  color: var(--ink-on-dark-muted);
+}
+.lightbox-fechar,
+.lightbox-nav {
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  border: var(--rule-dark);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--paper);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox-fechar {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 1.3rem;
+}
+.lightbox-fechar:hover,
+.lightbox-nav:hover {
+  border-color: var(--foliage);
+  color: var(--foliage);
+}
+@media (max-width: 640px) {
+  .lightbox { padding: 16px; }
+  .lightbox-nav { position: absolute; bottom: 22px; }
+  .lightbox-anterior { left: 20px; }
+  .lightbox-proxima { right: 20px; }
+}
+
 /* ==========================================================================
    HOME: blocos
    ========================================================================== */
