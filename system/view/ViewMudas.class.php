@@ -8,12 +8,24 @@
 abstract class ViewMudas implements IView {
 
 	/**
-	 * Fichas que saíram do ar com o fim da produção de Pinus e Eucalyptus.
+	 * Fichas que saíram do ar porque o viveiro deixou de produzir a espécie:
+	 * primeiro Pinus e Eucalyptus, depois as marcadas na planilha de espécies
+	 * em setembro de 2026.
 	 *
 	 * @var Array
 	 */
 	private static $especiesAposentadas = array (
-		'pinus', 'eucalipto-limao', 'eucalipto-cidra', 'eucalipto-rosa'
+		'pinus', 'eucalipto-limao', 'eucalipto-cidra', 'eucalipto-rosa',
+		'acacia-mimosa', 'acacia-negra', 'agulheiro', 'alecrim', 'angico-branco',
+		'arariba-amarelo', 'araca-da-serra', 'aroeira-branca', 'calistemone',
+		'canela-guaica', 'canela-preta', 'cinamomo', 'cotoneaster-', 'erva-mate',
+		'espatodea', 'espinheira-santa', 'flamboyant', 'geriva', 'goiaba-da-serra',
+		'grevilea', 'grevilea-ana', 'inga-de-metro', 'inga-quatro-quinas',
+		'jacaranda-mimoso', 'jambolao', 'leucena', 'ligustro', 'limoeiro-do-mato',
+		'louro-cravo', 'mamica-de-porca', 'manduirana', 'maria-preta', 'mogno',
+		'palmeira-buriti', 'pau-brasil', 'pau-cigarra', 'pau-jacare', 'pau-oleo',
+		'pinheiro-alemao', 'pinheiro-de-natal', 'salso-chorao', 'sete-capotes',
+		'sombreiro', 'tuia', 'urucum', 'uva-do-japao', 'vassourao-preto'
 	);
 
 	/**
