@@ -31,7 +31,31 @@ class HtmlMain extends Html implements IHtml {
 
 		$this->template->setVar ( 'ANO', date ( 'Y' ) );
 		$this->template->setVar ( 'TOTAL_MUDAS', Muda::total () );
+		$this->template->setVar ( 'HORARIO', $this->horarioRodape () );
 		$this->template->show ( "docClose" );
+	}
+
+	/**
+	 * Item de horário do rodapé.
+	 *
+	 * Sai da mesma fonte que o openingHoursSpecification do schema, para que o
+	 * horário visível e o declarado nunca possam divergir. Sem horário
+	 * confirmado, devolve vazio e o item simplesmente não aparece.
+	 *
+	 * @return String
+	 */
+	private function horarioRodape() {
+
+		$linha = Seo::horarioLinha ();
+
+		if (! $linha) {
+			return '';
+		}
+
+		return '<li>'
+			. '<svg class="ic" aria-hidden="true"><use href="#ic-relogio"/></svg>'
+			. '<span>' . htmlspecialchars ( $linha, ENT_QUOTES, 'UTF-8' ) . '</span>'
+			. '</li>';
 	}
 
 	/**

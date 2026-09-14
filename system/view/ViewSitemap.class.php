@@ -56,7 +56,9 @@ abstract class ViewSitemap implements IView {
 		) ) );
 		$urls [] = array ('loc' => $base . 'fotos', 'priority' => '0.4', 'changefreq' => 'yearly', 'lastmod' => self::lastmod ( array (
 			'system/view/ViewFotos.class.php',
-			'system/template/fotos/index.tpl.html'
+			'system/template/fotos/index.tpl.html',
+			'system/template/fotos/galeria.tpl.html',
+			'system/data/galeria.csv'
 		) ) );
 		$urls [] = array ('loc' => $base . 'links', 'priority' => '0.3', 'changefreq' => 'yearly', 'lastmod' => self::lastmod ( array (
 			'system/view/ViewLinks.class.php',

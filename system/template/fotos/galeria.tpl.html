@@ -1,0 +1,94 @@
+*=>grade
+<div class="galeria-grade">
+%s</div>
+<=*
+
+*=>item
+  <figure class="galeria-item">
+    <img src="%s" alt="%s" width="%d" height="%d" loading="lazy" decoding="async" />
+    <figcaption>%s</figcaption>
+  </figure>
+<=*
+
+*=>itemAmpliavel
+  <figure class="galeria-item">
+    <a href="%s" class="galeria-zoom" data-legenda="%s" data-largura="%d" aria-label="Ampliar: %s">
+      <img src="%s" alt="%s" width="%d" height="%d" loading="lazy" decoding="async" />
+    </a>
+    <figcaption>%s</figcaption>
+  </figure>
+<=*
+
+*=>lightbox
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada" hidden>
+  <button type="button" class="lightbox-fechar" data-acao="fechar" aria-label="Fechar">&times;</button>
+  <button type="button" class="lightbox-nav lightbox-anterior" data-acao="anterior" aria-label="Foto anterior">&#8249;</button>
+  <figure class="lightbox-palco">
+    <img id="lightboxImg" src="" alt="" />
+    <figcaption id="lightboxLegenda"></figcaption>
+  </figure>
+  <button type="button" class="lightbox-nav lightbox-proxima" data-acao="proxima" aria-label="Próxima foto">&#8250;</button>
+</div>
+
+<script>
+(function() {
+  var zooms = [].slice.call(document.querySelectorAll('.galeria-zoom'));
+  if (!zooms.length) { return; }
+
+  var caixa    = document.getElementById('lightbox');
+  var imagem   = document.getElementById('lightboxImg');
+  var legenda  = document.getElementById('lightboxLegenda');
+  var atual    = 0;
+  var origem   = null;
+
+  function mostrar(i) {
+    atual = (i + zooms.length) % zooms.length;
+    var alvo = zooms[atual];
+    var img  = alvo.querySelector('img');
+    imagem.src = alvo.getAttribute('href');
+    imagem.alt = img ? img.alt : '';
+    // Trava a ampliação no tamanho real do arquivo. Sem isso o lightbox
+    // esticaria uma foto de 588 px para a largura da tela e só mostraria o
+    // borrão que a grade já tinha escondido.
+    var largura = parseInt(alvo.getAttribute('data-largura'), 10);
+    imagem.style.maxWidth = largura ? 'min(100%, ' + largura + 'px)' : '';
+    legenda.textContent = alvo.getAttribute('data-legenda') || '';
+  }
+
+  function abrir(i, disparador) {
+    origem = disparador;
+    mostrar(i);
+    caixa.hidden = false;
+    document.body.style.overflow = 'hidden';
+    caixa.querySelector('.lightbox-fechar').focus();
+  }
+
+  function fechar() {
+    caixa.hidden = true;
+    imagem.src = '';
+    document.body.style.overflow = '';
+    // Devolve o foco ao thumbnail de onde se veio: sem isso quem navega por
+    // teclado volta para o topo da página a cada foto fechada.
+    if (origem) { origem.focus(); origem = null; }
+  }
+
+  zooms.forEach(function(a, i) {
+    a.addEventListener('click', function(e) { e.preventDefault(); abrir(i, a); });
+  });
+
+  caixa.addEventListener('click', function(e) {
+    var acao = e.target.getAttribute && e.target.getAttribute('data-acao');
+    if (acao === 'fechar' || e.target === caixa) { fechar(); }
+    else if (acao === 'anterior') { mostrar(atual - 1); }
+    else if (acao === 'proxima')  { mostrar(atual + 1); }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (caixa.hidden) { return; }
+    if (e.key === 'Escape')     { fechar(); }
+    if (e.key === 'ArrowLeft')  { mostrar(atual - 1); }
+    if (e.key === 'ArrowRight') { mostrar(atual + 1); }
+  });
+})();
+</script>
+<=*

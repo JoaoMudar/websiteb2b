@@ -260,7 +260,7 @@ abstract class Html {
 		$title = strlen ( $this->title ) ? $this->title : self::TITLE_PADRAO;
 		$description = strlen ( $this->description ) ? $this->description : self::DESCRIPTION;
 		$canonical = $this->canonical ? $this->canonical : _Path::getURL () . ltrim ( _Formatting::returnAccessedArea ( '' ), '/' );
-		$ogImage = $this->ogImage ? $this->ogImage : _Path::getIMAGE_PATH () . 'pictures/DSC07748.jpg';
+		$ogImage = $this->ogImage ? $this->ogImage : Seo::fotoPadrao ();
 
 		$this->template->setVar ( 'TITLE', htmlspecialchars ( $title, ENT_QUOTES, 'UTF-8' ) );
 		$this->template->setVar ( 'DESCRIPTION', htmlspecialchars ( $description, ENT_QUOTES, 'UTF-8' ) );

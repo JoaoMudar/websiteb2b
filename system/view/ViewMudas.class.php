@@ -8,12 +8,24 @@
 abstract class ViewMudas implements IView {
 
 	/**
-	 * Fichas que saíram do ar com o fim da produção de Pinus e Eucalyptus.
+	 * Fichas que saíram do ar porque o viveiro deixou de produzir a espécie:
+	 * primeiro Pinus e Eucalyptus, depois as marcadas na planilha de espécies
+	 * em setembro de 2026.
 	 *
 	 * @var Array
 	 */
 	private static $especiesAposentadas = array (
-		'pinus', 'eucalipto-limao', 'eucalipto-cidra', 'eucalipto-rosa'
+		'pinus', 'eucalipto-limao', 'eucalipto-cidra', 'eucalipto-rosa',
+		'acacia-mimosa', 'acacia-negra', 'agulheiro', 'alecrim', 'angico-branco',
+		'arariba-amarelo', 'araca-da-serra', 'aroeira-branca', 'calistemone',
+		'canela-guaica', 'canela-preta', 'cinamomo', 'cotoneaster-', 'erva-mate',
+		'espatodea', 'espinheira-santa', 'flamboyant', 'geriva', 'goiaba-da-serra',
+		'grevilea', 'grevilea-ana', 'inga-de-metro', 'inga-quatro-quinas',
+		'jacaranda-mimoso', 'jambolao', 'leucena', 'ligustro', 'limoeiro-do-mato',
+		'louro-cravo', 'mamica-de-porca', 'manduirana', 'maria-preta', 'mogno',
+		'palmeira-buriti', 'pau-brasil', 'pau-cigarra', 'pau-jacare', 'pau-oleo',
+		'pinheiro-alemao', 'pinheiro-de-natal', 'salso-chorao', 'sete-capotes',
+		'sombreiro', 'tuia', 'urucum', 'uva-do-japao', 'vassourao-preto'
 	);
 
 	/**
@@ -260,8 +272,12 @@ abstract class ViewMudas implements IView {
 		$html->setOgType ( 'product' );
 		$html->setWhatsappMessage ( $mensagem, 'Pedir orçamento' );
 
-		if ($muda->getMapaRegiao ()) {
-			$html->setOgImage ( $muda->getMapaRegiao () );
+		// A imagem de compartilhamento é a foto da espécie quando existe. O mapa de
+		// ocorrência não serve: num card de WhatsApp ele lê como se a muda fosse
+		// aquele desenho do Brasil. Sem foto, o Html cai na foto do viveiro sozinho.
+		$foto = $muda->getFoto ();
+		if ($foto) {
+			$html->setOgImage ( $foto );
 		}
 
 		$html->addJsonLd ( Seo::mudaJsonLd ( $muda ) );
@@ -287,6 +303,7 @@ abstract class ViewMudas implements IView {
 		$tpl->setVar ( 'FICHA', self::ficha ( $tpl, $muda ) );
 		$tpl->setVar ( 'LEGENDA', self::legenda ( $tpl, $muda ) );
 		$tpl->setVar ( 'RELACIONADAS', self::relacionadas ( $tpl, $muda ) );
+		$tpl->setVar ( 'FOTO', self::foto ( $tpl, $muda ) );
 		$tpl->setVar ( 'MAPA', self::mapa ( $tpl, $muda ) );
 		$tpl->setVar ( 'PLACA_CLARA', Seo::specPlateHtml ( 'spec-plate-light' ) );
 		$tpl->setVar ( 'WHATSAPP_CORPO', Seo::whatsappButtonHtml ( $mensagem, 'Pedir orçamento no WhatsApp', 'especie' ) );
@@ -464,6 +481,33 @@ abstract class ViewMudas implements IView {
 		}
 
 		return $html;
+	}
+
+	/**
+	 * Foto da espécie, quando existe arquivo para ela.
+	 *
+	 * É o que torna honesto o "image" do schema Product: a imagem declarada lá
+	 * passa a estar de fato na página. Sem arquivo, nada é impresso.
+	 *
+	 * @param Template $tpl
+	 * @param Muda $muda
+	 * @return String
+	 */
+	private static function foto($tpl, $muda) {
+
+		$foto = $muda->getFoto ();
+
+		if (! $foto) {
+			return '';
+		}
+
+		$nome = htmlspecialchars ( $muda->getNomePopular (), ENT_QUOTES, 'UTF-8' );
+
+		return sprintf ( $tpl->get ( 'foto' ),
+			htmlspecialchars ( $foto, ENT_QUOTES, 'UTF-8' ),
+			$nome,
+			htmlspecialchars ( $muda->getNomeCientificoCurto (), ENT_QUOTES, 'UTF-8' ),
+			$nome );
 	}
 
 	/**
